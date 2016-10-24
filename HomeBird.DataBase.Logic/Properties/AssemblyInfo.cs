@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("HomeBird.Logic")]
+[assembly: AssemblyProduct("HomeBird.DataBase.Logic")]
 [assembly: AssemblyTrademark("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
@@ -16,4 +16,4 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("49833a8f-2ee0-4f89-81a4-7997d6658338")]
+[assembly: Guid("71e6abe9-e53c-4599-afbf-43852f9dc9ff")]
