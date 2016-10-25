@@ -1,6 +1,9 @@
 ﻿using AutoMapper;
+using HomeBird.Common;
 using HomeBird.DataBase.Ef6.Context;
+using HomeBird.DataBase.Ef6.Models;
 using HomeBird.DataClasses;
+using HomeBird.DataClasses.Forms;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -27,6 +30,31 @@ namespace HomeBird.DataBase.Logic
                                 .ToArrayAsync();
 
             return incs.Select(_mapper.Map<HbIncubator>).ToArray();
+        }
+
+        public async Task<HbIncubator> GetById(int incubatorId)
+        {
+            var inc = await _dc.Incubators.FirstOrDefaultAsync(u => u.Id == incubatorId && !u.IsDeleted);
+            if (inc == null)
+                return null;
+
+            return _mapper.Map<HbIncubator>(inc);
+        }
+
+        public async Task<HbResult<HbIncubator>> Create(CreateIncubatorForm form)
+        {
+            var exist = await _dc.Incubators.AnyAsync(u => !u.IsDeleted && u.Title == form.Title);
+            if (exist)
+                return new HbResult<HbIncubator>(ErrorCodes.IncubatorAlreadyExist);
+
+            var inc = _dc.Incubators.Add(new HbIncubators
+            {
+                Title = form.Title
+            });
+
+            await _dc.SaveChangesAsync();
+
+            return new HbResult<HbIncubator>(_mapper.Map<HbIncubator>(inc));
         }
     }
 }
