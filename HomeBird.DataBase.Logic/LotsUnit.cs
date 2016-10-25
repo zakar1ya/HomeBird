@@ -61,9 +61,17 @@ namespace HomeBird.DataBase.Logic
             await _dc.SaveChangesAsync();
         }
 
-        public void GetAll()
+        public async Task<IEnumerable<HbLot>> GetAll(PagedLotsForm form)
         {
+            var lots = await _dc.Lots
+                                .Where(u => u.CreationDate > form.Start && u.CreationDate < form.End)
+                                .Where(u => !u.IsDeleted)
+                                .OrderByDescending(u => u.Id)
+                                .Skip(form.Offset)
+                                .Take(form.Count)
+                                .ToArrayAsync();
 
+            return lots.Select(_mapper.Map<HbLot>).ToArray();
         }
 
         public void GetById()

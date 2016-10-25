@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HomeBird.DataClasses.Forms;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,5 +24,12 @@ namespace HomeBird.DataClasses
 
         public decimal? Profit { get; set; }
 
+    }
+
+    public class PagedLotsForm : PagingForm
+    {
+        public DateTime Start { get; set; }
+
+        public DateTime End { get; set; }
     }
 }
