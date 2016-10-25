@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using HomeBird.Common;
 using HomeBird.DataBase.Ef6.Context;
 using HomeBird.DataBase.Ef6.Models;
 using HomeBird.DataClasses;
@@ -37,17 +38,17 @@ namespace HomeBird.DataBase.Logic
             return _mapper.Map<HbLot>(dbLot);
         }
 
-        public async Task<HbLot> Update(UpdateLotForm form)
+        public async Task<HbResult<HbLot>> Update(UpdateLotForm form)
         {
             var lot = await _dc.Lots.FirstOrDefaultAsync(u => u.Id == form.Id && !u.IsDeleted);
             if (lot == null)
-                return null;
+                return new HbResult<HbLot>(ErrorCodes.LotNotFound);
 
             lot.IdentifierNumber = form.IdentifierNumber;
 
             await _dc.SaveChangesAsync();
 
-            return _mapper.Map<HbLot>(lot);
+            return new HbResult<HbLot>(_mapper.Map<HbLot>(lot));
         }
 
         public async Task Delete(int lotId)
@@ -74,13 +75,13 @@ namespace HomeBird.DataBase.Logic
             return lots.Select(_mapper.Map<HbLot>).ToArray();
         }
 
-        public async Task<HbLot> GetById(int lotId)
+        public async Task<HbResult<HbLot>> GetById(int lotId)
         {
             var lot = await _dc.Lots.FirstOrDefaultAsync(u => !u.IsDeleted && u.Id == lotId);
             if (lot == null)
-                return null;
+                return new HbResult<HbLot>(ErrorCodes.LotNotFound);
 
-            return _mapper.Map<HbLot>(lot);
+            return new HbResult<HbLot>(_mapper.Map<HbLot>(lot));
         }
     }
 }
