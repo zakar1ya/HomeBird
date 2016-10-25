@@ -56,5 +56,29 @@ namespace HomeBird.DataBase.Logic
 
             return new HbResult<HbIncubator>(_mapper.Map<HbIncubator>(inc));
         }
+
+        public async Task<HbResult<HbIncubator>> Update(UpdateIncubatorForm form)
+        {
+            var inc = await _dc.Incubators.FirstOrDefaultAsync(u => !u.IsDeleted && u.Id == form.Id);
+            if (inc == null)
+                return new HbResult<HbIncubator>(ErrorCodes.IncubatorNotFound);
+
+            inc.Title = form.Title;
+
+            await _dc.SaveChangesAsync();
+
+            return new HbResult<HbIncubator>(_mapper.Map<HbIncubator>(inc));
+        }
+
+        public async Task Delete(int incubatorId)
+        {
+            var inc = await _dc.Incubators.FirstOrDefaultAsync(u => !u.IsDeleted && u.Id == incubatorId);
+            if (inc == null)
+                return;
+
+            inc.IsDeleted = true;
+
+            await _dc.SaveChangesAsync();
+        }
     }
 }
