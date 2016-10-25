@@ -24,6 +24,8 @@ namespace HomeBird.DataBase.Logic
 
         public async Task<HbLot> Create(CreateLotForm form)
         {
+            // TODO: check if lot with same identifier already exist in this year
+
             var dbLot = _dc.Lots.Add(new HbLots
             {
                 IdentifierNumber = form.IdentifierNumber,
@@ -37,7 +39,7 @@ namespace HomeBird.DataBase.Logic
 
         public async Task<HbLot> Update(UpdateLotForm form)
         {
-            var lot = await _dc.Lots.FirstOrDefaultAsync(u => u.Id == form.Id);
+            var lot = await _dc.Lots.FirstOrDefaultAsync(u => u.Id == form.Id && !u.IsDeleted);
             if (lot == null)
                 return null;
 
@@ -48,9 +50,15 @@ namespace HomeBird.DataBase.Logic
             return _mapper.Map<HbLot>(lot);
         }
 
-        public void Delete()
+        public async Task Delete(int lotId)
         {
+            var lot = await _dc.Lots.FirstOrDefaultAsync(u => u.Id == lotId && !u.IsDeleted);
+            if (lot == null)
+                return;
 
+            lot.IsDeleted = true;
+
+            await _dc.SaveChangesAsync();
         }
 
         public void GetAll()
