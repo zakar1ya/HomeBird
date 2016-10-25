@@ -22,6 +22,10 @@ namespace HomeBird.DataBase.Logic.Mapping
                 .ForMember(u => u.Profit, opt => opt.MapFrom(u => u.Profit))
                 .ForMember(u => u.SoldCount, opt => opt.MapFrom(u => u.SoldCount))
                 .ForAllOtherMembers(u => u.Ignore());
+
+            CreateMap<HbIncubators, HbIncubator>()
+                .ForMember(u => u.Id, opt => opt.MapFrom(u => u.Id))
+                .ForMember(u => u.Title, opt => opt.MapFrom(u => u.Title));
         }
     }
 }
