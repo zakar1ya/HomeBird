@@ -24,6 +24,8 @@ namespace HomeBird.DataBase.Ef6.Models
 
         public decimal? Profit { get; set; }
 
+        public bool IsDeleted { get; set; }
+
         [InverseProperty("Lot")]
         public virtual ICollection<HbPurchases> Purchases { get; set; }
 

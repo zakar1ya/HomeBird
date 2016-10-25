@@ -57,6 +57,10 @@
     <Compile Include="Migrations\201610241948598_InitDataBase.Designer.cs">
       <DependentUpon>201610241948598_InitDataBase.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610251909202_IsDeletedLots.cs" />
+    <Compile Include="Migrations\201610251909202_IsDeletedLots.Designer.cs">
+      <DependentUpon>201610251909202_IsDeletedLots.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\HbBroods.cs" />
     <Compile Include="Models\HbIncubators.cs" />
@@ -80,6 +84,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201610241948598_InitDataBase.resx">
       <DependentUpon>201610241948598_InitDataBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610251909202_IsDeletedLots.resx">
+      <DependentUpon>201610251909202_IsDeletedLots.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
