@@ -61,7 +61,7 @@ namespace HomeBird.DataBase.Logic
             await _dc.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<HbLot>> GetAll(PagedLotsForm form)
+        public async Task<IEnumerable<HbLot>> GetList(PagedLotsForm form)
         {
             var lots = await _dc.Lots
                                 .Where(u => u.CreationDate > form.Start && u.CreationDate < form.End)
