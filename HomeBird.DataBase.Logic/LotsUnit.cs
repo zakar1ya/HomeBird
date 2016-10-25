@@ -5,6 +5,7 @@ using HomeBird.DataClasses;
 using HomeBird.DataClasses.Forms;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -34,9 +35,17 @@ namespace HomeBird.DataBase.Logic
             return _mapper.Map<HbLot>(dbLot);
         }
 
-        public void Update()
+        public async Task<HbLot> Update(UpdateLotForm form)
         {
+            var lot = await _dc.Lots.FirstOrDefaultAsync(u => u.Id == form.Id);
+            if (lot == null)
+                return null;
 
+            lot.IdentifierNumber = form.IdentifierNumber;
+
+            await _dc.SaveChangesAsync();
+
+            return _mapper.Map<HbLot>(lot);
         }
 
         public void Delete()
