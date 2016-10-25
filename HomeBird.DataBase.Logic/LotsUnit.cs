@@ -74,9 +74,13 @@ namespace HomeBird.DataBase.Logic
             return lots.Select(_mapper.Map<HbLot>).ToArray();
         }
 
-        public void GetById()
+        public async Task<HbLot> GetById(int lotId)
         {
+            var lot = await _dc.Lots.FirstOrDefaultAsync(u => !u.IsDeleted && u.Id == lotId);
+            if (lot == null)
+                return null;
 
+            return _mapper.Map<HbLot>(lot);
         }
     }
 }
