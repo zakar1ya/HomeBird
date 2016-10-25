@@ -10,5 +10,7 @@ namespace HomeBird.DataBase.Ef6.Models
         public int Id { get; set; }
 
         public string Title { get; set; }
+
+        public bool IsDeleted { get; set; }
     }
 }
