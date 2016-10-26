@@ -83,5 +83,23 @@ namespace HomeBird.DataBase.Logic
 
             return new HbResult<HbPurchase>(_mapper.Map<HbPurchase>(purchase));
         }
+
+        public async Task<IEnumerable<HbPurchase>> GetRange(PagedPurchasesForm form)
+        {
+            var query = _dc.Purchases
+                            .Where(u => !u.IsDeleted)
+                            .Where(u => u.PurchaseDate > form.Start && u.PurchaseDate < form.End)
+                            .AsQueryable();
+
+            if (form.LotId.HasValue)
+                query = query.Where(u => u.LotId == form.LotId);
+
+            var purchases = await query.OrderByDescending(u => u.Id)
+                                       .Skip(form.Offset)
+                                       .Take(form.Count)
+                                       .ToArrayAsync();
+
+            return purchases.Select(_mapper.Map<HbPurchase>).ToArray();
+        }
     }
 }
