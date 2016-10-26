@@ -13,7 +13,8 @@ namespace HomeBird.Common
         public const int Ok = 0;
         public const int LotNotFound = 1;
         public const int IncubatorNotFound = 2;
-        public const int IncubatorAlreadyExist = 1;
+        public const int IncubatorAlreadyExist = 3;
+        public const int PurchaseNotFound = 4;
 
         static ErrorCodes()
         {
@@ -22,6 +23,7 @@ namespace HomeBird.Common
             _messages.Add(LotNotFound, "Партия не найдена");
             _messages.Add(IncubatorNotFound, "Инкубатор не найден");
             _messages.Add(IncubatorAlreadyExist, "Инкубатор с таким именем уже существует");
+            _messages.Add(PurchaseNotFound, "Закупка не найдена");
         }
     }
 }

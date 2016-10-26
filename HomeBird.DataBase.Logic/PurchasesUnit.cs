@@ -1,7 +1,12 @@
-﻿using HomeBird.Common;
+﻿using AutoMapper;
+using HomeBird.Common;
 using HomeBird.DataBase.Ef6.Context;
+using HomeBird.DataBase.Ef6.Models;
+using HomeBird.DataClasses;
+using HomeBird.DataClasses.Forms;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,11 +15,73 @@ namespace HomeBird.DataBase.Logic
     public class PurchasesUnit
     {
         private HomeBirdContext _dc;
+        private IMapper _mapper;
 
-        public PurchasesUnit(HomeBirdContext dc)
+        public PurchasesUnit(HomeBirdContext dc, IMapper mapper)
         {
             _dc = dc;
+            _mapper = mapper;
         }
 
+        public async Task<HbResult<HbPurchase>> Create(CreatePurchaseForm form)
+        {
+            var lotExist = await _dc.Lots.AnyAsync(u => !u.IsDeleted && u.Id == form.LotId);
+            if (!lotExist)
+                return new HbResult<HbPurchase>(ErrorCodes.LotNotFound);
+
+            var purchase = _dc.Purchases.Add(new HbPurchases
+            {
+                Address = form.Address,
+                Amount = form.Amount,
+                Count = form.Count,
+                LotId = form.LotId,
+                PurchaseDate = form.PurchaseDate
+            });
+
+            await _dc.SaveChangesAsync();
+
+            return new HbResult<HbPurchase>(_mapper.Map<HbPurchase>(purchase));
+        }
+
+        public async Task<HbResult<HbPurchase>> UpdatePurchase(UpdatePurchaseForm form)
+        {
+            var purchase = await _dc.Purchases.FirstOrDefaultAsync(u => u.Id == form.Id && !u.IsDeleted);
+            if (purchase == null)
+                return new HbResult<HbPurchase>(ErrorCodes.PurchaseNotFound);
+
+            var lotExist = await _dc.Lots.AnyAsync(u => !u.IsDeleted && u.Id == form.LotId);
+            if (!lotExist)
+                return new HbResult<HbPurchase>(ErrorCodes.LotNotFound);
+
+            purchase.Address = form.Address;
+            purchase.Amount = form.Amount;
+            purchase.Count = form.Count;
+            purchase.LotId = form.LotId;
+            purchase.PurchaseDate = form.PurchaseDate;
+
+            await _dc.SaveChangesAsync();
+
+            return new HbResult<HbPurchase>(_mapper.Map<HbPurchase>(purchase));
+        }
+
+        public async Task Delete(int purchaseId)
+        {
+            var purchase = await _dc.Purchases.FirstOrDefaultAsync(u => !u.IsDeleted && u.Id == purchaseId);
+            if (purchase == null)
+                return;
+
+            purchase.IsDeleted = true;
+
+            await _dc.SaveChangesAsync();
+        }
+
+        public async Task<HbResult<HbPurchase>> GetById(int purchaseId)
+        {
+            var purchase = await _dc.Purchases.FirstOrDefaultAsync(u => u.Id == purchaseId && !u.IsDeleted);
+            if (purchase == null)
+                return new HbResult<HbPurchase>(ErrorCodes.PurchaseNotFound);
+
+            return new HbResult<HbPurchase>(_mapper.Map<HbPurchase>(purchase));
+        }
     }
 }

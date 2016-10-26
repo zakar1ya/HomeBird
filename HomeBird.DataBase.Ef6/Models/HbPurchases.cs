@@ -20,6 +20,8 @@ namespace HomeBird.DataBase.Ef6.Models
         
         public int LotId { get; set; }
 
+        public bool IsDeleted { get; set; }
+
         [ForeignKey("LotId")]
         public HbLots Lot { get; set; }
     }

@@ -65,6 +65,10 @@
     <Compile Include="Migrations\201610251933032_IsDeletedIncubators.Designer.cs">
       <DependentUpon>201610251933032_IsDeletedIncubators.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610261932322_IsDeletedPurchasesField.cs" />
+    <Compile Include="Migrations\201610261932322_IsDeletedPurchasesField.Designer.cs">
+      <DependentUpon>201610261932322_IsDeletedPurchasesField.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\HbBroods.cs" />
     <Compile Include="Models\HbIncubators.cs" />
@@ -94,6 +98,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610251933032_IsDeletedIncubators.resx">
       <DependentUpon>201610251933032_IsDeletedIncubators.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610261932322_IsDeletedPurchasesField.resx">
+      <DependentUpon>201610261932322_IsDeletedPurchasesField.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
