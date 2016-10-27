@@ -69,6 +69,10 @@
     <Compile Include="Migrations\201610261932322_IsDeletedPurchasesField.Designer.cs">
       <DependentUpon>201610261932322_IsDeletedPurchasesField.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610272000335_OverheadsIsDeletedField.cs" />
+    <Compile Include="Migrations\201610272000335_OverheadsIsDeletedField.Designer.cs">
+      <DependentUpon>201610272000335_OverheadsIsDeletedField.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\HbBroods.cs" />
     <Compile Include="Models\HbIncubators.cs" />
@@ -101,6 +105,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610261932322_IsDeletedPurchasesField.resx">
       <DependentUpon>201610261932322_IsDeletedPurchasesField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610272000335_OverheadsIsDeletedField.resx">
+      <DependentUpon>201610272000335_OverheadsIsDeletedField.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

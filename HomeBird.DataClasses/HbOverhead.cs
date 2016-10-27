@@ -32,6 +32,6 @@ namespace HomeBird.DataClasses
 
         public DateTime? End { get; set; }
 
-        public string Address { get; set; }
+        public int? LotId { get; set; }
     }
 }

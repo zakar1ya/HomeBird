@@ -15,6 +15,7 @@ namespace HomeBird.Common
         public const int IncubatorNotFound = 2;
         public const int IncubatorAlreadyExist = 3;
         public const int PurchaseNotFound = 4;
+        public const int OverheadsNotFound = 5;
 
         static ErrorCodes()
         {
@@ -24,6 +25,7 @@ namespace HomeBird.Common
             _messages.Add(IncubatorNotFound, "Инкубатор не найден");
             _messages.Add(IncubatorAlreadyExist, "Инкубатор с таким именем уже существует");
             _messages.Add(PurchaseNotFound, "Закупка не найдена");
+            _messages.Add(OverheadsNotFound, "Расход не найден");
         }
     }
 }
