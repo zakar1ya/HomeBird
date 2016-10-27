@@ -10,6 +10,7 @@ namespace HomeBird.DataClasses.Forms
     {
         [Required(ErrorMessage = "Укажите номер партии")]
         [StringLength(15, ErrorMessage = "Идентификатор не должен быть менее 15 символов")]
+        [Display(Name = "Номер партии")]
         public string IdentifierNumber { get; set; }
     }
 }

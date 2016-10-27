@@ -84,7 +84,7 @@ namespace HomeBird.DataBase.Logic
             return new HbResult<HbPurchase>(_mapper.Map<HbPurchase>(purchase));
         }
 
-        public async Task<IEnumerable<HbPurchase>> GetRange(PagedPurchasesForm form)
+        public async Task<IEnumerable<HbPurchase>> GetList(PagedPurchasesForm form)
         {
             var query = _dc.Purchases
                             .Where(u => !u.IsDeleted)

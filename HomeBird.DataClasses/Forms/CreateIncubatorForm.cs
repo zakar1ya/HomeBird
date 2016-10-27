@@ -10,6 +10,7 @@ namespace HomeBird.DataClasses.Forms
     {
         [Required(ErrorMessage = "Укажите название инкубатора")]
         [StringLength(255, ErrorMessage = "Название должно быть меньше 255 символов")]
+        [Display(Name = "Название")]
         public string Title { get; set; }
     }
 }
