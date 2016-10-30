@@ -77,6 +77,10 @@
     <Compile Include="Migrations\201610301834113_SaleNewFileds.Designer.cs">
       <DependentUpon>201610301834113_SaleNewFileds.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610301917050_LayingIsDeletedFiled.cs" />
+    <Compile Include="Migrations\201610301917050_LayingIsDeletedFiled.Designer.cs">
+      <DependentUpon>201610301917050_LayingIsDeletedFiled.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\HbBroods.cs" />
     <Compile Include="Models\HbIncubators.cs" />
@@ -115,6 +119,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610301834113_SaleNewFileds.resx">
       <DependentUpon>201610301834113_SaleNewFileds.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610301917050_LayingIsDeletedFiled.resx">
+      <DependentUpon>201610301917050_LayingIsDeletedFiled.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
