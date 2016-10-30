@@ -1,4 +1,4 @@
-﻿{
+{
   "version": "1.0.0-*",
 
   "dependencies": {
@@ -10,6 +10,9 @@
   "frameworks": {
     "net461": {
       "dependencies": {
+        "HomeBird.Common": {
+          "target": "project"
+        },
         "HomeBird.DataBase.Ef6": {
           "target": "project"
         }

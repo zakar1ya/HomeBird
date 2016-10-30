@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "exports": {
+    "HomeBird.Common/1.0.0": {
+      "type": "project",
+      "framework": ".NETFramework,Version=v4.6.1",
+      "compile": {
+        "bin/Debug/HomeBird.Common.dll": {}
+      },
+      "runtime": {
+        "bin/Debug/HomeBird.Common.dll": {}
+      },
+      "contentFiles": {
+        "bin/Debug/HomeBird.Common.pdb": {
+          "buildAction": "None",
+          "codeLanguage": "any",
+          "copyToOutput": true
+        }
+      }
+    }
+  }
+}

@@ -7,6 +7,11 @@
 
   "frameworks": {
     "net461": {
+      "dependencies": {
+        "HomeBird.Common": {
+          "target": "project"
+        }
+      }
     }
   }
 }

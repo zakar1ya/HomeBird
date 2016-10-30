@@ -41,6 +41,17 @@ namespace HomeBird.DataBase.Logic.Mapping
                 .ForMember(u => u.Comment, opt => opt.MapFrom(u => u.Comment))
                 .ForMember(u => u.LotId, opt => opt.MapFrom(u => u.LotId))
                 .ForMember(u => u.OverheadDate, opt => opt.MapFrom(u => u.OverheadDate));
+
+            CreateMap<HbSales, HbSale>()
+                .ForMember(u => u.Id, opt => opt.MapFrom(u => u.Id))
+                .ForMember(u => u.Amount, opt => opt.MapFrom(u => u.Amount))
+                .ForMember(u => u.SaleDate, opt => opt.MapFrom(u => u.SaleDate))
+                .ForMember(u => u.Count, opt => opt.MapFrom(u => u.Count))
+                .ForMember(u => u.Buyer, opt => opt.MapFrom(u => u.Buyer))
+                .ForMember(u => u.Comment, opt => opt.MapFrom(u => u.Comment))
+                .ForMember(u => u.LotId, opt => opt.MapFrom(u => u.LotId))
+                .ForMember(u => u.Type, opt => opt.MapFrom(u => u.Type));
+
         }
     }
 }

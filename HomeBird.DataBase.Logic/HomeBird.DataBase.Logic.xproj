@@ -16,6 +16,7 @@
     <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HomeBird.Common\HomeBird.Common.csproj" />
     <ProjectReference Include="..\HomeBird.DataBase.Ef6\HomeBird.DataBase.Ef6.csproj" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.targets" Condition="'$(VSToolsPath)' != ''" />

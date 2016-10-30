@@ -1,12 +1,13 @@
 ﻿using HomeBird.Common;
+using HomeBird.DataClasses.Forms;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HomeBird.DataBase.Ef6.Models
+namespace HomeBird.DataClasses
 {
-    public class HbSales
+    public class HbSale
     {
         public int Id { get; set; }
 
@@ -20,12 +21,25 @@ namespace HomeBird.DataBase.Ef6.Models
 
         public BirdTypes Type { get; set; }
 
-        public bool IsDeleted { get; set; }
-
         public string Comment { get; set; }
 
         public int LotId { get; set; }
+    }
 
-        public HbLots Lot { get; set; }
+    public class PagedSalesForm : PagingForm
+    {
+        public PagedSalesForm()
+        {
+            Start = new DateTime(DateTime.Now.Year, 1, 1);
+            End = Start.Value.AddYears(1);
+        }
+
+        public DateTime? Start { get; set; }
+
+        public DateTime? End { get; set; }
+
+        public BirdTypes? Type { get; set; }
+
+        public int? LotId { get; set; }
     }
 }

@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace HomeBird.DataClasses.Forms
 {
-    public abstract class PagingForm
+    public class UpdateSaleForm : CreateSaleForm
     {
-        public int Offset { get; set; }
-
-        public int Count { get; set; }
+        [Required]
+        public int Id { get; set; }
     }
 }
