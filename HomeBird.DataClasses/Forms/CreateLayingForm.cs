@@ -24,9 +24,5 @@ namespace HomeBird.DataClasses.Forms
         [Display(Name = "Инкубатор")]
         public int IncubatorId { get; set; }
 
-        [Required(ErrorMessage = "Укажите вывод")]
-        [Display(Name = "Вывод")]
-        public int BroodId { get; set; }
-
     }
 }

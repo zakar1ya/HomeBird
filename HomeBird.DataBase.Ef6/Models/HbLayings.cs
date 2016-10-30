@@ -16,8 +16,6 @@ namespace HomeBird.DataBase.Ef6.Models
 
         public decimal EggPrice { get; set; }
 
-        public int BroodId { get; set; }
-
         public int LotId { get; set; }
 
         public int IncubatorId { get; set; }

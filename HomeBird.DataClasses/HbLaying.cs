@@ -19,8 +19,6 @@ namespace HomeBird.DataClasses
         public int IncubatorId { get; set; }
 
         public decimal EggPrice { get; set; }
-
-        public int BroodId { get; set; }
     }
 
     public class PagedLayingsForm : PagingForm
@@ -38,7 +36,5 @@ namespace HomeBird.DataClasses
         public int? LotId { get; set; }
 
         public int? IncubatorId { get; set; }
-
-        public int? BroodId { get; set; }
     }
 }
