@@ -20,6 +20,14 @@ namespace HomeBird.Common
 
         public int ErrorCode { get; set; }
 
+        public string ErrorMessage
+        {
+            get
+            {
+                return ErrorCodes.GetMessage(ErrorCode);
+            }
+        }
+
         public bool IsCorrect
         {
             get

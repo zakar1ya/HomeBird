@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Consts.cs" />
     <Compile Include="ErrorCodes.cs" />
     <Compile Include="HbEnums.cs" />
     <Compile Include="HbResult.cs" />

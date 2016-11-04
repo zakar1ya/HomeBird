@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using HomeBird.DataBase.Ef6.Models;
 using HomeBird.DataClasses;
+using HomeBird.DataClasses.Forms;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,10 @@ namespace HomeBird.DataBase.Logic.Mapping
                 .ForAllOtherMembers(u => u.Ignore());
 
             CreateMap<HbIncubators, HbIncubator>()
+                .ForMember(u => u.Id, opt => opt.MapFrom(u => u.Id))
+                .ForMember(u => u.Title, opt => opt.MapFrom(u => u.Title));
+
+            CreateMap<HbIncubator, UpdateIncubatorForm>()
                 .ForMember(u => u.Id, opt => opt.MapFrom(u => u.Id))
                 .ForMember(u => u.Title, opt => opt.MapFrom(u => u.Title));
 

@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace HomeBird.DataBase.Logic
 {
-    public class LotsUnit
+    public class LotsUnit : ILotsUnit
     {
         private HomeBirdContext _dc;
         private IMapper _mapper;

@@ -33,5 +33,12 @@ namespace HomeBird.Common
             _messages.Add(LayingNotFound, "Закладка не найдена");
             _messages.Add(BroodNotFound, "Вывод не найден");
         }
+
+        public static string GetMessage(int code)
+        {
+            if (_messages.ContainsKey(code))
+                return _messages[code];
+            return string.Empty;
+        }
     }
 }
