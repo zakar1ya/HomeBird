@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HomeBird.DataBase.Ef6.Models
+namespace HomeBird.DataClasses
 {
-    public class HbBroods
+    public class HbBrood
     {
         public int Id { get; set; }
 
@@ -28,9 +27,5 @@ namespace HomeBird.DataBase.Ef6.Models
 
         public int LotId { get; set; }
 
-        public bool IsDeleted { get; set; }
-
-        [ForeignKey("LotId")]
-        public virtual HbLots Lot { get; set; }
     }
 }

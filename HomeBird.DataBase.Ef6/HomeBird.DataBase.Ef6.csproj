@@ -85,6 +85,10 @@
     <Compile Include="Migrations\201610302033412_ChangeLayingsTable.Designer.cs">
       <DependentUpon>201610302033412_ChangeLayingsTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611041736240_BroodIsDelertedField.cs" />
+    <Compile Include="Migrations\201611041736240_BroodIsDelertedField.Designer.cs">
+      <DependentUpon>201611041736240_BroodIsDelertedField.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\HbBroods.cs" />
     <Compile Include="Models\HbIncubators.cs" />
@@ -129,6 +133,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610302033412_ChangeLayingsTable.resx">
       <DependentUpon>201610302033412_ChangeLayingsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611041736240_BroodIsDelertedField.resx">
+      <DependentUpon>201611041736240_BroodIsDelertedField.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
