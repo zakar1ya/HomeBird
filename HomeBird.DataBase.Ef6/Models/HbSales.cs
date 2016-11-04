@@ -1,6 +1,7 @@
 ﻿using HomeBird.Common;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,6 +9,7 @@ namespace HomeBird.DataBase.Ef6.Models
 {
     public class HbSales
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         public DateTime SaleDate { get; set; }

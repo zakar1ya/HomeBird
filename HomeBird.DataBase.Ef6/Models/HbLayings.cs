@@ -8,6 +8,7 @@ namespace HomeBird.DataBase.Ef6.Models
 {
     public class HbLayings
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         public DateTime CreationTime { get; set; }

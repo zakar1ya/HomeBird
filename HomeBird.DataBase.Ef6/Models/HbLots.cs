@@ -8,6 +8,7 @@ namespace HomeBird.DataBase.Ef6.Models
 {
     public class HbLots
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         public string IdentifierNumber { get; set; }
