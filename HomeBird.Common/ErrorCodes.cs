@@ -18,6 +18,7 @@ namespace HomeBird.Common
         public const int OverheadsNotFound = 5;
         public const int SaleNotFound = 6;
         public const int LayingNotFound = 7;
+        public const int BroodNotFound = 8;
 
         static ErrorCodes()
         {
@@ -30,6 +31,7 @@ namespace HomeBird.Common
             _messages.Add(OverheadsNotFound, "Расход не найден");
             _messages.Add(SaleNotFound, "Продажа не найдена");
             _messages.Add(LayingNotFound, "Закладка не найдена");
+            _messages.Add(BroodNotFound, "Вывод не найден");
         }
     }
 }

@@ -32,6 +32,12 @@ namespace HomeBird.DataClasses.Forms
 
     public class PagedBroodsForm : PagingForm
     {
+        public PagedBroodsForm()
+        {
+            Start = new DateTime(DateTime.UtcNow.Year, 1, 1);
+            End = Start.Value.AddYears(1);
+        }
+
         public DateTime? Start { get; set; }
 
         public DateTime? End { get; set; }
