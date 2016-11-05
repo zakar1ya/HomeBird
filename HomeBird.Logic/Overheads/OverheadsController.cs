@@ -41,7 +41,7 @@ namespace HomeBird.Logic.Overheads
         [HttpPost]
         public async Task<IActionResult> Add(CreateOverheadsForm form)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 await InitLotsList(form);
                 return View(form);
@@ -70,7 +70,7 @@ namespace HomeBird.Logic.Overheads
         [HttpPost]
         public async Task<IActionResult> Edit(UpdateOverheadsForm form)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 await InitLotsList(form);
                 return View(form);

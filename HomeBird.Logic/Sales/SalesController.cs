@@ -28,7 +28,7 @@ namespace HomeBird.Logic.Sales
         public async Task<IActionResult> List(PagedSalesForm form)
         {
             var page = await _sales.GetList(form);
-            return View(form);
+            return View(page);
         }
 
         public async Task<IActionResult> Add()

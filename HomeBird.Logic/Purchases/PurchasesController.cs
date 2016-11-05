@@ -28,7 +28,6 @@ namespace HomeBird.Logic.Purchases
         public async Task<IActionResult> List(PagedPurchasesForm form)
         {
             var page = await _purchase.GetList(form);
-
             return View(page);
         }
 
@@ -43,7 +42,7 @@ namespace HomeBird.Logic.Purchases
         [HttpPost]
         public async Task<IActionResult> Add(CreatePurchaseForm form)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 await InitLotsList(form);
                 return View(form);
@@ -73,7 +72,7 @@ namespace HomeBird.Logic.Purchases
         [HttpPost]
         public async Task<IActionResult> Edit(UpdatePurchaseForm form)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 await InitLotsList(form);
                 return View(form);

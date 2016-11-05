@@ -28,7 +28,7 @@ namespace HomeBird.Logic.Broods
         public async Task<IActionResult> List(PagedBroodsForm form)
         {
             var page = await _broods.GetList(form);
-            return View();
+            return View(page);
         }
 
         public async Task<IActionResult> Add()
@@ -41,7 +41,7 @@ namespace HomeBird.Logic.Broods
         [HttpPost]
         public async Task<IActionResult> Add(CreateBroodForm form)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 await InitLotsList(form);
                 return View(form);
@@ -53,7 +53,7 @@ namespace HomeBird.Logic.Broods
 
             ViewData[ViewDataKeys.ErrorMessage] = res.ErrorMessage;
             await InitLotsList(form);
-            return View(form); 
+            return View(form);
         }
 
         public async Task<IActionResult> Edit(int id)

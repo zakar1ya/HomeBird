@@ -21,7 +21,6 @@ namespace HomeBird.Logic.Incubators
         public async Task<IActionResult> List()
         {
             var incubators = await _inc.GetList();
-
             return View(incubators);
         }
 

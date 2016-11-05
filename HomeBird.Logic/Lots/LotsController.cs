@@ -15,12 +15,12 @@ namespace HomeBird.Logic.Lots
     {
         private readonly ILotsUnit _lots;
         private readonly IMapper _mapper;
-        
+
         public LotsController(ILotsUnit lots, IMapper mapper)
         {
             _lots = lots;
             _mapper = mapper;
-        } 
+        }
 
         public async Task<IActionResult> List(PagedLotsForm form)
         {

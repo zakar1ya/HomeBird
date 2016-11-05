@@ -70,7 +70,7 @@ namespace HomeBird.Logic.Layings
         [HttpPost]
         public async Task<IActionResult> Edit(UpdateLayingForm form)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 await InitLotsList(form);
                 return View(form);
