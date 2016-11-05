@@ -23,6 +23,19 @@ namespace HomeBird.DataBase.Logic
             _mapper = mapper;
         }
 
+        public async Task<int> Count(PagedOverheadForm form)
+        {
+            var query = _dc.Overheads
+               .Where(u => !u.IsDeleted)
+               .Where(u => u.OverheadDate > form.Start && u.OverheadDate < form.End)
+               .AsQueryable();
+
+            if (form.LotId.HasValue)
+                query = query.Where(u => u.LotId == form.LotId.Value);
+
+            return await query.CountAsync();
+        }
+
         public async Task<HbResult<HbOverhead>> Create(CreateOverheadsForm form)
         {
             var lot = await _dc.Lots.FirstOrDefaultAsync(u => !u.IsDeleted && u.Id == form.LotId);

@@ -23,6 +23,14 @@ namespace HomeBird.DataBase.Logic
             _mapper = mapper;
         }
 
+        public async Task<int> Count(PagedLotsForm form)
+        {
+            return await _dc.Lots
+                            .Where(u => u.CreationDate > form.Start && u.CreationDate < form.End)
+                            .Where(u => !u.IsDeleted)
+                            .CountAsync();
+        }
+
         public async Task<HbResult<HbLot>> Create(CreateLotForm form)
         {
             // TODO: check if lot with same identifier already exist in this year

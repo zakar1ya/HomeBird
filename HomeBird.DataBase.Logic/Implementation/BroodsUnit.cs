@@ -23,6 +23,19 @@ namespace HomeBird.DataBase.Logic
             _mapper = mapper;
         }
 
+        public async Task<int> Count(PagedBroodsForm form)
+        {
+            var query = _dc.Broods
+               .Where(u => !u.IsDeleted)
+               .Where(u => u.BroodDate > form.Start && u.BroodDate < form.End.Value)
+               .AsQueryable();
+
+            if (form.LotId.HasValue)
+                query = query.Where(u => u.LotId == form.LotId.Value);
+
+            return await query.CountAsync();
+        }
+
         public async Task<HbResult<HbBrood>> Create(CreateBroodForm form)
         {
             var lot = await _dc.Lots

@@ -13,5 +13,6 @@ namespace HomeBird.DataBase.Logic
         Task<HbResult<HbBrood>> GetById(int id);
         Task<IEnumerable<HbBrood>> GetList(PagedBroodsForm form);
         Task<HbResult<HbBrood>> Update(UpdateBroodForm form);
+        Task<int> Count(PagedBroodsForm form);
     }
 }
