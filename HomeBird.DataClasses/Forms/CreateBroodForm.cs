@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -27,7 +28,7 @@ namespace HomeBird.DataClasses.Forms
         [Required(ErrorMessage = "Укажите номер партии")]
         [Display(Name = "Номер партии")]
         public int LotId { get; set; }
-
+        public IEnumerable<SelectListItem> Lots { get; set; }
     }
 
     public class PagedBroodsForm : PagingForm
