@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace HomeBird.DataClasses.Forms
 {
@@ -24,5 +25,6 @@ namespace HomeBird.DataClasses.Forms
         [Display(Name = "Инкубатор")]
         public int IncubatorId { get; set; }
 
+        public IEnumerable<SelectListItem> Lots { get; set; }
     }
 }
