@@ -12,5 +12,6 @@ namespace HomeBird.DataBase.Logic
         Task Delete(int overheadId);
         Task<IEnumerable<HbOverhead>> GetList(PagedOverheadForm form);
         Task<HbResult<HbOverhead>> Update(UpdateOverheadsForm form);
+        Task<HbResult<HbOverhead>> GetById(int id);
     }
 }

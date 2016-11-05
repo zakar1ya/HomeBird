@@ -10,38 +10,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HomeBird.Logic.Purchases
+namespace HomeBird.Logic.Overheads
 {
-    public class PurchasesController : Controller
+    public class OverheadsController : Controller
     {
-        private readonly IPurchasesUnit _purchase;
-        private readonly IMapper _mapper;
+        private readonly IOverheadsUnit _overheads;
         private readonly ILotsUnit _lots;
+        private readonly IMapper _mapper;
 
-        public PurchasesController(IPurchasesUnit purchase, IMapper mapper, ILotsUnit lots)
+        public OverheadsController(IOverheadsUnit overheads, ILotsUnit lots, IMapper mapper)
         {
-            _purchase = purchase;
-            _mapper = mapper;
+            _overheads = overheads;
             _lots = lots;
+            _mapper = mapper;
         }
 
-        public async Task<IActionResult> List(PagedPurchasesForm form)
+        public async Task<IActionResult> List(PagedOverheadForm form)
         {
-            var page = await _purchase.GetList(form);
-
+            var page = await _overheads.GetList(form);
             return View(page);
         }
 
         public async Task<IActionResult> Add()
         {
-            var form = new CreatePurchaseForm();
+            var form = new CreateOverheadsForm();
             await InitLotsList(form);
-
             return View(form);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(CreatePurchaseForm form)
+        public async Task<IActionResult> Add(CreateOverheadsForm form)
         {
             if(!ModelState.IsValid)
             {
@@ -49,7 +47,7 @@ namespace HomeBird.Logic.Purchases
                 return View(form);
             }
 
-            var res = await _purchase.Create(form);
+            var res = await _overheads.Create(form);
             if (res.IsCorrect)
                 return RedirectToAction(nameof(List));
 
@@ -60,18 +58,17 @@ namespace HomeBird.Logic.Purchases
 
         public async Task<IActionResult> Edit(int id)
         {
-            var purchase = await _purchase.GetById(id);
-            if (!purchase.IsCorrect)
+            var overhead = await _overheads.GetById(id);
+            if (!overhead.IsCorrect)
                 return RedirectToAction(nameof(List));
 
-            var form = _mapper.Map<UpdatePurchaseForm>(purchase.Result);
+            var form = _mapper.Map<UpdateOverheadsForm>(overhead.Result);
             await InitLotsList(form);
-
             return View(form);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(UpdatePurchaseForm form)
+        public async Task<IActionResult> Edit(UpdateOverheadsForm form)
         {
             if(!ModelState.IsValid)
             {
@@ -79,7 +76,7 @@ namespace HomeBird.Logic.Purchases
                 return View(form);
             }
 
-            var res = await _purchase.UpdatePurchase(form);
+            var res = await _overheads.Update(form);
             if (res.IsCorrect)
                 return RedirectToAction(nameof(List));
 
@@ -91,16 +88,16 @@ namespace HomeBird.Logic.Purchases
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
-            await _purchase.Delete(id);
+            await _overheads.Delete(id);
             return RedirectToAction(nameof(List));
         }
 
-        private async Task InitLotsList(CreatePurchaseForm form)
+        private async Task InitLotsList(CreateOverheadsForm form)
         {
             var lots = await _lots.GetList(new PagedLotsForm
             {
-                Start = new DateTime(form.PurchaseDate.Year, 1, 1),
-                End = new DateTime(form.PurchaseDate.Year + 1, 1, 1)
+                Start = new DateTime(form.OverheadDate.Year, 1, 1),
+                End = new DateTime(form.OverheadDate.Year + 1, 1, 1)
             });
 
             form.Lots = lots.Select(u => new SelectListItem
@@ -109,6 +106,5 @@ namespace HomeBird.Logic.Purchases
                 Value = u.Id.ToString()
             }).ToArray();
         }
-
     }
 }

@@ -90,5 +90,14 @@ namespace HomeBird.DataBase.Logic
 
             return overheads.Select(_mapper.Map<HbOverhead>).ToArray();
         }
+
+        public async Task<HbResult<HbOverhead>> GetById(int id)
+        {
+            var overhead = await _dc.Overheads.FirstOrDefaultAsync(u => u.Id == id && !u.IsDeleted);
+            if (overhead == null)
+                return new HbResult<HbOverhead>(ErrorCodes.OverheadsNotFound);
+
+            return new HbResult<HbOverhead>(_mapper.Map<HbOverhead>(overhead));
+        }
     }
 }

@@ -9,6 +9,11 @@ namespace HomeBird.DataClasses.Forms
 {
     public class CreatePurchaseForm
     {
+        public CreatePurchaseForm()
+        {
+            PurchaseDate = DateTime.UtcNow;
+        }
+
         [Required(ErrorMessage = "Укажите количество")]
         [Range(0, 1000000)]
         [Display(Name = "Количество")]

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,6 +9,11 @@ namespace HomeBird.DataClasses.Forms
 {
     public class CreateOverheadsForm
     {
+        public CreateOverheadsForm()
+        {
+            OverheadDate = DateTime.UtcNow;
+        }
+
         [Required(ErrorMessage = "Укажите дату")]
         [Display(Name = "Дата")]
         public DateTime OverheadDate { get; set; }
@@ -24,5 +30,6 @@ namespace HomeBird.DataClasses.Forms
         [Display(Name = "Номер партии")]
         public int LotId { get; set; }
 
+        public IEnumerable<SelectListItem> Lots { get; set; }
     }
 }
