@@ -1,4 +1,5 @@
 ﻿using HomeBird.Common;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -35,5 +36,6 @@ namespace HomeBird.DataClasses.Forms
         [Display(Name = "Номер партии")]
         public int LotId { get; set; }
 
+        public IEnumerable<SelectListItem> Lots { get; set; }
     }
 }
