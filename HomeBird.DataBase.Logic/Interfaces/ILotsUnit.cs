@@ -8,7 +8,7 @@ namespace HomeBird.DataBase.Logic
 {
     public interface ILotsUnit
     {
-        Task<HbLot> Create(CreateLotForm form);
+        Task<HbResult<HbLot>> Create(CreateLotForm form);
         Task Delete(int lotId);
         Task<HbResult<HbLot>> GetById(int lotId);
         Task<IEnumerable<HbLot>> GetList(PagedLotsForm form);

@@ -23,7 +23,7 @@ namespace HomeBird.DataBase.Logic
             _mapper = mapper;
         }
 
-        public async Task<HbLot> Create(CreateLotForm form)
+        public async Task<HbResult<HbLot>> Create(CreateLotForm form)
         {
             // TODO: check if lot with same identifier already exist in this year
 
@@ -35,7 +35,7 @@ namespace HomeBird.DataBase.Logic
 
             await _dc.SaveChangesAsync();
 
-            return _mapper.Map<HbLot>(dbLot);
+            return new HbResult<HbLot>(_mapper.Map<HbLot>(dbLot));
         }
 
         public async Task<HbResult<HbLot>> Update(UpdateLotForm form)
@@ -53,11 +53,29 @@ namespace HomeBird.DataBase.Logic
 
         public async Task Delete(int lotId)
         {
-            var lot = await _dc.Lots.FirstOrDefaultAsync(u => u.Id == lotId && !u.IsDeleted);
+            var lot = await _dc.Lots
+                               .Include(u => u.Sales)
+                               .Include(u => u.Purchases)
+                               .Include(u => u.Overheads)
+                               .Include(u => u.Layings)
+                               .Include(u => u.Broods)
+                               .FirstOrDefaultAsync(u => u.Id == lotId && !u.IsDeleted);
+
             if (lot == null)
                 return;
 
             lot.IsDeleted = true;
+
+            foreach (var brood in lot.Broods)// TODO: it's necessary?
+                brood.IsDeleted = true;
+            foreach (var sale in lot.Sales)
+                sale.IsDeleted = true;
+            foreach (var purchase in lot.Purchases)
+                purchase.IsDeleted = true;
+            foreach (var laying in lot.Layings)
+                laying.IsDeleted = true;
+            foreach (var overhead in lot.Overheads)
+                overhead.IsDeleted = true;
 
             await _dc.SaveChangesAsync();
         }
