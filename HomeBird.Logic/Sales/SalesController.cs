@@ -3,6 +3,7 @@ using HomeBird.Common;
 using HomeBird.DataBase.Logic;
 using HomeBird.DataClasses;
 using HomeBird.DataClasses.Forms;
+using HomeBird.DataClasses.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -28,7 +29,8 @@ namespace HomeBird.Logic.Sales
         public async Task<IActionResult> List(PagedSalesForm form)
         {
             var page = await _sales.GetList(form);
-            return View(page);
+            form.Total = await _sales.Count(form);
+            return View(new PagedViewModel<HbSale, PagedSalesForm>(page, form));
         }
 
         public async Task<IActionResult> Add()

@@ -3,6 +3,7 @@ using HomeBird.Common;
 using HomeBird.DataBase.Logic;
 using HomeBird.DataClasses;
 using HomeBird.DataClasses.Forms;
+using HomeBird.DataClasses.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,8 @@ namespace HomeBird.Logic.Lots
         public async Task<IActionResult> List(PagedLotsForm form)
         {
             var page = await _lots.GetList(form);
-            return View(page);
+            form.Total = await _lots.Count(form);
+            return View(new PagedViewModel<HbLot, PagedLotsForm>(page, form));
         }
 
         public IActionResult Add()

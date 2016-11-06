@@ -3,6 +3,7 @@ using HomeBird.Common;
 using HomeBird.DataBase.Logic;
 using HomeBird.DataClasses;
 using HomeBird.DataClasses.Forms;
+using HomeBird.DataClasses.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -28,7 +29,8 @@ namespace HomeBird.Logic.Layings
         public async Task<IActionResult> List(PagedLayingsForm form)
         {
             var page = await _laying.GetList(form);
-            return View(page);
+            form.Total = await _laying.Count(form);
+            return View(new PagedViewModel<HbLaying, PagedLayingsForm>(page, form));
         }
 
         public async Task<IActionResult> Add()
