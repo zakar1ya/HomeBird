@@ -11,7 +11,8 @@ namespace HomeBird.DataBase.Ef6.Context
     {
         public HomeBirdContext(string connectionString) : base(connectionString)
         {
-            this.Configuration.LazyLoadingEnabled = false;
+            Configuration.LazyLoadingEnabled = false;
+            Configuration.ValidateOnSaveEnabled = false;
         }
 
         public DbSet<HbLots> Lots { get; set; }

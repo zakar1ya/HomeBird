@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using HomeBird.DataBase.Logic;
+using HomeBird.DataBase.Ef6.Context;
+using AutoMapper;
 
 namespace HomeBird
 {
@@ -35,6 +38,9 @@ namespace HomeBird
         {
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
+
+            services.AddAutoMapper();
+            ConfigDI(services);
 
             services.AddMvc();
         }
@@ -65,8 +71,22 @@ namespace HomeBird
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Lots}/{action=List}/{id?}");
             });
+        }
+
+        public void ConfigDI(IServiceCollection services)
+        {
+            string connection = Configuration.GetConnectionString("DefaultConnection");
+            services.AddScoped(u => new HomeBirdContext(connection));
+
+            services.AddScoped<ILotsUnit, LotsUnit>();
+            services.AddScoped<IPurchasesUnit, PurchasesUnit>();
+            services.AddScoped<IOverheadsUnit, OverheadsUnit>();
+            services.AddScoped<ISalesUnit, SalesUnit>();
+            services.AddScoped<IIncubatorsUnit, IncubatorsUnit>();
+            services.AddScoped<ILayingsUnit, LayingsUnit>();
+            services.AddScoped<IBroodsUnit, BroodsUnit>();
         }
     }
 }

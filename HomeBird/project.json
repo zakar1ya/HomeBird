@@ -1,5 +1,9 @@
 {
   "dependencies": {
+    "AutoMapper.Extensions.Microsoft.DependencyInjection": "1.1.2",
+    "HomeBird.DataBase.Logic": "1.0.0-*",
+    "HomeBird.DataClasses": "1.0.0-*",
+    "HomeBird.Logic": "1.0.0-*",
     "Microsoft.ApplicationInsights.AspNetCore": "1.0.0",
     "Microsoft.AspNetCore.Diagnostics": "1.0.0",
     "Microsoft.AspNetCore.Mvc": "1.0.1",
@@ -27,7 +31,13 @@
   },
 
   "frameworks": {
-    "net461" : {}
+    "net461": {
+      "dependencies": {
+        "HomeBird.Common": {
+          "target": "project"
+        }
+      }
+    }
   },
 
   "buildOptions": {

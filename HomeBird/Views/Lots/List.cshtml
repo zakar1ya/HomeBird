@@ -1,0 +1,8 @@
+﻿@model PagedViewModel<HbLot, PagedLotsForm>
+
+<ul>
+    @foreach (var lot in Model.List)
+    {
+        <li>@lot.IdentifierNumber</li>
+    }
+</ul>
