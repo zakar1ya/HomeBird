@@ -1,0 +1,36 @@
+﻿@model PagingViewModel
+
+@{
+    Layout = null;
+}
+
+<div class="row">
+    <div class="col-sm-5">
+        <div class="dataTables_info" id="datatable-buttons_info" role="status" aria-live="polite">Показано с @(Model.Offset) по @(Model.Count + Model.Offset) из @Model.Total записей</div>
+    </div>
+    <div class="col-sm-7">
+        <div class="dataTables_paginate paging_simple_numbers" id="datatable-buttons_paginate">
+            <ul class="pagination">
+                <li class="paginate_button previous" id="datatable-buttons_previous">
+                    <a href="@Model.GetUrl(1)" aria-controls="datatable-buttons" data-dt-idx="0" tabindex="0">В начало</a>
+                </li>
+                @for (int pageNumber = Model.Start; pageNumber <= Model.Stop; pageNumber++)
+                {
+                    <li class="paginate_button ">
+                        @if(Model.Current != pageNumber)
+                        {
+                            <a href="@Model.GetUrl(pageNumber)" aria-controls="datatable-buttons" tabindex="0">@pageNumber</a>
+                        }
+                        else
+                        {
+                            <span>@pageNumber</span>
+                        }
+                    </li>
+                }
+                <li class="paginate_button next disabled" id="datatable-buttons_next">
+                    <a href="@Model.GetUrl(Model.LastPage)" aria-controls="datatable-buttons" tabindex="0">В конец</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
