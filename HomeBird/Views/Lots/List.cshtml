@@ -52,22 +52,25 @@
                                 </thead>
                                 @foreach (var lot in Model.List)
                                 {
-                                    <tbody>
-                                        <tr>
-                                            <td>@($"{lot.IdentifierNumber} ({lot.CreationDate.Year}г.)")</td>
-                                            <td>@lot.CreationDate.ToString("dd.MM.yyyy")</td>
-                                            <td>@(lot.SoldCount.HasValue ? lot.SoldCount.ToString() : "-")</td>
-                                            <td>@(lot.AvgDailyPrice.HasValue ? lot.SoldCount.ToString() : "-")</td>
-                                            <td>@(lot.AvgAdultPrice.HasValue ? lot.SoldCount.ToString() : "-")</td>
-                                            <td>@(lot.Loses.HasValue ? lot.SoldCount.ToString() : "-")</td>
-                                            <td>@(lot.Profit.HasValue ? lot.SoldCount.ToString() : "-")</td>
-                                        </tr>
-                                    </tbody>
+                                <tbody>
+                                    <tr>
+                                        <td>@($"{lot.IdentifierNumber} ({lot.CreationDate.Year}г.)")</td>
+                                        <td>@lot.CreationDate.ToString("dd.MM.yyyy")</td>
+                                        <td>@(lot.SoldCount.HasValue ? lot.SoldCount.ToString() : "-")</td>
+                                        <td>@(lot.AvgDailyPrice.HasValue ? lot.SoldCount.ToString() : "-")</td>
+                                        <td>@(lot.AvgAdultPrice.HasValue ? lot.SoldCount.ToString() : "-")</td>
+                                        <td>@(lot.Loses.HasValue ? lot.SoldCount.ToString() : "-")</td>
+                                        <td>@(lot.Profit.HasValue ? lot.SoldCount.ToString() : "-")</td>
+                                    </tr>
+                                </tbody>
                                 }
                             </table>
                         </div>
                     </div>
-                    @Html.Paging(Model.Form, u => Url.Action("List", "Lots", new { Offset = (u - 1) * Model.Form.Count }))
+                    @if (Model.Form.Total > Model.Form.Count)
+                    {
+                        @Html.Paging(Model.Form, u => Url.Action("List", "Lots", new PagedLotsForm { Offset = (u - 1) * Model.Form.Count }))
+                    }
                 </div>
             </div>
         </div>
