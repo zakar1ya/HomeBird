@@ -10,6 +10,11 @@ namespace HomeBird.DataClasses.Forms
 {
     public class CreateSaleForm
     {
+        public CreateSaleForm()
+        {
+            SaleDate = DateTime.UtcNow;
+        }
+
         [Required(ErrorMessage = "Укажите дату продажи")]
         [Display(Name = "Дата продажи")]
         public DateTime SaleDate { get; set; }
@@ -36,6 +41,6 @@ namespace HomeBird.DataClasses.Forms
         [Display(Name = "Номер партии")]
         public int LotId { get; set; }
 
-        public IEnumerable<SelectListItem> Lots { get; set; }
+        public IEnumerable<HbLot> Lots { get; set; }
     }
 }

@@ -30,6 +30,6 @@ namespace HomeBird.DataClasses.Forms
         [Display(Name = "Номер партии")]
         public int LotId { get; set; }
 
-        public IEnumerable<SelectListItem> Lots { get; set; }
+        public IEnumerable<HbLot> Lots { get; set; }
     }
 }

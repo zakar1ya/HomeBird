@@ -49,11 +49,15 @@ namespace HomeBird.DataBase.Logic
 
             var overheads = await _dc.Overheads
                                      .Where(u => !u.IsDeleted && u.LotId == form.LotId)
-                                     .SumAsync(u => u.Amount);
+                                     .Select(u => u.Amount)
+                                     .DefaultIfEmpty(0)
+                                     .SumAsync();
 
             var purchases = await _dc.Purchases
                                      .Where(u => !u.IsDeleted && u.LotId == form.LotId)
-                                     .SumAsync(u => u.Amount);
+                                     .Select(u => u.Amount)
+                                     .DefaultIfEmpty(0)
+                                     .SumAsync();
 
             var layings = await _dc.Layings.Where(u => !u.IsDeleted)
                                            .Where(u => u.LotId == form.LotId)
@@ -103,7 +107,8 @@ namespace HomeBird.DataBase.Logic
 
         public async Task<IEnumerable<HbLaying>> GetList(PagedLayingsForm form)
         {
-            var query = _dc.Layings.Where(u => !u.IsDeleted)
+            var query = _dc.Layings.Include(u => u.Lot)
+                                   .Where(u => !u.IsDeleted)
                                    .Where(u => u.CreationTime > form.Start && u.CreationTime < form.End)
                                    .AsQueryable();
 
@@ -136,11 +141,15 @@ namespace HomeBird.DataBase.Logic
 
             var overheads = await _dc.Overheads
                                      .Where(u => !u.IsDeleted && u.LotId == form.LotId)
-                                     .SumAsync(u => u.Amount);
+                                     .Select(u => u.Amount)
+                                     .DefaultIfEmpty(0)
+                                     .SumAsync();
 
             var purchases = await _dc.Purchases
                                      .Where(u => !u.IsDeleted && u.LotId == form.LotId)
-                                     .SumAsync(u => u.Amount);
+                                     .Select(u => u.Amount)
+                                     .DefaultIfEmpty(0)
+                                     .SumAsync();
 
             var layings = await _dc.Layings.Where(u => !u.IsDeleted)
                                            .Where(u => u.LotId == form.LotId && u.Id != laying.Id)

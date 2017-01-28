@@ -9,6 +9,11 @@ namespace HomeBird.DataClasses.Forms
 {
     public class CreateLayingForm
     {
+        public CreateLayingForm()
+        {
+            CreationDate = DateTime.UtcNow;
+        }
+
         [Required(ErrorMessage = "Укажиет дату закладки")]
         [Display(Name = "Дата закладки")]
         public DateTime CreationDate { get; set; }
@@ -25,6 +30,7 @@ namespace HomeBird.DataClasses.Forms
         [Display(Name = "Инкубатор")]
         public int IncubatorId { get; set; }
 
-        public IEnumerable<SelectListItem> Lots { get; set; }
+        public IEnumerable<HbIncubator> Incubators { get; set; }
+        public IEnumerable<HbLot> Lots { get; set; }
     }
 }

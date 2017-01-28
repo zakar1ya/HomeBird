@@ -96,17 +96,11 @@ namespace HomeBird.Logic.Overheads
 
         private async Task InitLotsList(CreateOverheadsForm form)
         {
-            var lots = await _lots.GetList(new PagedLotsForm
+            form.Lots = await _lots.GetList(new PagedLotsForm
             {
                 Start = new DateTime(form.OverheadDate.Year, 1, 1),
                 End = new DateTime(form.OverheadDate.Year + 1, 1, 1)
             });
-
-            form.Lots = lots.Select(u => new SelectListItem
-            {
-                Text = $"{u.IdentifierNumber} ({u.CreationDate})",
-                Value = u.Id.ToString()
-            }).ToArray();
         }
     }
 }

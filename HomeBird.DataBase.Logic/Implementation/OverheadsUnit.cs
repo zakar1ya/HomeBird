@@ -88,10 +88,10 @@ namespace HomeBird.DataBase.Logic
 
         public async Task<IEnumerable<HbOverhead>> GetList(PagedOverheadForm form)
         {
-            var query = _dc.Overheads
-                           .Where(u => !u.IsDeleted)
-                           .Where(u => u.OverheadDate > form.Start && u.OverheadDate < form.End)
-                           .AsQueryable();
+            var query = _dc.Overheads.Include(u => u.Lot)
+                                     .Where(u => !u.IsDeleted)
+                                     .Where(u => u.OverheadDate > form.Start && u.OverheadDate < form.End)
+                                     .AsQueryable();
 
             if (form.LotId.HasValue)
                 query = query.Where(u => u.LotId == form.LotId.Value);

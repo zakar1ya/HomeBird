@@ -14,7 +14,7 @@ namespace HomeBird.DataClasses
 
         public int Count { get; set; }
 
-        public int LotId { get; set; }
+        public HbLot Lot { get; set; }
 
         public int IncubatorId { get; set; }
 

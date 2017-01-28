@@ -95,17 +95,11 @@ namespace HomeBird.Logic.Sales
 
         private async Task InitLotsList(CreateSaleForm form)
         {
-            var lots = await _lots.GetList(new PagedLotsForm
+            form.Lots = await _lots.GetList(new PagedLotsForm
             {
                 Start = new DateTime(form.SaleDate.Year, 1, 1),
                 End = new DateTime(form.SaleDate.Year + 1, 1, 1)
             });
-
-            form.Lots = lots.Select(u => new SelectListItem
-            {
-                Text = $"{u.IdentifierNumber} ({u.CreationDate})",
-                Value = u.Id.ToString()
-            }).ToArray();
         }
     }
 }

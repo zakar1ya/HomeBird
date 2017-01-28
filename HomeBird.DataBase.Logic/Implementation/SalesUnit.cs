@@ -93,7 +93,8 @@ namespace HomeBird.DataBase.Logic
 
         public async Task<IEnumerable<HbSale>> GetList(PagedSalesForm form)
         {
-            var query = _dc.Sales.Where(u => !u.IsDeleted)
+            var query = _dc.Sales.Include(u => u.Lot)
+                                 .Where(u => !u.IsDeleted)
                                  .Where(u => u.SaleDate > form.Start && u.SaleDate < form.End)
                                  .AsQueryable();
 

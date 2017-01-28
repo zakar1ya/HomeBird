@@ -1,0 +1,97 @@
+﻿@model PagedViewModel<HbOverhead, PagedOverheadForm>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Партии";
+}
+
+<div class="page-title">
+    <div class="title_left">
+        <h3>
+            Сезон ___
+        </h3>
+    </div>
+
+    <div class="title_right">
+        <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search for...">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">Go!</button>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>
+
+<div class="row">
+
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Партии</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div id="datatable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                    <div class="row"></div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table id="datatable" class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Комментарий</th>
+                                        <th>Сумма</th>
+                                        <th>Дата</th>
+                                        <th>Партия</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                @foreach (var item in Model.List)
+                                {
+                                    <tbody>
+                                        <tr>
+                                            <td>@item.Comment</td>
+                                            <td>@item.Amount</td>
+                                            <td>@item.OverheadDate.ToString("dd MMM yyyy")</td>
+                                            <td>lot number</td>
+                                            <td>
+                                                <a class="btn btn-info" asp-action="Edit" asp-controller="Overheads" asp-route-id="@item.Id">Изменить </a>
+                                                <a href="#" class="btn btn-danger js-delete" data-url="@Url.Action("Delete", "Overheads", new { id = item.Id })">Удалить</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                }
+                            </table>
+                        </div>
+                    </div>
+                    @if (Model.Form.Total > Model.Form.Count)
+                    {
+                        @Html.Paging(Model.Form, u => Url.Action("List", "Lots", new PagedLotsForm { Offset = (u - 1) * Model.Form.Count }))
+                    }
+                </div>
+                <a class="btn btn-success" asp-action="Add" asp-controller="Overheads">Создать</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        $('.js-delete').click(function (e) {
+            e.preventDefault();
+            if (!confirm('Вы уверены?'))
+                return;
+            var $el = $(e.currentTarget);
+
+            $.ajax({
+                url: $el.data('url'),
+                type: 'POST',
+                success: function (res) {
+                    if (!res.error)
+                        $el.closest('tr').remove();
+                }
+            });
+        })
+    });
+</script>

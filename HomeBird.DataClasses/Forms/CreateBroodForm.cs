@@ -9,6 +9,11 @@ namespace HomeBird.DataClasses.Forms
 {
     public class CreateBroodForm
     {
+        public CreateBroodForm()
+        {
+            BroodDate = DateTime.UtcNow;
+        }
+
         [Required(ErrorMessage = "Укажите дату вывода")]
         [Display(Name = "Дата вывода")]
         public DateTime BroodDate { get; set; }
@@ -28,7 +33,7 @@ namespace HomeBird.DataClasses.Forms
         [Required(ErrorMessage = "Укажите номер партии")]
         [Display(Name = "Номер партии")]
         public int LotId { get; set; }
-        public IEnumerable<SelectListItem> Lots { get; set; }
+        public IEnumerable<HbLot> Lots { get; set; }
     }
 
     public class PagedBroodsForm : PagingForm

@@ -25,7 +25,7 @@ namespace HomeBird.DataClasses
 
         public decimal PlacePrice { get; set; }
 
-        public int LotId { get; set; }
+        public HbLot Lot { get; set; }
 
     }
 }

@@ -18,12 +18,14 @@ namespace HomeBird.Logic.Layings
         private readonly ILayingsUnit _laying;
         private readonly ILotsUnit _lots;
         private readonly IMapper _mapper;
+        private readonly IIncubatorsUnit _incub;
 
-        public LayingsController(ILayingsUnit laying, ILotsUnit lots, IMapper mapper)
+        public LayingsController(ILayingsUnit laying, ILotsUnit lots, IIncubatorsUnit incub, IMapper mapper)
         {
             _laying = laying;
             _lots = lots;
             _mapper = mapper;
+            _incub = incub;
         }
 
         public async Task<IActionResult> List(PagedLayingsForm form)
@@ -96,17 +98,13 @@ namespace HomeBird.Logic.Layings
 
         private async Task InitLotsList(CreateLayingForm form)
         {
-            var lots = await _lots.GetList(new PagedLotsForm
+            form.Lots = await _lots.GetList(new PagedLotsForm
             {
                 Start = new DateTime(form.CreationDate.Year, 1, 1),
                 End = new DateTime(form.CreationDate.Year + 1, 1, 1)
             });
 
-            form.Lots = lots.Select(u => new SelectListItem
-            {
-                Text = $"{u.IdentifierNumber} ({u.CreationDate})",
-                Value = u.Id.ToString()
-            }).ToArray();
+            form.Incubators = await _incub.GetList();
         }
 
 

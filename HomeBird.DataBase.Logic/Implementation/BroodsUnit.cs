@@ -121,10 +121,10 @@ namespace HomeBird.DataBase.Logic
 
         public async Task<IEnumerable<HbBrood>> GetList(PagedBroodsForm form)
         {
-            var query = _dc.Broods
-                           .Where(u => !u.IsDeleted)
-                           .Where(u => u.BroodDate > form.Start && u.BroodDate < form.End.Value)
-                           .AsQueryable();
+            var query = _dc.Broods.Include(u => u.Lot)
+                                  .Where(u => !u.IsDeleted)
+                                  .Where(u => u.BroodDate > form.Start && u.BroodDate < form.End.Value)
+                                  .AsQueryable();
 
             if (form.LotId.HasValue)
                 query = query.Where(u => u.LotId == form.LotId.Value);

@@ -101,7 +101,7 @@ namespace HomeBird.DataBase.Logic.Mapping
                 .ForMember(u => u.CreationDate, opt => opt.MapFrom(u => u.CreationTime))
                 .ForMember(u => u.EggPrice, opt => opt.MapFrom(u => u.EggPrice))
                 .ForMember(u => u.IncubatorId, opt => opt.MapFrom(u => u.IncubatorId))
-                .ForMember(u => u.LotId, opt => opt.MapFrom(u => u.LotId))
+                .ForMember(u => u.Lot, opt => opt.MapFrom(u => u.Lot))
                 .ForAllOtherMembers(u => u.Ignore());
 
             CreateMap<HbLaying, UpdateLayingForm>()
@@ -109,7 +109,7 @@ namespace HomeBird.DataBase.Logic.Mapping
                 .ForMember(u => u.Count, opt => opt.MapFrom(u => u.Count))
                 .ForMember(u => u.CreationDate, opt => opt.MapFrom(u => u.CreationDate))
                 .ForMember(u => u.IncubatorId, opt => opt.MapFrom(u => u.IncubatorId))
-                .ForMember(u => u.LotId, opt => opt.MapFrom(u => u.LotId))
+                .ForMember(u => u.LotId, opt => opt.MapFrom(u => u.Lot.Id))
                 .ForAllOtherMembers(u => u.Ignore());
 
             CreateMap<HbBroods, HbBrood>()
@@ -120,18 +120,18 @@ namespace HomeBird.DataBase.Logic.Mapping
                 .ForMember(u => u.EmptyCount, opt => opt.MapFrom(u => u.EmptyCount))
                 .ForMember(u => u.DeadPercent, opt => opt.MapFrom(u => u.DeadPercent))
                 .ForMember(u => u.EmptyPercent, opt => opt.MapFrom(u => u.EmptyPercent))
-                .ForMember(u => u.LotId, opt => opt.MapFrom(u => u.LotId))
+                .ForMember(u => u.Lot, opt => opt.MapFrom(u => u.Lot))
                 .ForMember(u => u.Percent, opt => opt.MapFrom(u => u.Percent))
                 .ForMember(u => u.PlacePrice, opt => opt.MapFrom(u => u.PlacePrice))
                 .ForAllOtherMembers(u => u.Ignore());
 
-            CreateMap<HbBroods, UpdateBroodForm>()
+            CreateMap<HbBrood, UpdateBroodForm>()
                 .ForMember(u => u.Id, opt => opt.MapFrom(u => u.Id))
                 .ForMember(u => u.Count, opt => opt.MapFrom(u => u.Count))
                 .ForMember(u => u.BroodDate, opt => opt.MapFrom(u => u.BroodDate))
                 .ForMember(u => u.DeadCount, opt => opt.MapFrom(u => u.DeadCount))
                 .ForMember(u => u.EmptyCount, opt => opt.MapFrom(u => u.EmptyCount))
-                .ForMember(u => u.LotId, opt => opt.MapFrom(u => u.LotId))
+                .ForMember(u => u.LotId, opt => opt.MapFrom(u => u.Lot.Id))
                 .ForAllOtherMembers(u => u.Ignore());
         }
     }
