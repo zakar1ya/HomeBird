@@ -5,10 +5,7 @@ using HomeBird.DataClasses;
 using HomeBird.DataClasses.Forms;
 using HomeBird.DataClasses.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace HomeBird.Logic.Purchases

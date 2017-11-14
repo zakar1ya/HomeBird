@@ -1,11 +1,8 @@
 ﻿using AutoMapper;
-using HomeBird.DataBase.Ef6.Models;
+using HomeBird.DataBase.EfCore.Models;
 using HomeBird.DataClasses;
 using HomeBird.DataClasses.Forms;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace HomeBird.DataBase.Logic.Mapping
 {

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace HomeBird.Common
 {
@@ -16,6 +12,7 @@ namespace HomeBird.Common
         public HbResult(int errorCode)
         {
             ErrorCode = errorCode;
+
         }
 
         public int ErrorCode { get; set; }
