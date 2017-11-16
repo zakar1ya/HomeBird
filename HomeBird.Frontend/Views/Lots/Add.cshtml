@@ -1,0 +1,14 @@
+﻿@model CreateLotForm
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Партии";
+}
+
+<form asp-action="Add" asp-controller="Lots" method="post">@*TODO: move to modal*@
+    <div class="form-group">
+        <input asp-for="IdentifierNumber" type="text" />
+        <span asp-validation-for="IdentifierNumber"></span>
+    </div>
+    <input type="submit" value="Сохранить" />
+</form>

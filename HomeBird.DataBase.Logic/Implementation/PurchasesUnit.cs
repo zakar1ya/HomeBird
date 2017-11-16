@@ -1,14 +1,13 @@
 ﻿using AutoMapper;
 using HomeBird.Common;
-using HomeBird.DataBase.Ef6.Context;
-using HomeBird.DataBase.Ef6.Models;
+using HomeBird.DataBase.EfCore.Context;
 using HomeBird.DataClasses;
 using HomeBird.DataClasses.Forms;
-using System;
 using System.Collections.Generic;
-using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
+using HomeBird.DataBase.EfCore.Models;
 
 namespace HomeBird.DataBase.Logic
 {

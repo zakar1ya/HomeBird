@@ -9,13 +9,6 @@
       },
       "runtime": {
         "bin/Debug/HomeBird.Common.dll": {}
-      },
-      "contentFiles": {
-        "bin/Debug/HomeBird.Common.pdb": {
-          "buildAction": "None",
-          "codeLanguage": "any",
-          "copyToOutput": true
-        }
       }
     }
   }

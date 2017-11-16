@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Automapper" Version="6.1.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HomeBird.Common\HomeBird.Common.csproj" />
+    <ProjectReference Include="..\HomeBird.DataBase.EfCore\HomeBird.DataBase.EfCore.csproj" />
+    <ProjectReference Include="..\HomeBird.DataClasses\HomeBird.DataClasses.csproj" />
+  </ItemGroup>
+</Project>
