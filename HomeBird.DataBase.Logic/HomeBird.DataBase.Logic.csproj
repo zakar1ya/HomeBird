@@ -3,7 +3,7 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Automapper" Version="6.1.1" />
+    <PackageReference Include="Automapper" Version="6.2.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HomeBird.Common\HomeBird.Common.csproj" />
