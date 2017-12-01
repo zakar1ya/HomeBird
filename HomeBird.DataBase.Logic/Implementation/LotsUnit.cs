@@ -37,7 +37,7 @@ namespace HomeBird.DataBase.Logic
 
             var dbLot = _dc.Lots.Add(new HbLots
             {
-                IdentifierNumber = form.IdentifierNumber,
+                Identifier = form.IdentifierNumber,
                 CreationDate = DateTime.UtcNow
             });
 
@@ -52,7 +52,7 @@ namespace HomeBird.DataBase.Logic
             if (lot == null)
                 return new HbResult<HbLot>(ErrorCodes.LotNotFound);
 
-            lot.IdentifierNumber = form.IdentifierNumber;
+            lot.Identifier = form.IdentifierNumber;
 
             await _dc.SaveChangesAsync();
 

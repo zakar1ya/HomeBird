@@ -12,7 +12,7 @@ namespace HomeBird.DataBase.Logic.Mapping
         {
             CreateMap<HbLots, HbLot>()
                 .ForMember(u => u.Id, opt => opt.MapFrom(u => u.Id))
-                .ForMember(u => u.IdentifierNumber, opt => opt.MapFrom(u => u.IdentifierNumber))
+                .ForMember(u => u.IdentifierNumber, opt => opt.MapFrom(u => u.Identifier))
                 .ForMember(u => u.AvgAdultPrice, opt => opt.MapFrom(u => u.AvgAdultPrice))
                 .ForMember(u => u.AvgDailyPrice, opt => opt.MapFrom(u => u.AvgDailyPrice))
                 .ForMember(u => u.CreationDate, opt => opt.MapFrom(u => u.CreationDate))

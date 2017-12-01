@@ -29,7 +29,7 @@ namespace HomeBird.DataClasses.Forms
 
         [Required(ErrorMessage = "Укажите возраст")]
         [Display(Name = "Тип (суточный/подрост)")]
-        public BirdTypes Type { get; set; }
+        public SalesTypes Type { get; set; }
 
         [Display(Name = "Примечание")]
         public string Comment { get; set; }

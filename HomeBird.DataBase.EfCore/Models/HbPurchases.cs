@@ -4,25 +4,30 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HomeBird.DataBase.EfCore.Models
 {
+    /// <summary>
+    /// Закупки
+    /// </summary>
     public class HbPurchases
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public virtual int Id { get; set; }
 
-        public DateTime PurchaseDate { get; set; }
+        public virtual DateTimeOffset CreationDate { get; set; }
 
-        public int Count { get; set; }
+        public virtual DateTimeOffset PurchaseDate { get; set; }
 
-        public decimal Amount { get; set; }
+        public virtual int Count { get; set; }
+
+        public virtual decimal Amount { get; set; }
 
         [MaxLength(2048)]
-        public string Address { get; set; }
+        public virtual string Address { get; set; }
         
-        public int LotId { get; set; }
+        public virtual int LotId { get; set; }
 
-        public bool IsDeleted { get; set; }
+        public virtual bool IsDeleted { get; set; }
 
-        [ForeignKey("LotId")]
-        public HbLots Lot { get; set; }
+        [ForeignKey(nameof(LotId))]
+        public virtual HbLots Lot { get; set; }
     }
 }

@@ -5,27 +5,30 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HomeBird.DataBase.EfCore.Models
 {
+    /// <summary>
+    /// Партии
+    /// </summary>
     public class HbLots
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public virtual int Id { get; set; }
 
         [MaxLength(1024)]
-        public string IdentifierNumber { get; set; }
+        public virtual string Identifier { get; set; }
 
-        public DateTime CreationDate { get; set; }
+        public virtual DateTime CreationDate { get; set; }
 
-        public decimal? AvgAdultPrice { get; set; }
+        public virtual decimal? AvgAdultPrice { get; set; }
 
-        public decimal? AvgDailyPrice { get; set; }
+        public virtual decimal? AvgDailyPrice { get; set; }
 
-        public int? SoldCount { get; set; }
+        public virtual int? SoldCount { get; set; }
 
-        public int? Loses { get; set; }
+        public virtual int? Loses { get; set; }
 
-        public decimal? Profit { get; set; }
+        public virtual decimal? Profit { get; set; }
 
-        public bool IsDeleted { get; set; }
+        public virtual bool IsDeleted { get; set; }
 
         [InverseProperty("Lot")]
         public virtual ICollection<HbPurchases> Purchases { get; set; }

@@ -35,7 +35,7 @@ namespace HomeBird.DataClasses
 
         public DateTime? End { get; set; }
 
-        public BirdTypes? Type { get; set; }
+        public SalesTypes? Type { get; set; }
 
         public int? LotId { get; set; }
     }
