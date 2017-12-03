@@ -1,8 +1,5 @@
 ﻿using HomeBird.DataBase.EfCore.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace HomeBird.DataBase.EfCore.Context
 {
@@ -13,19 +10,19 @@ namespace HomeBird.DataBase.EfCore.Context
 
         }
 
-        public DbSet<HbLots> Lots { get; set; }
+        public virtual DbSet<HbLots> Lots { get; set; }
 
-        public DbSet<HbBroods> Broods { get; set; }
+        public virtual DbSet<HbBroods> Broods { get; set; }
 
-        public DbSet<HbIncubators> Incubators { get; set; }
+        public virtual DbSet<HbIncubators> Incubators { get; set; }
 
-        public DbSet<HbLayings> Layings { get; set; }
+        public virtual DbSet<HbLayings> Layings { get; set; }
 
-        public DbSet<HbOverheads> Overheads { get; set; }
+        public virtual DbSet<HbOverheads> Overheads { get; set; }
 
-        public DbSet<HbPurchases> Purchases { get; set; }
+        public virtual DbSet<HbPurchases> Purchases { get; set; }
 
-        public DbSet<HbSales> Sales { get; set; }
+        public virtual DbSet<HbSales> Sales { get; set; }
 
     }
 }

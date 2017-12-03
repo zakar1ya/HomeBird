@@ -7,4 +7,11 @@ namespace HomeBird.Common
         Adult,
         Daily
     }
+
+    public enum SalesTypes
+    {
+        AdultChicken,
+        DailyChicken,
+        Egg
+    }
 }

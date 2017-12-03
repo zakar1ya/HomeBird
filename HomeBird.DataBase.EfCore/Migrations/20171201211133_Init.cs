@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Microsoft.EntityFrameworkCore.Metadata;
+using System;
+using System.Collections.Generic;
 
 namespace HomeBird.DataBase.EfCore.Migrations
 {
-    public partial class InitDatabase : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -16,7 +16,7 @@ namespace HomeBird.DataBase.EfCore.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     IsDeleted = table.Column<bool>(nullable: false),
-                    Title = table.Column<string>(nullable: true)
+                    Title = table.Column<string>(maxLength: 1024, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -32,7 +32,7 @@ namespace HomeBird.DataBase.EfCore.Migrations
                     AvgAdultPrice = table.Column<decimal>(nullable: true),
                     AvgDailyPrice = table.Column<decimal>(nullable: true),
                     CreationDate = table.Column<DateTime>(nullable: false),
-                    IdentifierNumber = table.Column<string>(nullable: true),
+                    Identifier = table.Column<string>(maxLength: 1024, nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     Loses = table.Column<int>(nullable: true),
                     Profit = table.Column<decimal>(nullable: true),
@@ -49,8 +49,9 @@ namespace HomeBird.DataBase.EfCore.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    BroodDate = table.Column<DateTime>(nullable: false),
+                    BroodDate = table.Column<DateTimeOffset>(nullable: false),
                     Count = table.Column<int>(nullable: false),
+                    CreationDate = table.Column<DateTimeOffset>(nullable: false),
                     DeadCount = table.Column<int>(nullable: false),
                     DeadPercent = table.Column<decimal>(nullable: false),
                     EmptyCount = table.Column<int>(nullable: false),
@@ -68,7 +69,7 @@ namespace HomeBird.DataBase.EfCore.Migrations
                         column: x => x.LotId,
                         principalTable: "Lots",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -92,7 +93,7 @@ namespace HomeBird.DataBase.EfCore.Migrations
                         column: x => x.LotId,
                         principalTable: "Lots",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -102,10 +103,11 @@ namespace HomeBird.DataBase.EfCore.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Amount = table.Column<decimal>(nullable: false),
-                    Comment = table.Column<string>(nullable: true),
+                    Comment = table.Column<string>(maxLength: 2048, nullable: true),
+                    CreationDate = table.Column<DateTimeOffset>(nullable: false),
                     IsDeleted = table.Column<bool>(nullable: false),
                     LotId = table.Column<int>(nullable: false),
-                    OverheadDate = table.Column<DateTime>(nullable: false)
+                    OverheadDate = table.Column<DateTimeOffset>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -115,7 +117,7 @@ namespace HomeBird.DataBase.EfCore.Migrations
                         column: x => x.LotId,
                         principalTable: "Lots",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -124,12 +126,13 @@ namespace HomeBird.DataBase.EfCore.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Address = table.Column<string>(nullable: true),
+                    Address = table.Column<string>(maxLength: 2048, nullable: true),
                     Amount = table.Column<decimal>(nullable: false),
                     Count = table.Column<int>(nullable: false),
+                    CreationDate = table.Column<DateTimeOffset>(nullable: false),
                     IsDeleted = table.Column<bool>(nullable: false),
                     LotId = table.Column<int>(nullable: false),
-                    PurchaseDate = table.Column<DateTime>(nullable: false)
+                    PurchaseDate = table.Column<DateTimeOffset>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -139,7 +142,7 @@ namespace HomeBird.DataBase.EfCore.Migrations
                         column: x => x.LotId,
                         principalTable: "Lots",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -149,12 +152,12 @@ namespace HomeBird.DataBase.EfCore.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Amount = table.Column<decimal>(nullable: false),
-                    Buyer = table.Column<string>(nullable: true),
-                    Comment = table.Column<string>(nullable: true),
+                    Buyer = table.Column<string>(maxLength: 2048, nullable: true),
+                    Comment = table.Column<string>(maxLength: 2048, nullable: true),
                     Count = table.Column<int>(nullable: false),
                     IsDeleted = table.Column<bool>(nullable: false),
                     LotId = table.Column<int>(nullable: false),
-                    SaleDate = table.Column<DateTime>(nullable: false),
+                    SaleDate = table.Column<DateTimeOffset>(nullable: false),
                     Type = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -165,7 +168,7 @@ namespace HomeBird.DataBase.EfCore.Migrations
                         column: x => x.LotId,
                         principalTable: "Lots",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
