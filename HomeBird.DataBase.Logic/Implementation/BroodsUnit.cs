@@ -98,7 +98,7 @@ namespace HomeBird.DataBase.Logic
             return new HbResult<HbBrood>(_mapper.Map<HbBrood>(brood));
         }
 
-        public async Task Delete(int id)
+        public async Task Remove(int id)
         {
             var brood = await _dc.Broods.FirstOrDefaultAsync(u => !u.IsDeleted && u.Id == id);
             if (brood == null)

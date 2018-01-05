@@ -1,15 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace HomeBird.DataClasses
 {
+    /// <summary>
+    /// Выводок
+    /// </summary>
     public class HbBrood
     {
         public int Id { get; set; }
 
-        public DateTime BroodDate { get; set; }
+        public DateTimeOffset BroodDate { get; set; }
 
         public int Count { get; set; }
 
@@ -24,8 +24,6 @@ namespace HomeBird.DataClasses
         public decimal DeadPercent { get; set; }
 
         public decimal PlacePrice { get; set; }
-
-        public HbLot Lot { get; set; }
 
     }
 }

@@ -87,7 +87,7 @@ namespace HomeBird.Logic.Broods
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
-            await _broods.Delete(id);
+            await _broods.Remove(id);
             return RedirectToAction(nameof(List));
         }
 
