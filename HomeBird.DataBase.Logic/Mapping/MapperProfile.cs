@@ -117,7 +117,6 @@ namespace HomeBird.DataBase.Logic.Mapping
                 .ForMember(u => u.EmptyCount, opt => opt.MapFrom(u => u.EmptyCount))
                 .ForMember(u => u.DeadPercent, opt => opt.MapFrom(u => u.DeadPercent))
                 .ForMember(u => u.EmptyPercent, opt => opt.MapFrom(u => u.EmptyPercent))
-                .ForMember(u => u.Lot, opt => opt.MapFrom(u => u.Lot))
                 .ForMember(u => u.Percent, opt => opt.MapFrom(u => u.Percent))
                 .ForMember(u => u.PlacePrice, opt => opt.MapFrom(u => u.PlacePrice))
                 .ForAllOtherMembers(u => u.Ignore());
@@ -128,7 +127,6 @@ namespace HomeBird.DataBase.Logic.Mapping
                 .ForMember(u => u.BroodDate, opt => opt.MapFrom(u => u.BroodDate))
                 .ForMember(u => u.DeadCount, opt => opt.MapFrom(u => u.DeadCount))
                 .ForMember(u => u.EmptyCount, opt => opt.MapFrom(u => u.EmptyCount))
-                .ForMember(u => u.LotId, opt => opt.MapFrom(u => u.Lot.Id))
                 .ForAllOtherMembers(u => u.Ignore());
         }
     }

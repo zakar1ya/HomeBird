@@ -5,7 +5,78 @@
     ViewBag.Title = "Партии";
 }
 
-<div class="page-title">
+<div class="row">
+    <div class="col-md-3 color margin-bottom">
+        <div class="nav nav-list">
+            <a href="#" class="list-group-item active"><i class="glyphicon glyphicon-folder-open"></i>Закладки</a>
+            <a href="#" class="list-group-item"><i class="glyphicon glyphicon-shopping-cart"></i>Залупки</a>
+            <a href="#" class="list-group-item"><i class="glyphicon glyphicon-open"></i>Выводы</a>
+            <a href="#" class="list-group-item"><i class="glyphicon glyphicon-usd"></i>Продажи</a>
+            <a href="#" class="list-group-item"><i class="glyphicon glyphicon-shopping-cart"></i>Закупки</a>
+        </div>
+    </div>
+    <div class="col-md-9 margin-table">
+        <div class="table table-responsive">
+            <table class="table table-hover table-striped table-bordered table-condensed">
+                <thead class="thead-inverse">
+                    <tr>
+                        <th>Номер партии</th>
+                        <th>Дата создания</th>
+                        <th>Продано шт.</th>
+                        <th>Средняя цена суточный</th>
+                        <th>Средняя цена подрост</th>
+                        <th>Потери шт.</th>
+                        <th>Выгода</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var lot in Model.List)
+                    {
+                        <tr>
+                            <td>@($"{lot.IdentifierNumber} ({lot.CreationDate.Year}г.)")</td>
+                            <td>@lot.CreationDate.ToString("dd.MM.yyyy")</td>
+                            <td>@(lot.SoldCount.HasValue ? lot.SoldCount.ToString() : "-")</td>
+                            <td>@(lot.AvgDailyPrice.HasValue ? lot.SoldCount.ToString() : "-")</td>
+                            <td>@(lot.AvgAdultPrice.HasValue ? lot.SoldCount.ToString() : "-")</td>
+                            <td>@(lot.Loses.HasValue ? lot.SoldCount.ToString() : "-")</td>
+                            <td>@(lot.Profit.HasValue ? lot.SoldCount.ToString() : "-")</td>
+                            <td align="center">
+                                <button class="btn btn-primary">Изменить</button>
+                                <button class="btn btn-danger" style="margin-left: 5px;" onclick="return confirm('Уверены?')">Удалить</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="conteiner">
+            <div class="row">
+                <div class="col-md-6 margin position">
+                    <a asp-action="Add" asp-controller="Lots" class="btn btn-success">Добавить партию</a>
+                </div>
+                @if (Model.Form.Total > Model.Form.Count)
+                {
+                    @Html.Paging(Model.Form, u => Url.Action("List", "Lots", new PagedLotsForm { Offset = (u - 1) * Model.Form.Count }))
+                }
+                @*<div class="col-md-6 margin">
+                        <div class="btn-group">
+                            <button class="btn payging">Предыдущая</button>
+                            <button class="btn payging">1</button>
+                            <button class="btn payging">2</button>
+                            <button class="btn payging">3</button>
+                            <button class="btn payging">4</button>
+                            <button class="btn payging">следущюая</button>
+                        </div>
+                    </div>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@*<div class="page-title">
     <div class="title_left">
         <h3>
             Сезон @Model.Form.Start.Year
@@ -52,28 +123,25 @@
                                 </thead>
                                 @foreach (var lot in Model.List)
                                 {
-                                <tbody>
-                                    <tr>
-                                        <td>@($"{lot.IdentifierNumber} ({lot.CreationDate.Year}г.)")</td>
-                                        <td>@lot.CreationDate.ToString("dd.MM.yyyy")</td>
-                                        <td>@(lot.SoldCount.HasValue ? lot.SoldCount.ToString() : "-")</td>
-                                        <td>@(lot.AvgDailyPrice.HasValue ? lot.SoldCount.ToString() : "-")</td>
-                                        <td>@(lot.AvgAdultPrice.HasValue ? lot.SoldCount.ToString() : "-")</td>
-                                        <td>@(lot.Loses.HasValue ? lot.SoldCount.ToString() : "-")</td>
-                                        <td>@(lot.Profit.HasValue ? lot.SoldCount.ToString() : "-")</td>
-                                    </tr>
-                                </tbody>
+                                    <tbody>
+                                        <tr>
+                                            <td>@($"{lot.IdentifierNumber} ({lot.CreationDate.Year}г.)")</td>
+                                            <td>@lot.CreationDate.ToString("dd.MM.yyyy")</td>
+                                            <td>@(lot.SoldCount.HasValue ? lot.SoldCount.ToString() : "-")</td>
+                                            <td>@(lot.AvgDailyPrice.HasValue ? lot.SoldCount.ToString() : "-")</td>
+                                            <td>@(lot.AvgAdultPrice.HasValue ? lot.SoldCount.ToString() : "-")</td>
+                                            <td>@(lot.Loses.HasValue ? lot.SoldCount.ToString() : "-")</td>
+                                            <td>@(lot.Profit.HasValue ? lot.SoldCount.ToString() : "-")</td>
+                                        </tr>
+                                    </tbody>
                                 }
                             </table>
                         </div>
                     </div>
-                    @if (Model.Form.Total > Model.Form.Count)
-                    {
-                        @Html.Paging(Model.Form, u => Url.Action("List", "Lots", new PagedLotsForm { Offset = (u - 1) * Model.Form.Count }))
-                    }
+
                 </div>
                 <a asp-action="Add" asp-controller="Lots" class="btn btn-success">Создать</a>
             </div>
         </div>
     </div>
-</div>
+</div>*@

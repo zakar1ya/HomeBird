@@ -1,37 +1,16 @@
-﻿<!DOCTYPE HTML>
-<html>
-<head>
-    <title>Full view</title>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" href="/styles/bootstrap.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/style.css" type="text/css" />
-</head>
-<body>
-    <div class="date">
-        <div class="btn-group">
-            <button class="btn" type="button" data-toggle="dropdown">
-                Дата
-            </button>
-            <div class="dropdown-menu">
-                <a href="#">fg</a>
-                <a href="#">fg</a>
-            </div>
+﻿<div class="row">
+    <div class="col-md-3 color margin-bottom">
+        <div class="nav nav-list">
+            <a href="#" class="list-group-item active"><i class="glyphicon glyphicon-folder-open"></i>Закладки</a>
+            <a href="#" class="list-group-item"><i class="glyphicon glyphicon-shopping-cart"></i>Залупки</a>
+            <a href="#" class="list-group-item"><i class="glyphicon glyphicon-open"></i>Выводы</a>
+            <a href="#" class="list-group-item"><i class="glyphicon glyphicon-usd"></i>Продажи</a>
+            <a href="#" class="list-group-item"><i class="glyphicon glyphicon-shopping-cart"></i>Закупки</a>
         </div>
     </div>
-    <div class="container">
-
-        <div class="btn-group-vertical">
-            <div class="sidbar">
-                <div class="href"><a href="#">Закладки</a></div>
-                <div class="href"><a href="#">Закупуки</a></div>
-                <div class="href"><a href="#">Выводы</a></div>
-                <div class="href"><a href="#">Продажи</a></div>
-                <div class="href"><a href="#">Закупки</a></div>
-            </div>
-        </div>
-        <div class="table">
-            <table class="table table-hover">
-
+    <div class="col-md-9 margin-table">
+        <div class="table table-responsive">
+            <table class="table table-hover table-striped table-bordered table-condensed">
                 <thead class="thead-inverse">
                     <tr>
                         <th>Номер</th>
@@ -47,53 +26,69 @@
                     <td>ffff</td>
                     <td>ffff</td>
                     <td>ffff</td>
-                    <td align="right"><button class="btn btn-mini">Изменить</button></td>
-                    <td align="right"><button class="btn btn-danger">Удалить</button></td>
+                    <td align="center"><button class="btn-table">Изменить</button></td>
+                    <td align="center"><button class="btn-table">Удалить</button></td>
                 </tr>
                 <tr>
                     <td class="bold">2</td>
                     <td>ffff</td>
                     <td>ffff</td>
                     <td>ffff</td>
-                    <td align="right"><button class="btn btn-mini">Изменить</button></td>
-                    <td align="right"><button class="btn btn-danger">Удалить</button></td>
+                    <td align="center"><button class="btn-table">Изменить</button></td>
+                    <td align="center"><button class="btn-table">Удалить</button></td>
                 </tr>
                 <tr>
                     <td class="bold">3</td>
                     <td>ffff</td>
                     <td>ffff</td>
                     <td>ffff</td>
-                    <td align="right"><button class="btn btn-mini">Изменить</button></td>
-                    <td align="right"><button class="btn btn-danger">Удалить</button></td>
+                    <td align="center"><button class="btn-table">Изменить</button></td>
+                    <td align="center"><button class="btn-table">Удалить</button></td>
                 </tr>
                 <tr>
                     <td class="bold">4</td>
                     <td>ffff</td>
                     <td>ffff</td>
                     <td>ffff</td>
-                    <td align="right"><button class="btn btn-mini">Изменить</button></td>
-                    <td align="right"><button class="btn btn-danger">Удалить</button></td>
+                    <td align="center"><button class="btn-table">Изменить</button></td>
+                    <td align="center"><button class="btn-table">Удалить</button></td>
                 </tr>
                 <tr>
                     <td class="bold">5</td>
                     <td>ffff</td>
                     <td>ffff</td>
                     <td>ffff</td>
-                    <td align="right"><button class="btn btn-mini">Изменить</button></td>
-                    <td align="right"><button class="btn btn-danger">Удалить</button></td>
+                    <td align="center"><button class="btn-table">Изменить</button></td>
+                    <td align="center"><button class="btn-table">Удалить</button></td>
                 </tr>
                 <tr>
                     <td class="bold">6</td>
                     <td>ffff</td>
                     <td>ffff</td>
                     <td>ffff</td>
-                    <td align="right"><button class="btn btn-mini">Изменить</button></td>
-                    <td align="right"><button class="btn btn-danger" value="delete">Удалить</button></td>
+                    <td align="center"><button class="btn-table">Изменить</button></td>
+                    <td align="center"><button class="btn-table" value="delete">Удалить</button></td>
                 </tr>
             </table>
         </div>
-        <div class="primary"><button class="btn btn-primary">Добавить</button></div>
+        <div class="conteiner">
+            <div class="row">
+                <div class="col-md-6 margin position">
+                    <form>
+                        <button class="btn payging ">Добавить вкладку</button>
+                    </form>
+                </div>
+                <div class="col-md-6 margin">
+                    <div class="btn-group">
+                        <button class="btn payging">Предыдущая</button>
+                        <button class="btn payging">1</button>
+                        <button class="btn payging">2</button>
+                        <button class="btn payging">3</button>
+                        <button class="btn payging">4</button>
+                        <button class="btn payging">следущюая</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    </div>
-</body>
-</html>
+</div>

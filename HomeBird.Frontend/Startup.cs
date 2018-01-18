@@ -1,7 +1,9 @@
-﻿using HomeBird.DataBase.EfCore.Context;
+﻿using AutoMapper;
+using HomeBird.DataBase.EfCore.Context;
 using HomeBird.DataBase.Logic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -27,9 +29,13 @@ namespace HomeBird.Frontend
         {
             // Add framework services.
             services.AddMvc();
-            //services.AddAutoMapper();
+            services.AddAutoMapper();
+
+            var defaultConnnection = Configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContextPool<HomeBirdContext>(u => u.UseSqlServer(defaultConnnection));
+
+
             services.AddTransient<ILotsUnit, LotsUnit>();
-            services.AddTransient<HomeBirdContext, HomeBirdContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
