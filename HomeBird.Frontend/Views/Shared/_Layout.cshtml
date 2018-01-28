@@ -15,7 +15,7 @@
                     <a href="#" class="brand">Ссылка на главную</a>
                 </div>
             </div>
-            <div class="col-md-6 margin-left col-xs-2"> 
+            <div class="col-md-6 margin-left col-xs-2">
                 <div class="button-top btn-group margin-left">
                     <button class="btn-blue dropdown-toggle" data-toggle="dropdown">Выберите год <span class="caret"></span></button><!--TODO: use datepicker for year-->
                     <ul class="dropdown-menu">
@@ -29,7 +29,20 @@
         </div>
     </div>
     <div class="conteiner-fluid">
-        @RenderBody()
+        <div class="row">
+            <div class="col-md-3 color margin-bottom">
+                <div class="nav nav-list">
+                    <a asp-controller="Lots" asp-action="List" class="list-group-item @Html.IsActive("List", "Lots")"><i class="glyphicon glyphicon-folder-open"></i>Партии</a>
+                    <a asp-controller="Layings" asp-action="List" class="list-group-item @Html.IsActive("List", "Layings")"><i class="glyphicon glyphicon-folder-open"></i>Закладки</a>
+                    <a asp-controller="Broods" asp-action="List" class="list-group-item @Html.IsActive("List", "Broods")"><i class="glyphicon glyphicon-open"></i>Выводы</a>
+                    <a asp-controller="Sales" asp-action="List" class="list-group-item @Html.IsActive("List", "Sales")"><i class="glyphicon glyphicon-usd"></i>Продажи</a>
+                    <a asp-controller="Purchases" asp-action="List" class="list-group-item @Html.IsActive("List", "Purchases")"><i class="glyphicon glyphicon-shopping-cart"></i>Закупки</a>
+                    <a asp-controller="Overheads" asp-action="List" class="list-group-item @Html.IsActive("List", "Overheads")"><i class="glyphicon glyphicon-shopping-cart"></i>Расходы</a>
+                    <a asp-controller="Incubators" asp-action="List" class="list-group-item @Html.IsActive("List", "Incubators")"><i class="glyphicon glyphicon-book"></i>Инкубаторы</a>
+                </div>
+            </div>
+            @RenderBody()
+        </div>
     </div>
 </body>
 </html>

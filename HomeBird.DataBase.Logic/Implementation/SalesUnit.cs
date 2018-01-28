@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace HomeBird.DataBase.Logic
 {
-    public class SalesUnit : ISalesUnit
+    internal class SalesUnit : ISalesUnit
     {
         private HomeBirdContext _dc;
         private IMapper _mapper;

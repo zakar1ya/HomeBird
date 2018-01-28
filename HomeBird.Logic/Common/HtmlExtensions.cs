@@ -25,6 +25,17 @@ namespace HomeBird.Logic.Common
             vm.Stop = vm.Current + 2 < vm.LastPage ? vm.Current + 2 : vm.LastPage;
 
             return helper.Partial("~/Views/Shared/Paging.cshtml", vm);
-        } 
+        }
+
+        public static string IsActive(this IHtmlHelper helper, string action, string controller = null)
+        {
+            if(!string.IsNullOrWhiteSpace(controller) && controller != helper.ViewContext.RouteData.Values["controller"].ToString())
+                return string.Empty;
+
+            if(action == helper.ViewContext.RouteData.Values["action"].ToString())
+                return "active";
+
+            return string.Empty;
+        }
     }
 }

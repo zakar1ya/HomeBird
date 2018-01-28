@@ -11,7 +11,7 @@ using HomeBird.DataBase.EfCore.Models;
 
 namespace HomeBird.DataBase.Logic
 {
-    public class BroodsUnit : IBroodsUnit
+    internal class BroodsUnit : IBroodsUnit
     {
         private readonly HomeBirdContext _dc;
         private readonly IMapper _mapper;

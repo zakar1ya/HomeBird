@@ -5,80 +5,51 @@
     ViewBag.Title = "Партии";
 }
 
-<div class="page-title">
-    <div class="title_left">
-        <h3>
-            Сезон ___
-        </h3>
+<div class="col-md-9 margin-table">
+    <h2>Продажи</h2>
+    <div class="table table-responsive">
+        <table id="datatable" class="table table-hover table-striped table-bordered table-condensed">
+            <thead class="thead-inverse">
+                <tr>
+                    <th>Сумма</th>
+                    <th>Количество</th>
+                    <th>Дата</th>
+                    <th>Покупатель</th>
+                    <th>Комментарий</th>
+                    <th>Тип</th>
+                    <th>Партия</th>
+                    <th></th>
+                </tr>
+            </thead>
+            @foreach (var item in Model.List)
+            {
+                <tbody>
+                    <tr>
+                        <td>@item.Amount</td>
+                        <td>@item.Count</td>
+                        <td>@item.SaleDate.ToString("dd MMM yyyy")</td>
+                        <td>@item.Buyer</td>
+                        <td>@item.Comment</td>
+                        <td>@(item.Type == BirdTypes.Adult ? "Подрост" : "Суточный")</td>
+                        <td>lot number</td>
+                        <td>
+                            <a class="btn btn-info" asp-action="Edit" asp-controller="Sales" asp-route-id="@item.Id">Изменить </a>
+                            <a href="#" class="btn btn-danger js-delete" data-url="@Url.Action("Delete", "Sales", new { id = item.Id })">Удалить</a>
+                        </td>
+                    </tr>
+                </tbody>
+            }
+        </table>
     </div>
-
-    <div class="title_right">
-        <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search for...">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">Go!</button>
-                </span>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="clearfix"></div>
-
-<div class="row">
-
-    <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="x_panel">
-            <div class="x_title">
-                <h2>Продажи</h2>
-                <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-                <div id="datatable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
-                    <div class="row"></div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <table id="datatable" class="table table-striped table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Сумма</th>
-                                        <th>Количество</th>
-                                        <th>Дата</th>
-                                        <th>Покупатель</th>
-                                        <th>Комментарий</th>
-                                        <th>Тип</th>
-                                        <th>Партия</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                @foreach (var item in Model.List)
-                                {
-                                    <tbody>
-                                        <tr>
-                                            <td>@item.Amount</td>
-                                            <td>@item.Count</td>
-                                            <td>@item.SaleDate.ToString("dd MMM yyyy")</td>
-                                            <td>@item.Buyer</td>
-                                            <td>@item.Comment</td>
-                                            <td>@(item.Type == BirdTypes.Adult ? "Подрост" : "Суточный")</td>
-                                            <td>lot number</td>
-                                            <td>
-                                                <a class="btn btn-info" asp-action="Edit" asp-controller="Sales" asp-route-id="@item.Id">Изменить </a>
-                                                <a href="#" class="btn btn-danger js-delete" data-url="@Url.Action("Delete", "Sales", new { id = item.Id })">Удалить</a>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                }
-                            </table>
-                        </div>
-                    </div>
-                    @if (Model.Form.Total > Model.Form.Count)
-                    {
-                        @Html.Paging(Model.Form, u => Url.Action("List", "Sales", new PagedLotsForm { Offset = (u - 1) * Model.Form.Count }))
-                    }
-                </div>
+    <div class="conteiner">
+        <div class="row">
+            <div class="col-md-6 margin position">
                 <a class="btn btn-success" asp-action="Add" asp-controller="Sales">Создать</a>
             </div>
+            @if (Model.Form.Total > Model.Form.Count)
+            {
+                @Html.Paging(Model.Form, u => Url.Action("List", "Sales", new PagedLotsForm { Offset = (u - 1) * Model.Form.Count }))
+            }
         </div>
     </div>
 </div>

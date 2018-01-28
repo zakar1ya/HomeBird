@@ -12,7 +12,7 @@ using HomeBird.DataBase.EfCore.Models;
 
 namespace HomeBird.DataBase.Logic
 {
-    public class LotsUnit : ILotsUnit
+    internal class LotsUnit : ILotsUnit
     {
         private HomeBirdContext _dc;
         private IMapper _mapper;

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using HomeBird.DataBase.EfCore.Context;
-using HomeBird.DataBase.Logic;
+using HomeBird.DataBase.Logic.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -35,7 +35,7 @@ namespace HomeBird.Frontend
             services.AddDbContextPool<HomeBirdContext>(u => u.UseSqlServer(defaultConnnection));
 
 
-            services.AddTransient<ILotsUnit, LotsUnit>();
+            services.AddUnits();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,7 +60,7 @@ namespace HomeBird.Frontend
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Lots}/{action=List}/{id?}");
             });
         }
     }

@@ -11,7 +11,7 @@ using HomeBird.DataBase.EfCore.Models;
 
 namespace HomeBird.DataBase.Logic
 {
-    public class OverheadsUnit : IOverheadsUnit
+    internal class OverheadsUnit : IOverheadsUnit
     {
         private HomeBirdContext _dc;
         private IMapper _mapper;
