@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using HomeBird.DataBase.EfCore.Context;
 using HomeBird.DataBase.Logic.Extensions;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -33,7 +34,8 @@ namespace HomeBird.Frontend
 
             var defaultConnnection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContextPool<HomeBirdContext>(u => u.UseSqlServer(defaultConnnection));
-
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                    .AddCookie();
 
             services.AddUnits();
         }

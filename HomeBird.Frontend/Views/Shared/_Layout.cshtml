@@ -2,10 +2,19 @@
 <html>
 <head>
     <link href="/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/lib/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    @*<link href="/lib/jquery-ui/themes/base/jquery-ui.min.css" rel="stylesheet" />*@
     <link href="/css/style.css" rel="stylesheet" />
 
+    <script src="/lib/moment/min/moment.min.js"></script>
+    <script src="/lib/moment/min/locales.min.js"></script>
     <script src="/lib/jquery/dist/jquery.min.js"></script>
     <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/lib/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+    @*<script src="/lib/jquery-ui/jquery-ui.min.js"></script>*@
+    <script src="/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.min.js"></script>
 </head>
 <body>
     <div class="conteiner-fluid header color">
@@ -17,13 +26,10 @@
             </div>
             <div class="col-md-6 margin-left col-xs-2">
                 <div class="button-top btn-group margin-left">
-                    <button class="btn-blue dropdown-toggle" data-toggle="dropdown">Выберите год <span class="caret"></span></button><!--TODO: use datepicker for year-->
-                    <ul class="dropdown-menu">
-                        <li><a href="#"></a>2014</li>
-                        <li><a href="#"></a>2015</li>
-                        <li><a href="#"></a>2016</li>
-                        <li><a href="#"></a>2017</li>
-                    </ul>
+                    <div class="form-group">
+                        <label style="color: white;">Выберите год</label>
+                        <input style="width:50px;" type="text" id="global-year" name="global-year" value="@DateTimeOffset.UtcNow" />
+                    </div>
                 </div>
             </div>
         </div>
@@ -44,5 +50,13 @@
             @RenderBody()
         </div>
     </div>
+    <script>
+        $(function () {
+            $('#global-year').datetimepicker({
+                locale: 'ru',
+                format: "YYYY"
+            });
+        });
+    </script>
 </body>
 </html>
