@@ -22,8 +22,13 @@ namespace HomeBird.Frontend.Logic.Common
                 var thisYear = new DateTimeOffset(DateTimeOffset.UtcNow.Year, 1, 1, 1, 0, 0, TimeSpan.Zero);
                 var claims = new Claim[] { new Claim(HbClaimTypes.StartDate, thisYear.ToString()) };
 
-                var identity = new ClaimsIdentity(claims);
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
+                var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity), new AuthenticationProperties
+                {
+                    ExpiresUtc = DateTime.UtcNow.AddYears(99),
+                    IsPersistent = true,
+                    AllowRefresh = false
+                });
 
                 return thisYear;
             }
@@ -40,8 +45,13 @@ namespace HomeBird.Frontend.Logic.Common
                 var thisYear = new DateTimeOffset(DateTimeOffset.UtcNow.Year, 1, 1, 1, 0, 0, TimeSpan.Zero);
                 var claims = new Claim[] { new Claim(HbClaimTypes.EndDate, thisYear.AddYears(1).ToString()) };
 
-                var identity = new ClaimsIdentity(claims);
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
+                var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity), new AuthenticationProperties
+                {
+                    ExpiresUtc = DateTime.UtcNow.AddYears(99),
+                    IsPersistent = true,
+                    AllowRefresh = false
+                });
 
                 return thisYear;
             }

@@ -11,7 +11,7 @@
     <script src="/lib/jquery/dist/jquery.min.js"></script>
     <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="/lib/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
-    @*<script src="/lib/jquery-ui/jquery-ui.min.js"></script>*@
+    <script src="/lib/jquery-ui/jquery-ui.min.js"></script>
     <script src="/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
     <script src="/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.min.js"></script>
@@ -28,7 +28,7 @@
                 <div class="button-top btn-group margin-left">
                     <div class="form-group">
                         <label style="color: white;">Выберите год</label>
-                        <input style="width:50px;" type="text" id="global-year" name="global-year" value="@DateTimeOffset.UtcNow" />
+                        <input style="width:50px;" type="text" id="global-year" name="startDate" value="@DateTimeOffset.UtcNow" />\
                     </div>
                 </div>
             </div>
@@ -54,7 +54,18 @@
         $(function () {
             $('#global-year').datetimepicker({
                 locale: 'ru',
-                format: "YYYY"
+                format: 'YYYY'
+            });
+
+            $('#global-year').on('dp.change', function (e) {
+                $.ajax({
+                    url: '@Url.Action("UpdateYear", "Home")',
+                    type: 'POST',
+                    data: {
+                        startDate: e.date.toISOString(),
+                        returnUrl: '@Context.Request.Path'
+                    }
+                });
             });
         });
     </script>

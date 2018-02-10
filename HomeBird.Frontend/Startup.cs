@@ -35,7 +35,11 @@ namespace HomeBird.Frontend
             var defaultConnnection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContextPool<HomeBirdContext>(u => u.UseSqlServer(defaultConnnection));
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                    .AddCookie();
+                    .AddCookie(opts =>
+                    {
+                        opts.LoginPath = "/";
+                        opts.Cookie.Name = ".hbcookie";
+                    });
 
             services.AddUnits();
         }
@@ -57,6 +61,7 @@ namespace HomeBird.Frontend
             }
 
             app.UseStaticFiles();
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {
