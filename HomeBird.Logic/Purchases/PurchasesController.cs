@@ -95,11 +95,7 @@ namespace HomeBird.Logic.Purchases
 
         private async Task InitLotsList(CreatePurchaseForm form)
         {
-            form.Lots = await _lots.GetList(new PagedLotsForm
-            {
-                Start = new DateTime(form.PurchaseDate.Year, 1, 1),
-                End = new DateTime(form.PurchaseDate.Year + 1, 1, 1)
-            });
+            form.Lots = await _lots.GetList(new PagedLotsForm());
         }
 
     }

@@ -13,6 +13,8 @@ namespace HomeBird.DataClasses.Forms
             Count = Consts.PageCount;
         }
 
+        public int Year { get; set; } = DateTimeOffset.UtcNow.Year;
+
         private int _offset;
         public int Offset
         {

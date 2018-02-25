@@ -15,6 +15,7 @@ namespace HomeBird.Common
         public const int SaleNotFound = 6;
         public const int LayingNotFound = 7;
         public const int BroodNotFound = 8;
+        public const int LotAlreadyExist = 9;
 
         static ErrorCodes()
         {
@@ -28,6 +29,7 @@ namespace HomeBird.Common
             _messages.Add(SaleNotFound, "Продажа не найдена");
             _messages.Add(LayingNotFound, "Закладка не найдена");
             _messages.Add(BroodNotFound, "Вывод не найден");
+            _messages.Add(LotAlreadyExist, "Партия уже существует");
         }
 
         public static string GetMessage(int code)

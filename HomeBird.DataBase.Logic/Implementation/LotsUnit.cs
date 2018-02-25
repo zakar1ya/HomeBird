@@ -33,12 +33,15 @@ namespace HomeBird.DataBase.Logic
 
         public async Task<HbResult<HbLot>> Create(CreateLotForm form)
         {
+            var exist = await _dc.Lots.AnyAsync(u => u.Identifier == form.IdentifierNumber );
+            if (exist)
+                return new HbResult<HbLot>(ErrorCodes.IncubatorAlreadyExist);
             // TODO: check if lot with same identifier already exist in this year
 
             var dbLot = _dc.Lots.Add(new HbLots
             {
                 Identifier = form.IdentifierNumber,
-                CreationDate = DateTime.UtcNow
+                CreationDate = DateTime.UtcNow                
             });
 
             await _dc.SaveChangesAsync();
@@ -91,7 +94,7 @@ namespace HomeBird.DataBase.Logic
         public async Task<IEnumerable<HbLot>> GetList(PagedLotsForm form)
         {
             var lots = await _dc.Lots
-                                .Where(u => u.CreationDate > form.Start && u.CreationDate < form.End)
+                                .Where(u => u.CreationDate > form.Start &&  u.CreationDate < form.End)
                                 .Where(u => !u.IsDeleted)
                                 .OrderByDescending(u => u.Id)
                                 .Skip(form.Offset)

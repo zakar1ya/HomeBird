@@ -34,7 +34,7 @@
                         <td>@(lot.Profit.HasValue ? lot.SoldCount.ToString() : "-")</td>
                         <td align="center">
                             <button class="btn btn-primary">Изменить</button>
-                            <button class="btn btn-danger" style="margin-left: 5px;" onclick="return confirm('Уверены?')">Удалить</button>
+                            <button class="btn btn-danger js-remove-lot" data-url="@Url.Action("Delete", "Lots", new { id = lot.Id })" style="margin-left: 5px;">Удалить</button>
                         </td>
                     </tr>
                 }
@@ -53,3 +53,23 @@
         </div>
     </div>
 </div>
+<script>
+    $(function () {
+        $('.js-remove-lot').click(function (e) {
+            if (!confirm('Уверены?'))
+                return;
+
+            var $el = $(e.currentTarget);
+            $.ajax({
+                url: $el.data('url'),
+                type: 'POST',
+                success: function (response) {
+                    if (response.error)
+                        return toastr.error(response.error.message);
+
+                    $el.closest('tr').remove();
+                }
+            });
+        });
+    });
+</script>

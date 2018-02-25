@@ -93,11 +93,7 @@ namespace HomeBird.Logic.Broods
 
         private async Task InitLotsList(CreateBroodForm form)
         {
-            form.Lots = await _lots.GetList(new PagedLotsForm
-            {
-                Start = new DateTime(form.BroodDate.Year, 1, 1),
-                End = new DateTime(form.BroodDate.Year + 1, 1, 1)
-            });
+            form.Lots = await _lots.GetList(new PagedLotsForm());
         }
 
     }

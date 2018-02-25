@@ -28,14 +28,21 @@ namespace HomeBird.DataClasses
 
     public class PagedLotsForm : PagingForm
     {
-        public PagedLotsForm()
+
+        public DateTime Start
         {
-            Start = new DateTime(DateTime.UtcNow.Year, 1, 1);
-            End = Start.AddYears(1);
+            get
+            {
+                return new DateTime(Year, 1, 1);
+            }
         }
 
-        public DateTime Start { get; set; }
-
-        public DateTime End { get; set; }
+        public DateTime End
+        {
+            get
+            {
+                return new DateTime(Year, 12, 31);
+            }
+        }
     }
 }

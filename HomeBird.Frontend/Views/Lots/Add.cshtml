@@ -5,10 +5,14 @@
     ViewBag.Title = "Партии";
 }
 
-<form asp-action="Add" asp-controller="Lots" method="post">@*TODO: move to modal*@
-    <div class="form-group">
-        <input asp-for="IdentifierNumber" type="text" />
-        <span asp-validation-for="IdentifierNumber"></span>
-    </div>
-    <input type="submit" value="Сохранить" />
-</form>
+<div class="col-md-5">
+    <h2>Добавить партию</h2>
+    <form asp-action="Add" asp-controller="Lots" method="post">
+        <div class="form-group">
+            <label>Номер</label>
+            <input asp-for="IdentifierNumber" class="form-control" type="text" />
+            <span asp-validation-for="IdentifierNumber"></span>
+        </div>
+        <input type="submit" class="btn btn-default" value="Сохранить" />
+    </form>
+</div>

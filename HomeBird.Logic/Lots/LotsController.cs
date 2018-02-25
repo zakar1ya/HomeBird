@@ -4,12 +4,13 @@ using HomeBird.DataBase.Logic;
 using HomeBird.DataClasses;
 using HomeBird.DataClasses.Forms;
 using HomeBird.DataClasses.ViewModels;
+using HomeBird.Frontend.Logic.Common;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace HomeBird.Logic.Lots
 {
-    public class LotsController : Controller
+    public class LotsController : HbBaseController
     {
         private readonly ILotsUnit _lots;
         private readonly IMapper _mapper;
@@ -22,15 +23,13 @@ namespace HomeBird.Logic.Lots
 
         public async Task<IActionResult> List(PagedLotsForm form)
         {
+            form.Year = CurrenYear;
             var page = await _lots.GetList(form);
             form.Total = await _lots.Count(form);
             return View(new PagedViewModel<HbLot, PagedLotsForm>(page, form));
         }
 
-        public IActionResult Add()
-        {
-            return View();
-        }
+        public IActionResult Add() => View();
 
         [HttpPost]
         public async Task<IActionResult> Add(CreateLotForm form)
@@ -38,6 +37,7 @@ namespace HomeBird.Logic.Lots
             if (!ModelState.IsValid)
                 return View(form);
 
+            form.Year = CurrenYear;
             var res = await _lots.Create(form);
             if (res.IsCorrect)
                 return RedirectToAction(nameof(List));

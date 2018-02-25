@@ -93,11 +93,7 @@ namespace HomeBird.Logic.Overheads
 
         private async Task InitLotsList(CreateOverheadsForm form)
         {
-            form.Lots = await _lots.GetList(new PagedLotsForm
-            {
-                Start = new DateTime(form.OverheadDate.Year, 1, 1),
-                End = new DateTime(form.OverheadDate.Year + 1, 1, 1)
-            });
+            form.Lots = await _lots.GetList(new PagedLotsForm());
         }
     }
 }

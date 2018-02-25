@@ -8,5 +8,6 @@ namespace HomeBird.Common
     {
         public const string StartDate = "StartDate";
         public const string EndDate = "EndDate";
+        public const string CurrentYear = "CurrentYear";
     }
 }

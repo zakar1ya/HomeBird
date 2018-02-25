@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace HomeBird.DataClasses.Forms
 {
@@ -12,5 +9,7 @@ namespace HomeBird.DataClasses.Forms
         [StringLength(15, ErrorMessage = "Идентификатор не должен быть менее 15 символов")]
         [Display(Name = "Номер партии")]
         public string IdentifierNumber { get; set; }
+
+        public int Year { get; set; } = DateTimeOffset.UtcNow.Year;
     }
 }

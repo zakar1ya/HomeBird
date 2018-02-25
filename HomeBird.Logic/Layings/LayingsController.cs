@@ -95,11 +95,7 @@ namespace HomeBird.Logic.Layings
 
         private async Task InitLotsList(CreateLayingForm form)
         {
-            form.Lots = await _lots.GetList(new PagedLotsForm
-            {
-                Start = new DateTime(form.CreationDate.Year, 1, 1),
-                End = new DateTime(form.CreationDate.Year + 1, 1, 1)
-            });
+            form.Lots = await _lots.GetList(new PagedLotsForm());
 
             form.Incubators = await _incub.GetList();
         }

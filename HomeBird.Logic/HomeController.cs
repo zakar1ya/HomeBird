@@ -11,9 +11,9 @@ namespace HomeBird.Frontend.Logic
 {
     public class HomeController : HbBaseController
     {
-        public async Task<IActionResult> UpdateYear(DateTimeOffset startDate, string returnUrl)
+        public async Task<IActionResult> UpdateYear(int year, string returnUrl)
         {
-            var claims = new Claim[] { new Claim(HbClaimTypes.StartDate, startDate.ToString()) };
+            var claims = new Claim[] { new Claim(HbClaimTypes.CurrentYear, year.ToString()) };
 
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity), new AuthenticationProperties

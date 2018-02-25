@@ -5,6 +5,7 @@
     <link href="/lib/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
     @*<link href="/lib/jquery-ui/themes/base/jquery-ui.min.css" rel="stylesheet" />*@
     <link href="/css/style.css" rel="stylesheet" />
+    <link href="/lib/toastr/toastr.min.css" rel="stylesheet" />
 
     <script src="/lib/moment/min/moment.min.js"></script>
     <script src="/lib/moment/min/locales.min.js"></script>
@@ -15,22 +16,17 @@
     <script src="/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
     <script src="/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="/lib/toastr/toastr.min.js"></script>
 </head>
 <body>
     <div class="conteiner-fluid header color">
-        <div class="row">
-            <div class="col-md-6 col-xs-10">
-                <div class="navbar-header home">
-                    <a href="#" class="brand">Ссылка на главную</a>
-                </div>
-            </div>
-            <div class="col-md-6 margin-left col-xs-2">
-                <div class="button-top btn-group margin-left">
-                    <div class="form-group">
-                        <label style="color: white;">Выберите год</label>
-                        <input style="width:50px;" type="text" id="global-year" name="startDate" value="@DateTimeOffset.UtcNow" />\
-                    </div>
-                </div>
+        <div class="navbar-header home">
+            <a href="#" class="brand">Ссылка на главную</a>
+        </div>
+        <div class="button-top btn-group margin-left" style="display:table;height:100%;">
+            <div class="form-group" style="display:table-cell;vertical-align:middle;">
+                <label style="color: white;">Выберите год</label>
+                <input style="width:70px;display:inherit;" class="form-control" type="text" id="global-year" name="startDate"/>
             </div>
         </div>
     </div>
@@ -54,7 +50,8 @@
         $(function () {
             $('#global-year').datetimepicker({
                 locale: 'ru',
-                format: 'YYYY'
+                format: 'YYYY',
+                defaultDate: '@(User.Claims.FirstOrDefault(u => u.Type == HbClaimTypes.CurrentYear)?.Value ?? DateTimeOffset.Now.Year.ToString())-01-01T12:00:00Z'
             });
 
             $('#global-year').on('dp.change', function (e) {
@@ -62,7 +59,7 @@
                     url: '@Url.Action("UpdateYear", "Home")',
                     type: 'POST',
                     data: {
-                        startDate: e.date.toISOString(),
+                        year: e.date.format('YYYY'),
                         returnUrl: '@Context.Request.Path'
                     }
                 });
