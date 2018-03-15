@@ -1,52 +1,180 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <link href="/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="/lib/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
-    @*<link href="/lib/jquery-ui/themes/base/jquery-ui.min.css" rel="stylesheet" />*@
-    <link href="/css/style.css" rel="stylesheet" />
-    <link href="/lib/toastr/toastr.min.css" rel="stylesheet" />
+    @*<link href="/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="/lib/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+        @*<link href="/lib/jquery-ui/themes/base/jquery-ui.min.css" rel="stylesheet" />
+        <link href="/css/style.css" rel="stylesheet" />
+        <link href="/lib/toastr/toastr.min.css" rel="stylesheet" />
 
-    <script src="/lib/moment/min/moment.min.js"></script>
-    <script src="/lib/moment/min/locales.min.js"></script>
-    <script src="/lib/jquery/dist/jquery.min.js"></script>
-    <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="/lib/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
-    <script src="/lib/jquery-ui/jquery-ui.min.js"></script>
-    <script src="/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-    <script src="/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.min.js"></script>
-    <script src="/lib/toastr/toastr.min.js"></script>
+        <script src="/lib/moment/min/moment.min.js"></script>
+        <script src="/lib/moment/min/locales.min.js"></script>
+        <script src="/lib/jquery/dist/jquery.min.js"></script>
+        <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="/lib/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+        <script src="/lib/jquery-ui/jquery-ui.min.js"></script>
+        <script src="/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+        <script src="/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+        <script src="/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.min.js"></script>
+        <script src="/lib/toastr/toastr.min.js"></script>*@
+
+    <link href="/dist/css/vendor.css" rel="stylesheet" />
+    <link href="~/dist/css/app.css" rel="stylesheet" />
+
+    <script src="/dist/js/vendor.js"></script>
 </head>
 <body>
-    <div class="conteiner-fluid header color">
-        <div class="navbar-header home">
-            <a href="#" class="brand">Ссылка на главную</a>
-        </div>
-        <div class="button-top btn-group margin-left" style="display:table;height:100%;">
-            <div class="form-group" style="display:table-cell;vertical-align:middle;">
-                <label style="color: white;">Выберите год</label>
-                <input style="width:70px;display:inherit;" class="form-control" type="text" id="global-year" name="startDate"/>
-            </div>
-        </div>
-    </div>
-    <div class="conteiner-fluid">
-        <div class="row">
-            <div class="col-md-3 color margin-bottom">
-                <div class="nav nav-list">
-                    <a asp-controller="Lots" asp-action="List" class="list-group-item @Html.IsActive("List", "Lots")"><i class="glyphicon glyphicon-folder-open"></i>Партии</a>
-                    <a asp-controller="Layings" asp-action="List" class="list-group-item @Html.IsActive("List", "Layings")"><i class="glyphicon glyphicon-folder-open"></i>Закладки</a>
-                    <a asp-controller="Broods" asp-action="List" class="list-group-item @Html.IsActive("List", "Broods")"><i class="glyphicon glyphicon-open"></i>Выводы</a>
-                    <a asp-controller="Sales" asp-action="List" class="list-group-item @Html.IsActive("List", "Sales")"><i class="glyphicon glyphicon-usd"></i>Продажи</a>
-                    <a asp-controller="Purchases" asp-action="List" class="list-group-item @Html.IsActive("List", "Purchases")"><i class="glyphicon glyphicon-shopping-cart"></i>Закупки</a>
-                    <a asp-controller="Overheads" asp-action="List" class="list-group-item @Html.IsActive("List", "Overheads")"><i class="glyphicon glyphicon-shopping-cart"></i>Расходы</a>
-                    <a asp-controller="Incubators" asp-action="List" class="list-group-item @Html.IsActive("List", "Incubators")"><i class="glyphicon glyphicon-book"></i>Инкубаторы</a>
+    <div class="main-wrapper">
+        <div class="app" id="app">
+            <header class="header">
+                <div class="header-block header-block-collapse d-lg-none d-xl-none">
+                    <button class="collapse-btn" id="sidebar-collapse-btn">
+                        <i class="fa fa-bars"></i>
+                    </button>
                 </div>
-            </div>
+            </header>
+            <aside class="sidebar">
+                <div class="sidebar-container">
+                    <div class="sidebar-header">
+                        <div class="brand">
+                            <div class="logo">
+                                <span class="l l1"></span>
+                                <span class="l l2"></span>
+                                <span class="l l3"></span>
+                                <span class="l l4"></span>
+                                <span class="l l5"></span>
+                            </div> HomeBird
+                        </div>
+                    </div>
+                    <nav class="menu">
+                        <ul class="sidebar-menu metismenu" id="sidebar-menu">
+                            <li class="@Html.IsActive("List", "Lots")">
+                                <a asp-controller="Lots" asp-action="List">
+                                    <i class="fa fa-home"></i> Партии
+                                </a>
+                            </li>
+                            <li class="@Html.IsActive("List", "Layings")">
+                                <a asp-controller="Layings" asp-action="List">
+                                    <i class="fa fa-home"></i> Закладки
+                                </a>
+                            </li>
+                            <li class="@Html.IsActive("List", "Broods")">
+                                <a asp-controller="Broods" asp-action="List">
+                                    <i class="fa fa-home"></i> Выводы
+                                </a>
+                            </li>
+                            <li class="@Html.IsActive("List", "Sales")">
+                                <a asp-controller="Sales" asp-action="List">
+                                    <i class="fa fa-home"></i> Продажи
+                                </a>
+                            </li>
+                            <li class="@Html.IsActive("List", "Purchases")">
+                                <a asp-controller="Purchases" asp-action="List">
+                                    <i class="fa fa-home"></i> Закупки
+                                </a>
+                            </li>
+                            <li class="@Html.IsActive("List", "Overheads")">
+                                <a asp-controller="Overheads" asp-action="List">
+                                    <i class="fa fa-home"></i> Расходы
+                                </a>
+                            </li>
+                            <li class="@Html.IsActive("List", "Incubators")">
+                                <a asp-controller="Incubators" asp-action="List">
+                                    <i class="fa fa-home"></i> Инкубаторы
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </aside>
+            <div class="sidebar-overlay" id="sidebar-overlay"></div>
+            <div class="sidebar-mobile-menu-handle" id="sidebar-mobile-menu-handle"></div>
+            <div class="mobile-menu-handle"></div>
             @RenderBody()
+            <div class="modal fade" id="modal-media">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Media Library</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                <span class="sr-only">Close</span>
+                            </button>
+                        </div>
+                        <div class="modal-body modal-tab-container">
+                            <ul class="nav nav-tabs modal-tabs" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#gallery" data-toggle="tab" role="tab">Gallery</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="#upload" data-toggle="tab" role="tab">Upload</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content modal-tab-content">
+                                <div class="tab-pane fade" id="gallery" role="tabpanel">
+                                    <div class="images-container">
+                                        <div class="row"> </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade active in" id="upload" role="tabpanel">
+                                    <div class="upload-container">
+                                        <div id="dropzone">
+                                            <form action="/" method="POST" enctype="multipart/form-data" class="dropzone needsclick dz-clickable" id="demo-upload">
+                                                <div class="dz-message-block">
+                                                    <div class="dz-message needsclick"> Drop files here or click to upload. </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Insert Selected</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+            <div class="modal fade" id="confirm-modal">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">
+                                <i class="fa fa-warning"></i> Alert
+                            </h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Are you sure want to do this?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Yes</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
         </div>
     </div>
-    <script>
+    <!-- Reference block for JS -->
+    <div class="ref" id="ref">
+        <div class="color-primary"></div>
+        <div class="chart">
+            <div class="color-primary"></div>
+            <div class="color-secondary"></div>
+        </div>
+    </div>    
+    <script src="/dist/js/app.js"></script>
+    @*<script>
         $(function () {
             $('#global-year').datetimepicker({
                 locale: 'ru',
@@ -65,6 +193,7 @@
                 });
             });
         });
-    </script>
+    </script>*@
+
 </body>
 </html>
