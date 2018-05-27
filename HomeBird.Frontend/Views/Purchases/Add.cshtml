@@ -5,36 +5,38 @@
     ViewBag.Title = "Закупки";
 }
 
-<form asp-action="Add" asp-controller="Purchases" method="post">
-    <div class="form-group">
-        <label asp-for="Address"></label>
-        <input asp-for="Address" type="text" />
-        <span asp-validation-for="Address"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Count"></label>
-        <input asp-for="Count" type="text" />
-        <span asp-validation-for="Count"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Amount"></label>
-        <input asp-for="Amount" type="text" />
-        <span asp-validation-for="Amount"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="PurchaseDate"></label>
-        <input asp-for="PurchaseDate" type="text" />
-        <span asp-validation-for="PurchaseDate"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="LotId"></label>
-        <select asp-for="LotId">
-            @foreach (var item in Model.Lots)
-            {
-                <option value="@item.Id">@item.IdentifierNumber (@item.CreationDate.Year)</option>
-            }
-        </select>
-        <span asp-validation-for="LotId"></span>
-    </div>
-    <input type="submit" value="Сохранить" />
-</form>
+<article class="content">
+    <form asp-action="Add" asp-controller="Purchases" method="post">
+        <div class="form-group">
+            <label asp-for="Address"></label>
+            <input asp-for="Address" type="text" />
+            <span asp-validation-for="Address"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Count"></label>
+            <input asp-for="Count" type="text" />
+            <span asp-validation-for="Count"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Amount"></label>
+            <input asp-for="Amount" type="text" />
+            <span asp-validation-for="Amount"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="PurchaseDate"></label>
+            <input asp-for="PurchaseDate" type="text" />
+            <span asp-validation-for="PurchaseDate"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="LotId"></label>
+            <select asp-for="LotId">
+                @foreach (var item in Model.Lots)
+                {
+                    <option value="@item.Id">@item.IdentifierNumber (@item.CreationDate.Year)</option>
+                }
+            </select>
+            <span asp-validation-for="LotId"></span>
+        </div>
+        <input type="submit" value="Сохранить" />
+    </form>
+</article>

@@ -5,59 +5,60 @@
     ViewBag.Title = "Выводы";
 }
 
-<div class="col-md-9 margin-table">
-    <h2>Выводы</h2>
-    <div class="table table-responsive">
-        <table id="datatable" class="table table-hover table-striped table-bordered table-condensed">
-            <thead class="thead-inverse">
-                <tr>
-                    <th>Дата вывод</th>
-                    <th>Количество</th>
-                    <th>Процент</th>
-                    <th>Б/З шт.</th>
-                    <th>Б/З %</th>
-                    <th>Б/Н шт.</th>
-                    <th>Б/Н %</th>
-                    <th>Цена места</th>
-                    <th>Партия</th>
-                    <th></th>
-                </tr>
-            </thead>
-            @foreach (var item in Model.List)
-            {
-                <tbody>
+<article class="content">
+    <div class="col-md-9 margin-table">
+        <h2>Выводы</h2>
+        <div class="table table-responsive">
+            <table id="datatable" class="table table-hover table-striped table-bordered table-condensed">
+                <thead class="thead-inverse">
                     <tr>
-                        <td>@item.BroodDate</td>
-                        <td>@item.Count</td>
-                        <td>@item.Percent</td>
-                        <td>@item.DeadCount</td>
-                        <td>@item.DeadPercent</td>
-                        <td>@item.EmptyCount</td>
-                        <td>@item.EmptyPercent</td>
-                        <td>@item.PlacePrice</td>
-                        @*<td>@item.Lot.IdentifierNumber</td>*@
-                        <td>
-                            <a class="btn btn-info" asp-action="Edit" asp-controller="Broods" asp-route-id="@item.Id">Изменить </a>
-                            <a href="#" class="btn btn-danger js-delete" data-url="@Url.Action("Delete", "Broods", new { id = item.Id })">Удалить</a>
-                        </td>
+                        <th>Дата вывод</th>
+                        <th>Количество</th>
+                        <th>Процент</th>
+                        <th>Б/З шт.</th>
+                        <th>Б/З %</th>
+                        <th>Б/Н шт.</th>
+                        <th>Б/Н %</th>
+                        <th>Цена места</th>
+                        <th>Партия</th>
+                        <th></th>
                     </tr>
-                </tbody>
-            }
-        </table>
-    </div>
-    <div class="conteiner">
-        <div class="row">
-            <div class="col-md-6 margin position">
-                <a class="btn btn-success" asp-action="Add" asp-controller="Broods">Создать</a>
+                </thead>
+                @foreach (var item in Model.List)
+                {
+                    <tbody>
+                        <tr>
+                            <td>@item.BroodDate</td>
+                            <td>@item.Count</td>
+                            <td>@item.Percent</td>
+                            <td>@item.DeadCount</td>
+                            <td>@item.DeadPercent</td>
+                            <td>@item.EmptyCount</td>
+                            <td>@item.EmptyPercent</td>
+                            <td>@item.PlacePrice</td>
+                            @*<td>@item.Lot.IdentifierNumber</td>*@
+                            <td>
+                                <a class="btn btn-info" asp-action="Edit" asp-controller="Broods" asp-route-id="@item.Id">Изменить </a>
+                                <a href="#" class="btn btn-danger js-delete" data-url="@Url.Action("Delete", "Broods", new { id = item.Id })">Удалить</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                }
+            </table>
+        </div>
+        <div class="conteiner">
+            <div class="row">
+                <div class="col-md-6 margin position">
+                    <a class="btn btn-success" asp-action="Add" asp-controller="Broods">Создать</a>
+                </div>
+                @if (Model.Form.Total > Model.Form.Count)
+                {
+                    @Html.Paging(Model.Form, u => Url.Action("List", "Broods", new PagedLotsForm { Offset = (u - 1) * Model.Form.Count }))
+                }
             </div>
-            @if (Model.Form.Total > Model.Form.Count)
-            {
-                @Html.Paging(Model.Form, u => Url.Action("List", "Broods", new PagedLotsForm { Offset = (u - 1) * Model.Form.Count }))
-            }
         </div>
     </div>
-</div>
-<script>
+</article><script>
     $(function () {
         $('.js-delete').click(function (e) {
             e.preventDefault();

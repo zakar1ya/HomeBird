@@ -5,37 +5,39 @@
     ViewBag.Title = "Выводки";
 }
 
-<form asp-action="Add" asp-controller="Broods" method="post">
-    <div class="form-group">
-        <label asp-for="BroodDate"></label>
-        <input asp-for="BroodDate" type="text" />
-        <span asp-validation-for="BroodDate"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Count"></label>
-        <input asp-for="Count" type="text" />
-        <span asp-validation-for="Count"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="DeadCount"></label>
-        <input asp-for="DeadCount" type="text" />
-        <span asp-validation-for="DeadCount"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="EmptyCount"></label>
-        <input asp-for="EmptyCount" type="text" />
-        <span asp-validation-for="EmptyCount"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="LotId"></label>
-        <select asp-for="LotId">
-            @foreach (var item in Model.Lots)
-            {
-                <option value="@item.Id">@item.IdentifierNumber (@item.CreationDate.Year)</option>
-            }
-        </select>
-        <span asp-validation-for="LotId"></span>
-    </div>
-    <input class="btn btn-success" type="submit" value="Сохранить" />
-    <a class="btn btn-default" asp-action="List" asp-controller="Broods">Отмена</a>
-</form>
+<article class="content">
+    <form asp-action="Add" asp-controller="Broods" method="post">
+        <div class="form-group">
+            <label asp-for="BroodDate"></label>
+            <input asp-for="BroodDate" type="text" />
+            <span asp-validation-for="BroodDate"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Count"></label>
+            <input asp-for="Count" type="text" />
+            <span asp-validation-for="Count"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="DeadCount"></label>
+            <input asp-for="DeadCount" type="text" />
+            <span asp-validation-for="DeadCount"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="EmptyCount"></label>
+            <input asp-for="EmptyCount" type="text" />
+            <span asp-validation-for="EmptyCount"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="LotId"></label>
+            <select asp-for="LotId">
+                @foreach (var item in Model.Lots)
+                {
+                    <option value="@item.Id">@item.IdentifierNumber (@item.CreationDate.Year)</option>
+                }
+            </select>
+            <span asp-validation-for="LotId"></span>
+        </div>
+        <input class="btn btn-success" type="submit" value="Сохранить" />
+        <a class="btn btn-default" asp-action="List" asp-controller="Broods">Отмена</a>
+    </form>
+</article>

@@ -5,54 +5,56 @@
     ViewBag.Title = "Партии";
 }
 
-<div class="col-md-9 margin-table">
-    <h2>Продажи</h2>
-    <div class="table table-responsive">
-        <table id="datatable" class="table table-hover table-striped table-bordered table-condensed">
-            <thead class="thead-inverse">
-                <tr>
-                    <th>Сумма</th>
-                    <th>Количество</th>
-                    <th>Дата</th>
-                    <th>Покупатель</th>
-                    <th>Комментарий</th>
-                    <th>Тип</th>
-                    <th>Партия</th>
-                    <th></th>
-                </tr>
-            </thead>
-            @foreach (var item in Model.List)
-            {
-                <tbody>
+<article class="content">
+    <div class="col-md-9 margin-table">
+        <h2>Продажи</h2>
+        <div class="table table-responsive">
+            <table id="datatable" class="table table-hover table-striped table-bordered table-condensed">
+                <thead class="thead-inverse">
                     <tr>
-                        <td>@item.Amount</td>
-                        <td>@item.Count</td>
-                        <td>@item.SaleDate.ToString("dd MMM yyyy")</td>
-                        <td>@item.Buyer</td>
-                        <td>@item.Comment</td>
-                        <td>@(item.Type == BirdTypes.Adult ? "Подрост" : "Суточный")</td>
-                        <td>lot number</td>
-                        <td>
-                            <a class="btn btn-info" asp-action="Edit" asp-controller="Sales" asp-route-id="@item.Id">Изменить </a>
-                            <a href="#" class="btn btn-danger js-delete" data-url="@Url.Action("Delete", "Sales", new { id = item.Id })">Удалить</a>
-                        </td>
+                        <th>Сумма</th>
+                        <th>Количество</th>
+                        <th>Дата</th>
+                        <th>Покупатель</th>
+                        <th>Комментарий</th>
+                        <th>Тип</th>
+                        <th>Партия</th>
+                        <th></th>
                     </tr>
-                </tbody>
-            }
-        </table>
-    </div>
-    <div class="conteiner">
-        <div class="row">
-            <div class="col-md-6 margin position">
-                <a class="btn btn-success" asp-action="Add" asp-controller="Sales">Создать</a>
+                </thead>
+                @foreach (var item in Model.List)
+                {
+                    <tbody>
+                        <tr>
+                            <td>@item.Amount</td>
+                            <td>@item.Count</td>
+                            <td>@item.SaleDate.ToString("dd MMM yyyy")</td>
+                            <td>@item.Buyer</td>
+                            <td>@item.Comment</td>
+                            <td>@(item.Type == BirdTypes.Adult ? "Подрост" : "Суточный")</td>
+                            <td>lot number</td>
+                            <td>
+                                <a class="btn btn-info" asp-action="Edit" asp-controller="Sales" asp-route-id="@item.Id">Изменить </a>
+                                <a href="#" class="btn btn-danger js-delete" data-url="@Url.Action("Delete", "Sales", new { id = item.Id })">Удалить</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                }
+            </table>
+        </div>
+        <div class="conteiner">
+            <div class="row">
+                <div class="col-md-6 margin position">
+                    <a class="btn btn-success" asp-action="Add" asp-controller="Sales">Создать</a>
+                </div>
+                @if (Model.Form.Total > Model.Form.Count)
+                {
+                    @Html.Paging(Model.Form, u => Url.Action("List", "Sales", new PagedLotsForm { Offset = (u - 1) * Model.Form.Count }))
+                }
             </div>
-            @if (Model.Form.Total > Model.Form.Count)
-            {
-                @Html.Paging(Model.Form, u => Url.Action("List", "Sales", new PagedLotsForm { Offset = (u - 1) * Model.Form.Count }))
-            }
         </div>
     </div>
-</div>
+</article>
 <script>
     $(function () {
         $('.js-delete').click(function (e) {

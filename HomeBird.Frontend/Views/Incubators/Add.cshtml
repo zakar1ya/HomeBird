@@ -5,12 +5,14 @@
     ViewBag.Title = "Инкубаторы";
 }
 
-<form asp-action="Add" asp-controller="Incubators" method="post">
-    <div class="form-group">
-        <label asp-for="Title"></label>
-        <input asp-for="Title" type="text" />
-        <span asp-validation-for="Title"></span>
-    </div>
-    <input class="btn btn-success" type="submit" value="Сохранить" />
-    <a class="btn btn-default" asp-action="List" asp-controller="Incubators">Отмена</a>
-</form>
+<article class="content">
+    <form asp-action="Add" asp-controller="Incubators" method="post">
+        <div class="form-group">
+            <label asp-for="Title"></label>
+            <input asp-for="Title" type="text" />
+            <span asp-validation-for="Title"></span>
+        </div>
+        <input class="btn btn-success" type="submit" value="Сохранить" />
+        <a class="btn btn-default" asp-action="List" asp-controller="Incubators">Отмена</a>
+    </form>
+</article>

@@ -8,7 +8,7 @@ namespace HomeBird.DataBase.EfCore.Context
         public HomeBirdContext CreateDbContext(string[] args)
         {
             var builder = new DbContextOptionsBuilder<HomeBirdContext>();
-            builder.UseSqlServer("Data Source=.\\SQLEXPRESS;Initial Catalog=HomeBird;User ID=HomeBirdDbMigrator;Password=erwWEw2#");
+            builder.UseSqlServer("Data Source=78.47.113.139, 1433\\SQLEXPRESS;Initial Catalog=HomeBirdDev;User ID=HbDbMigrator;Password=odfj!2*e");
 
             return new HomeBirdContext(builder.Options);
         }

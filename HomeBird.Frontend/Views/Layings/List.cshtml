@@ -5,50 +5,52 @@
     ViewBag.Title = "Партии";
 }
 
-<div class="col-md-9 margin-table">
-    <h2>Закладки</h2>
-    <div class="table table-responsive">
-        <table id="datatable" class="table table-hover table-striped table-bordered table-condensed">
-            <thead class="thead-inverse">
-                <tr>
-                    <th>Количество</th>
-                    <th>Цена яйца</th>
-                    <th>Дата</th>
-                    <th>Инкубатор</th>
-                    <th>Партия</th>
-                    <td></td>
-                </tr>
-            </thead>
-            @foreach (var item in Model.List)
-            {
-                <tbody>
+<article class="content">
+    <div class="col-md-9 margin-table">
+        <h2>Закладки</h2>
+        <div class="table table-responsive">
+            <table id="datatable" class="table table-hover table-striped table-bordered table-condensed">
+                <thead class="thead-inverse">
                     <tr>
-                        <td>@item.Count</td>
-                        <td>@item.EggPrice</td>
-                        <td>@item.CreationDate.ToString("dd MMM yyyy")</td>
-                        <td>incubator</td>
-                        <td>@item.Lot.IdentifierNumber</td>
-                        <td>
-                            <a class="btn btn-info" asp-action="Edit" asp-controller="Layings" asp-route-id="@item.Id">Изменить </a>
-                            <a href="#" class="btn btn-danger js-delete" data-url="@Url.Action("Delete", "Layings", new { id = item.Id })">Удалить</a>
-                        </td>
+                        <th>Количество</th>
+                        <th>Цена яйца</th>
+                        <th>Дата</th>
+                        <th>Инкубатор</th>
+                        <th>Партия</th>
+                        <td></td>
                     </tr>
-                </tbody>
-            }
-        </table>
-    </div>
-    <div class="conteiner">
-        <div class="row">
-            <div class="col-md-6 margin position">
-                <a class="btn btn-success" asp-action="Add" asp-controller="Layings">Создать</a>
+                </thead>
+                @foreach (var item in Model.List)
+                {
+                    <tbody>
+                        <tr>
+                            <td>@item.Count</td>
+                            <td>@item.EggPrice</td>
+                            <td>@item.CreationDate.ToString("dd MMM yyyy")</td>
+                            <td>incubator</td>
+                            <td>@item.Lot.IdentifierNumber</td>
+                            <td>
+                                <a class="btn btn-info" asp-action="Edit" asp-controller="Layings" asp-route-id="@item.Id">Изменить </a>
+                                <a href="#" class="btn btn-danger js-delete" data-url="@Url.Action("Delete", "Layings", new { id = item.Id })">Удалить</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                }
+            </table>
+        </div>
+        <div class="conteiner">
+            <div class="row">
+                <div class="col-md-6 margin position">
+                    <a class="btn btn-success" asp-action="Add" asp-controller="Layings">Создать</a>
+                </div>
+                @if (Model.Form.Total > Model.Form.Count)
+                {
+                    @Html.Paging(Model.Form, u => Url.Action("List", "Layings", new PagedLotsForm { Offset = (u - 1) * Model.Form.Count }))
+                }
             </div>
-            @if (Model.Form.Total > Model.Form.Count)
-            {
-                @Html.Paging(Model.Form, u => Url.Action("List", "Layings", new PagedLotsForm { Offset = (u - 1) * Model.Form.Count }))
-            }
         </div>
     </div>
-</div>
+</article>
 <script>
     $(function () {
         $('.js-delete').click(function (e) {
