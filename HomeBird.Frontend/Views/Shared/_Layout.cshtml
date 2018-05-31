@@ -19,9 +19,14 @@
         <script src="/lib/toastr/toastr.min.js"></script>*@
 
     <link href="/dist/css/vendor.css" rel="stylesheet" />
-    <link href="~/dist/css/app.css" rel="stylesheet" />
+    <link href="/dist/css/app.css" rel="stylesheet" />
+    <link href="/lib/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
 
     <script src="/dist/js/vendor.js"></script>
+    <script src="/js/dateTimes.js"></script>
+    <script src="/lib/moment/min/moment.min.js"></script>
+    <script src="/lib/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="/lib/moment/locale/ru.js"></script>
 </head>
 <body>
     <div class="main-wrapper">
@@ -174,26 +179,11 @@
         </div>
     </div>    
     <script src="/dist/js/app.js"></script>
-    @*<script>
+    <script>
         $(function () {
-            $('#global-year').datetimepicker({
-                locale: 'ru',
-                format: 'YYYY',
-                defaultDate: '@(User.Claims.FirstOrDefault(u => u.Type == HbClaimTypes.CurrentYear)?.Value ?? DateTimeOffset.Now.Year.ToString())-01-01T12:00:00Z'
-            });
-
-            $('#global-year').on('dp.change', function (e) {
-                $.ajax({
-                    url: '@Url.Action("UpdateYear", "Home")',
-                    type: 'POST',
-                    data: {
-                        year: e.date.format('YYYY'),
-                        returnUrl: '@Context.Request.Path'
-                    }
-                });
-            });
+            dateTimeManager.init();
         });
-    </script>*@
+    </script>
 
 </body>
 </html>

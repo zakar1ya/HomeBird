@@ -6,7 +6,7 @@
 }
 
 <article class="content">
-    <div class="col-md-9 margin-table">
+    <div class="col-md-11 margin-table">
         <h2>Партии</h2>
         <div class="table table-responsive">
             <table class="table table-hover table-striped table-bordered table-condensed">
@@ -34,8 +34,12 @@
                             <td>@(lot.Loses.HasValue ? lot.SoldCount.ToString() : "-")</td>
                             <td>@(lot.Profit.HasValue ? lot.SoldCount.ToString() : "-")</td>
                             <td align="center">
-                                <button class="btn btn-primary">Изменить</button>
-                                <button class="btn btn-danger js-remove-lot" data-url="@Url.Action("Delete", "Lots", new { id = lot.Id })" style="margin-left: 5px;">Удалить</button>
+                                <a href="#" class="btn btn-primary btn-sm">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                                <a href="" class="btn btn-danger btn-sm js-remove-lot" data-url="@Url.Action("Delete", "Lots", new { id = lot.Id })" style="margin-left: 5px;">
+                                    <i class="fa fa-remove"></i>
+                                </a>
                             </td>
                         </tr>
                     }

@@ -310,6 +310,131 @@ function setSameHeights($container) {
 	});
 }
 
+$(function() {
+    
+    if (!$('#morris-one-line-chart').length) {
+        return false;
+    }
+
+    function drawMorrisCharts() {
+
+        $('#morris-one-line-chart').empty();
+        
+        Morris.Line({
+            element: 'morris-one-line-chart',
+                data: [
+                    { year: '2008', value: 5 },
+                    { year: '2009', value: 10 },
+                    { year: '2010', value: 8 },
+                    { year: '2011', value: 22 },
+                    { year: '2012', value: 8 },
+                    { year: '2014', value: 10 },
+                    { year: '2015', value: 5 }
+                ],
+            xkey: 'year',
+            ykeys: ['value'],
+            resize: true,
+            lineWidth:4,
+            labels: ['Value'],
+            lineColors: [config.chart.colorPrimary.toString()],
+            pointSize:5,
+        });
+
+        $('#morris-area-chart').empty();
+
+        Morris.Area({
+            element: 'morris-area-chart',
+            data: [{ period: '2010 Q1', iphone: 2666, ipad: null, itouch: 2647 },
+                { period: '2010 Q2', iphone: 2778, ipad: 2294, itouch: 2441 },
+                { period: '2010 Q3', iphone: 4912, ipad: 1969, itouch: 2501 },
+                { period: '2010 Q4', iphone: 3767, ipad: 3597, itouch: 5689 },
+                { period: '2011 Q1', iphone: 6810, ipad: 1914, itouch: 2293 },
+                { period: '2011 Q2', iphone: 5670, ipad: 4293, itouch: 1881 },
+                { period: '2011 Q3', iphone: 4820, ipad: 3795, itouch: 1588 },
+                { period: '2011 Q4', iphone: 15073, ipad: 5967, itouch: 5175 },
+                { period: '2012 Q1', iphone: 10687, ipad: 4460, itouch: 2028 },
+                { period: '2012 Q2', iphone: 8432, ipad: 5713, itouch: 1791 } ],
+            xkey: 'period',
+            ykeys: ['iphone', 'ipad', 'itouch'],
+            labels: ['iPhone', 'iPad', 'iPod Touch'],
+            pointSize: 2,
+            hideHover: 'auto',
+            resize: true,
+            lineColors: [
+                tinycolor(config.chart.colorPrimary.toString()).lighten(10).toString(),
+                tinycolor(config.chart.colorPrimary.toString()).darken(10).toString(),
+                config.chart.colorPrimary.toString()
+            ],
+            lineWidth:2,
+            pointSize:1,
+        });
+
+        $('#morris-donut-chart').empty();
+
+        Morris.Donut({
+            element: 'morris-donut-chart',
+            data: [{ label: "Download Sales", value: 12 },
+                { label: "In-Store Sales", value: 30 },
+                { label: "Mail-Order Sales", value: 20 } ],
+            resize: true,
+            colors: [
+                tinycolor(config.chart.colorPrimary.toString()).lighten(10).toString(),
+                tinycolor(config.chart.colorPrimary.toString()).darken(10).toString(),
+                config.chart.colorPrimary.toString()
+            ],
+        });
+
+        $('#morris-bar-chart').empty();
+
+        Morris.Bar({
+            element: 'morris-bar-chart',
+            data: [{ y: '2006', a: 60, b: 50 },
+                { y: '2007', a: 75, b: 65 },
+                { y: '2008', a: 50, b: 40 },
+                { y: '2009', a: 75, b: 65 },
+                { y: '2010', a: 50, b: 40 },
+                { y: '2011', a: 75, b: 65 },
+                { y: '2012', a: 100, b: 90 } ],
+            xkey: 'y',
+            ykeys: ['a', 'b'],
+            labels: ['Series A', 'Series B'],
+            hideHover: 'auto',
+            resize: true,
+            barColors: [
+                config.chart.colorPrimary.toString(),
+                tinycolor(config.chart.colorPrimary.toString()).darken(10).toString()
+            ],
+        });
+
+        $('#morris-line-chart').empty();
+
+        Morris.Line({
+            element: 'morris-line-chart',
+            data: [{ y: '2006', a: 100, b: 90 },
+                { y: '2007', a: 75, b: 65 },
+                { y: '2008', a: 50, b: 40 },
+                { y: '2009', a: 75, b: 65 },
+                { y: '2010', a: 50, b: 40 },
+                { y: '2011', a: 75, b: 65 },
+                { y: '2012', a: 100, b: 90 } ],
+            xkey: 'y',
+            ykeys: ['a', 'b'],
+            labels: ['Series A', 'Series B'],
+            hideHover: 'auto',
+            resize: true,
+            lineColors: [
+                config.chart.colorPrimary.toString(),
+                tinycolor(config.chart.colorPrimary.toString()).darken(10).toString()
+            ],
+        });
+    }
+
+    drawMorrisCharts();
+
+    $(document).on("themechange", function(){
+        drawMorrisCharts();
+    });
+});
 //Flot Bar Chart
 $(function() {
 
@@ -641,172 +766,6 @@ $(function() {
 });
 
 $(function() {
-    
-    if (!$('#morris-one-line-chart').length) {
-        return false;
-    }
-
-    function drawMorrisCharts() {
-
-        $('#morris-one-line-chart').empty();
-        
-        Morris.Line({
-            element: 'morris-one-line-chart',
-                data: [
-                    { year: '2008', value: 5 },
-                    { year: '2009', value: 10 },
-                    { year: '2010', value: 8 },
-                    { year: '2011', value: 22 },
-                    { year: '2012', value: 8 },
-                    { year: '2014', value: 10 },
-                    { year: '2015', value: 5 }
-                ],
-            xkey: 'year',
-            ykeys: ['value'],
-            resize: true,
-            lineWidth:4,
-            labels: ['Value'],
-            lineColors: [config.chart.colorPrimary.toString()],
-            pointSize:5,
-        });
-
-        $('#morris-area-chart').empty();
-
-        Morris.Area({
-            element: 'morris-area-chart',
-            data: [{ period: '2010 Q1', iphone: 2666, ipad: null, itouch: 2647 },
-                { period: '2010 Q2', iphone: 2778, ipad: 2294, itouch: 2441 },
-                { period: '2010 Q3', iphone: 4912, ipad: 1969, itouch: 2501 },
-                { period: '2010 Q4', iphone: 3767, ipad: 3597, itouch: 5689 },
-                { period: '2011 Q1', iphone: 6810, ipad: 1914, itouch: 2293 },
-                { period: '2011 Q2', iphone: 5670, ipad: 4293, itouch: 1881 },
-                { period: '2011 Q3', iphone: 4820, ipad: 3795, itouch: 1588 },
-                { period: '2011 Q4', iphone: 15073, ipad: 5967, itouch: 5175 },
-                { period: '2012 Q1', iphone: 10687, ipad: 4460, itouch: 2028 },
-                { period: '2012 Q2', iphone: 8432, ipad: 5713, itouch: 1791 } ],
-            xkey: 'period',
-            ykeys: ['iphone', 'ipad', 'itouch'],
-            labels: ['iPhone', 'iPad', 'iPod Touch'],
-            pointSize: 2,
-            hideHover: 'auto',
-            resize: true,
-            lineColors: [
-                tinycolor(config.chart.colorPrimary.toString()).lighten(10).toString(),
-                tinycolor(config.chart.colorPrimary.toString()).darken(10).toString(),
-                config.chart.colorPrimary.toString()
-            ],
-            lineWidth:2,
-            pointSize:1,
-        });
-
-        $('#morris-donut-chart').empty();
-
-        Morris.Donut({
-            element: 'morris-donut-chart',
-            data: [{ label: "Download Sales", value: 12 },
-                { label: "In-Store Sales", value: 30 },
-                { label: "Mail-Order Sales", value: 20 } ],
-            resize: true,
-            colors: [
-                tinycolor(config.chart.colorPrimary.toString()).lighten(10).toString(),
-                tinycolor(config.chart.colorPrimary.toString()).darken(10).toString(),
-                config.chart.colorPrimary.toString()
-            ],
-        });
-
-        $('#morris-bar-chart').empty();
-
-        Morris.Bar({
-            element: 'morris-bar-chart',
-            data: [{ y: '2006', a: 60, b: 50 },
-                { y: '2007', a: 75, b: 65 },
-                { y: '2008', a: 50, b: 40 },
-                { y: '2009', a: 75, b: 65 },
-                { y: '2010', a: 50, b: 40 },
-                { y: '2011', a: 75, b: 65 },
-                { y: '2012', a: 100, b: 90 } ],
-            xkey: 'y',
-            ykeys: ['a', 'b'],
-            labels: ['Series A', 'Series B'],
-            hideHover: 'auto',
-            resize: true,
-            barColors: [
-                config.chart.colorPrimary.toString(),
-                tinycolor(config.chart.colorPrimary.toString()).darken(10).toString()
-            ],
-        });
-
-        $('#morris-line-chart').empty();
-
-        Morris.Line({
-            element: 'morris-line-chart',
-            data: [{ y: '2006', a: 100, b: 90 },
-                { y: '2007', a: 75, b: 65 },
-                { y: '2008', a: 50, b: 40 },
-                { y: '2009', a: 75, b: 65 },
-                { y: '2010', a: 50, b: 40 },
-                { y: '2011', a: 75, b: 65 },
-                { y: '2012', a: 100, b: 90 } ],
-            xkey: 'y',
-            ykeys: ['a', 'b'],
-            labels: ['Series A', 'Series B'],
-            hideHover: 'auto',
-            resize: true,
-            lineColors: [
-                config.chart.colorPrimary.toString(),
-                tinycolor(config.chart.colorPrimary.toString()).darken(10).toString()
-            ],
-        });
-    }
-
-    drawMorrisCharts();
-
-    $(document).on("themechange", function(){
-        drawMorrisCharts();
-    });
-});
-$(function() {
-	
-
-	function drawDashboardItemsListSparklines(){
-		$(".dashboard-page .items .sparkline").each(function() {
-			var type = $(this).data('type');
-
-			// There is predefined data
-			if ($(this).data('data')) {
-				var data = $(this).data('data').split(',').map(function(item) {
-					if (item.indexOf(":") > 0) {
-						return item.split(":");
-					}
-					else {
-						return item;
-					}
-				});
-			}
-			// Generate random data
-			else {
-				var data = [];
-				for (var i = 0; i < 17; i++) {
-					data.push(Math.round(100 * Math.random()));
-				}
-			}
-
-
-			$(this).sparkline(data, {
-				barColor: config.chart.colorPrimary.toString(),
-				height: $(this).height(),
-				type: type
-			});
-		});
-	}
-
-	drawDashboardItemsListSparklines();
-
-	$(document).on("themechange", function(){
-        drawDashboardItemsListSparklines();
-    });
-});
-$(function() {
 
     if (!$('#dashboard-visits-chart').length) {
         return false;
@@ -953,6 +912,47 @@ $(function() {
 
 
 $(function() {
+	
+
+	function drawDashboardItemsListSparklines(){
+		$(".dashboard-page .items .sparkline").each(function() {
+			var type = $(this).data('type');
+
+			// There is predefined data
+			if ($(this).data('data')) {
+				var data = $(this).data('data').split(',').map(function(item) {
+					if (item.indexOf(":") > 0) {
+						return item.split(":");
+					}
+					else {
+						return item;
+					}
+				});
+			}
+			// Generate random data
+			else {
+				var data = [];
+				for (var i = 0; i < 17; i++) {
+					data.push(Math.round(100 * Math.random()));
+				}
+			}
+
+
+			$(this).sparkline(data, {
+				barColor: config.chart.colorPrimary.toString(),
+				height: $(this).height(),
+				type: type
+			});
+		});
+	}
+
+	drawDashboardItemsListSparklines();
+
+	$(document).on("themechange", function(){
+        drawDashboardItemsListSparklines();
+    });
+});
+$(function() {
 
     var $dashboardSalesBreakdownChart = $('#dashboard-sales-breakdown-chart');
 
@@ -1066,41 +1066,6 @@ $(function() {
 		$(this).siblings('.input-group-addon').removeClass('focus');
 	});
 });
-$(function(){
-
-	// set sortable options
-	var sortable = new Sortable($('.images-container').get(0), {
-		animation: 150,
-		handle: ".control-btn.move",
-		draggable: ".image-container",
-		onMove: function (evt) {
-			var $relatedElem = $(evt.related);
-
-	        if ($relatedElem.hasClass('add-image')) {
-	        	return false;
-	        }
-	    }
-	});
-
-
-	$controlsButtons = $('.controls');
-
-	$controlsButtonsStar = $controlsButtons.find('.star');
-	$controlsButtonsRemove = $controlsButtons.find('.remove');
-
-	$controlsButtonsStar.on('click',function(e){
-		e.preventDefault();
-
-		$controlsButtonsStar.removeClass('active');
-		$controlsButtonsStar.parents('.image-container').removeClass('main');
-
-		$(this).addClass('active');
-
-		$(this).parents('.image-container').addClass('main');
-	})
-
-})
-
 $(function() {
 
     if (!$('#select-all-items').length) {
@@ -1145,6 +1110,41 @@ $(function() {
     });
 
 });
+$(function(){
+
+	// set sortable options
+	var sortable = new Sortable($('.images-container').get(0), {
+		animation: 150,
+		handle: ".control-btn.move",
+		draggable: ".image-container",
+		onMove: function (evt) {
+			var $relatedElem = $(evt.related);
+
+	        if ($relatedElem.hasClass('add-image')) {
+	        	return false;
+	        }
+	    }
+	});
+
+
+	$controlsButtons = $('.controls');
+
+	$controlsButtonsStar = $controlsButtons.find('.star');
+	$controlsButtonsRemove = $controlsButtons.find('.remove');
+
+	$controlsButtonsStar.on('click',function(e){
+		e.preventDefault();
+
+		$controlsButtonsStar.removeClass('active');
+		$controlsButtonsStar.parents('.image-container').removeClass('main');
+
+		$(this).addClass('active');
+
+		$(this).parents('.image-container').addClass('main');
+	})
+
+})
+
 $(function() {
 
 	$(".wyswyg").each(function() {

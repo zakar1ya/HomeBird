@@ -53,7 +53,7 @@ namespace HomeBird.DataBase.Logic
 
             await _dc.SaveChangesAsync();
 
-            return new HbResult<HbIncubator>(_mapper.Map<HbIncubator>(inc));
+            return new HbResult<HbIncubator>(_mapper.Map<HbIncubator>(inc.Entity));
         }
 
         public async Task<HbResult<HbIncubator>> Update(UpdateIncubatorForm form)

@@ -52,7 +52,7 @@ namespace HomeBird.DataBase.Logic
 
             await _dc.SaveChangesAsync();
 
-            return new HbResult<HbPurchase>(_mapper.Map<HbPurchase>(purchase));
+            return new HbResult<HbPurchase>(_mapper.Map<HbPurchase>(purchase.Entity));
         }
 
         public async Task<HbResult<HbPurchase>> UpdatePurchase(UpdatePurchaseForm form)

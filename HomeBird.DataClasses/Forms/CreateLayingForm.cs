@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace HomeBird.DataClasses.Forms
 {
@@ -20,6 +17,7 @@ namespace HomeBird.DataClasses.Forms
 
         [Required(ErrorMessage = "Укажите количество")]
         [Display(Name = "Количество")]
+        [Range(1, int.MaxValue, ErrorMessage = "Количество должно быть больше 0")]
         public int Count { get; set; }
 
         [Required(ErrorMessage = "Укажите партию")]

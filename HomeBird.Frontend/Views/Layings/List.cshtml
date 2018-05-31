@@ -27,7 +27,7 @@
                             <td>@item.Count</td>
                             <td>@item.EggPrice</td>
                             <td>@item.CreationDate.ToString("dd MMM yyyy")</td>
-                            <td>incubator</td>
+                            <td>@item.Incubator.Title</td>
                             <td>@item.Lot.IdentifierNumber</td>
                             <td>
                                 <a class="btn btn-info" asp-action="Edit" asp-controller="Layings" asp-route-id="@item.Id">Изменить </a>

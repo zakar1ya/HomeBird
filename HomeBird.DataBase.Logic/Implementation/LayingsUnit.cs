@@ -78,7 +78,7 @@ namespace HomeBird.DataBase.Logic
 
             await _dc.SaveChangesAsync();
 
-            return new HbResult<HbLaying>(_mapper.Map<HbLaying>(laying));
+            return new HbResult<HbLaying>(_mapper.Map<HbLaying>(laying.Entity));
         }
 
         public async Task Delete(int id)
@@ -94,7 +94,9 @@ namespace HomeBird.DataBase.Logic
 
         public async Task<HbResult<HbLaying>> GetById(int id)
         {
-            var laying = await _dc.Layings.Where(u => !u.IsDeleted)
+            var laying = await _dc.Layings.Include(u => u.Incubator)
+                                          .Include(u => u.Lot)
+                                          .Where(u => !u.IsDeleted)
                                           .Where(u => u.Id == id)
                                           .FirstOrDefaultAsync();
 
@@ -107,6 +109,7 @@ namespace HomeBird.DataBase.Logic
         public async Task<IEnumerable<HbLaying>> GetList(PagedLayingsForm form)
         {
             var query = _dc.Layings.Include(u => u.Lot)
+                                   .Include(u => u.Incubator)
                                    .Where(u => !u.IsDeleted)
                                    .Where(u => u.CreationTime > form.Start && u.CreationTime < form.End)
                                    .AsQueryable();

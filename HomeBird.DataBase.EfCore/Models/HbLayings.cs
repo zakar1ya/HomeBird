@@ -25,5 +25,8 @@ namespace HomeBird.DataBase.EfCore.Models
 
         [ForeignKey(nameof(LotId))]
         public virtual HbLots Lot { get; set; }
+
+        [ForeignKey(nameof(IncubatorId))]
+        public virtual HbIncubators Incubator { get; set; }
     }
 }

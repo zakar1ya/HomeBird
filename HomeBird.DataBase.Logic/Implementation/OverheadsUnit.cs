@@ -51,7 +51,7 @@ namespace HomeBird.DataBase.Logic
 
             await _dc.SaveChangesAsync();
 
-            return new HbResult<HbOverhead>(_mapper.Map<HbOverhead>(res));
+            return new HbResult<HbOverhead>(_mapper.Map<HbOverhead>(res.Entity));
         }
 
         public async Task<HbResult<HbOverhead>> Update(UpdateOverheadsForm form)

@@ -9,13 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeBird.DataClasses", "Hom
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeBird.Frontend.Logic", "HomeBird.Logic\HomeBird.Frontend.Logic.csproj", "{49833A8F-2EE0-4F89-81A4-7997D6658338}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeBird.DataBase.EfCore", "HomeBird.DataBase.EfCore\HomeBird.DataBase.EfCore.csproj", "{8D667094-6A69-46A4-A860-6FDE3ADBA773}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeBird.DataBase.EfCore", "HomeBird.DataBase.EfCore\HomeBird.DataBase.EfCore.csproj", "{8D667094-6A69-46A4-A860-6FDE3ADBA773}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeBird.Common", "HomeBird.Common\HomeBird.Common.csproj", "{C2F422DA-2901-4CC5-8A17-9F18B7F9DF0D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeBird.Common", "HomeBird.Common\HomeBird.Common.csproj", "{C2F422DA-2901-4CC5-8A17-9F18B7F9DF0D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeBird.DataBase.Logic", "HomeBird.DataBase.Logic\HomeBird.DataBase.Logic.csproj", "{583D7978-FC07-44BA-8670-31876367359D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeBird.DataBase.Logic", "HomeBird.DataBase.Logic\HomeBird.DataBase.Logic.csproj", "{583D7978-FC07-44BA-8670-31876367359D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeBird.Frontend", "HomeBird.Frontend\HomeBird.Frontend.csproj", "{A6AA60E9-B1B4-45FD-A5CD-537FF4E34A50}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeBird.Frontend", "HomeBird.Frontend\HomeBird.Frontend.csproj", "{A6AA60E9-B1B4-45FD-A5CD-537FF4E34A50}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,5 +50,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D8FF8995-AC40-4227-B8EA-B93289091EE1}
 	EndGlobalSection
 EndGlobal

@@ -16,7 +16,7 @@ namespace HomeBird.DataClasses
 
         public HbLot Lot { get; set; }
 
-        public int IncubatorId { get; set; }
+        public HbIncubator Incubator { get; set; }
 
         public decimal EggPrice { get; set; }
     }
