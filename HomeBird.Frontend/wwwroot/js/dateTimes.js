@@ -25,11 +25,11 @@
             var date = value ? new moment(value) : dateTimeManager.calculateLinkedDate(new moment(), el);
             opts = Object.assign({
                 locale: 'ru',
-                format: 'DD.MM.YYYY HH:mm',
-                defaultDate: date
+                format: 'DD.MM.YYYY HH:mm'
             }, opts);
 
-            $(el).datetimepicker(opts);
+            var dt = $(el).datetimepicker(opts);
+            dt.data('DateTimePicker').defaultDate(date);
         });
     },
 

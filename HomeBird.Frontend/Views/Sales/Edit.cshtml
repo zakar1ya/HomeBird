@@ -6,50 +6,52 @@
 }
 
 <article class="content">
-    <form asp-action="Edit" asp-controller="Sales" method="post">
+    <form asp-action="Edit" asp-controller="Sales" method="post" class="col-md-3">
         <input type="hidden" asp-for="Id" />
         <div class="form-group">
             <label asp-for="Amount"></label>
-            <input asp-for="Amount" type="text" />
-            <span asp-validation-for="Amount"></span>
+            <input asp-for="Amount" type="text" class="form-control" />
+            <span asp-validation-for="Amount" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Count"></label>
-            <input asp-for="Count" type="text" />
-            <span asp-validation-for="Count"></span>
+            <input asp-for="Count" type="text" class="form-control" />
+            <span asp-validation-for="Count" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Buyer"></label>
-            <input asp-for="Buyer" type="text" />
-            <span asp-validation-for="Buyer"></span>
+            <input asp-for="Buyer" type="text" class="form-control" />
+            <span asp-validation-for="Buyer" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Comment"></label>
-            <input asp-for="Comment" type="text" />
-            <span asp-validation-for="Comment"></span>
+            <input asp-for="Comment" type="text" class="form-control" />
+            <span asp-validation-for="Comment" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="SaleDate"></label>
-            <input asp-for="SaleDate" type="text" />
-            <span asp-validation-for="SaleDate"></span>
+            <input class="form-control js-datetimepicker" />
+            <input asp-for="SaleDate" type="hidden" />
+            <span asp-validation-for="SaleDate" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Type"></label>
-            <select asp-for="Type">
-                <option value="@BirdTypes.Adult">Подрост</option>
-                <option value="@BirdTypes.Daily">Суточный</option>
+            <select asp-for="Type" class="form-control">
+                <option value="@SalesTypes.AdultChicken">Подрост</option>
+                <option value="@SalesTypes.DailyChicken">Суточный</option>
+                <option value="@SalesTypes.Egg">Яйцо</option>
             </select>
-            <span asp-validation-for="Type"></span>
+            <span asp-validation-for="Type" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="LotId"></label>
-            <select asp-for="LotId">
+            <select asp-for="LotId" class="form-control">
                 @foreach (var item in Model.Lots)
                 {
                     <option value="@item.Id">@item.IdentifierNumber (@item.CreationDate.Year)</option>
                 }
             </select>
-            <span asp-validation-for="LotId"></span>
+            <span asp-validation-for="LotId" class="text-danger"></span>
         </div>
         <input class="btn btn-success" type="submit" value="Сохранить" />
         <a class="btn btn-default" asp-action="List" asp-controller="Sales">Отмена</a>
