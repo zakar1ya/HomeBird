@@ -9,19 +9,19 @@ namespace HomeBird.Common
             Result = result;
         }
 
-        public HbResult(int errorCode)
+        public HbResult(ErrorCodes errorCode)
         {
             ErrorCode = errorCode;
 
         }
 
-        public int ErrorCode { get; set; }
+        public ErrorCodes ErrorCode { get; set; }
 
         public string ErrorMessage
         {
             get
             {
-                return ErrorCodes.GetMessage(ErrorCode);
+                return ErrorCode.GetMessage();
             }
         }
 

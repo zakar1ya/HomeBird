@@ -12,9 +12,10 @@ using System;
 namespace HomeBird.DataBase.EfCore.Migrations
 {
     [DbContext(typeof(HomeBirdContext))]
-    partial class HomeBirdContextModelSnapshot : ModelSnapshot
+    [Migration("20180602175849_TransferSomeFields")]
+    partial class TransferSomeFields
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

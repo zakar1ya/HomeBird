@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HomeBird.DataClasses.Forms
 {
-    public class CreateBroodForm
+    public class CreateBroodForm : IValidatableObject
     {
         public CreateBroodForm()
         {
@@ -20,20 +20,33 @@ namespace HomeBird.DataClasses.Forms
 
         [Required(ErrorMessage = "Укажите количество")]
         [Display(Name = "Количество")]
+        [Range(1, int.MaxValue, ErrorMessage = "Количество должно быть больше 0")]
         public int Count { get; set; }
 
         [Required(ErrorMessage = "Укажите количество без зародыша")]
         [Display(Name = "Количество без зародыша")]
+        [Range(0, int.MaxValue, ErrorMessage = "Количество должно быть больше 0")]
         public int EmptyCount { get; set; }
 
         [Required(ErrorMessage = "Укажите количество без наклева")]
         [Display(Name = "Количество без наклева")]
+        [Range(0, int.MaxValue, ErrorMessage = "Количество должно быть больше 0")]
         public int DeadCount { get; set; }
 
         [Required(ErrorMessage = "Укажите номер партии")]
         [Display(Name = "Номер партии")]
         public int LotId { get; set; }
         public IEnumerable<HbLot> Lots { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            var errors = new List<ValidationResult>();
+
+            if (EmptyCount + DeadCount > Count)
+                errors.Add(new ValidationResult("Сумма без наклева и без зародыша не долэна превышать общее количество."));
+
+            return errors;
+        }
     }
 
     public class PagedBroodsForm : PagingForm

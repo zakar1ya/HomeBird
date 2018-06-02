@@ -11,11 +11,11 @@ namespace HomeBird.DataBase.EfCore.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public virtual int Id { get; set; }
 
-        public virtual DateTime CreationTime { get; set; }
+        public virtual DateTimeOffset LayingDate { get; set; }
+
+        public virtual DateTimeOffset CreationDate { get; set; }
 
         public virtual int Count { get; set; }
-
-        public virtual decimal EggPrice { get; set; }
 
         public virtual int LotId { get; set; }
 

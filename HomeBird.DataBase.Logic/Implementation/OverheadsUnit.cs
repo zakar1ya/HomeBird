@@ -15,11 +15,13 @@ namespace HomeBird.DataBase.Logic
     {
         private HomeBirdContext _dc;
         private IMapper _mapper;
+        private readonly ILotsUnit _lotsUnit;
 
-        public OverheadsUnit(HomeBirdContext dc, IMapper mapper)
+        public OverheadsUnit(HomeBirdContext dc, IMapper mapper, ILotsUnit lotsUnit)
         {
             _dc = dc;
             _mapper = mapper;
+            _lotsUnit = lotsUnit;
         }
 
         public async Task<int> Count(PagedOverheadForm form)
@@ -51,6 +53,8 @@ namespace HomeBird.DataBase.Logic
 
             await _dc.SaveChangesAsync();
 
+            await _lotsUnit.RecalculateLot(form.LotId);
+
             return new HbResult<HbOverhead>(_mapper.Map<HbOverhead>(res.Entity));
         }
 
@@ -71,6 +75,8 @@ namespace HomeBird.DataBase.Logic
 
             await _dc.SaveChangesAsync();
 
+            await _lotsUnit.RecalculateLot(form.LotId);
+
             return new HbResult<HbOverhead>(_mapper.Map<HbOverhead>(overhead));
         }
 
@@ -81,6 +87,8 @@ namespace HomeBird.DataBase.Logic
                 return;
 
             overhead.IsDeleted = true;
+
+            await _lotsUnit.RecalculateLot(overhead.LotId);
 
             await _dc.SaveChangesAsync();
         }

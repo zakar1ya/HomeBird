@@ -12,9 +12,10 @@ using System;
 namespace HomeBird.DataBase.EfCore.Migrations
 {
     [DbContext(typeof(HomeBirdContext))]
-    partial class HomeBirdContextModelSnapshot : ModelSnapshot
+    [Migration("20180602143709_LotYearField")]
+    partial class LotYearField
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -77,13 +78,13 @@ namespace HomeBird.DataBase.EfCore.Migrations
 
                     b.Property<int>("Count");
 
-                    b.Property<DateTimeOffset>("CreationDate");
+                    b.Property<DateTime>("CreationTime");
+
+                    b.Property<decimal>("EggPrice");
 
                     b.Property<int>("IncubatorId");
 
                     b.Property<bool>("IsDeleted");
-
-                    b.Property<DateTimeOffset>("LayingDate");
 
                     b.Property<int>("LotId");
 
@@ -106,8 +107,6 @@ namespace HomeBird.DataBase.EfCore.Migrations
                     b.Property<decimal?>("AvgDailyPrice");
 
                     b.Property<DateTime>("CreationDate");
-
-                    b.Property<decimal?>("EggPrice");
 
                     b.Property<string>("Identifier")
                         .HasMaxLength(1024);

@@ -28,7 +28,11 @@ namespace HomeBird.DataBase.EfCore.Models
 
         public virtual decimal? Profit { get; set; }
 
+        public virtual decimal? EggPrice { get; set; }
+
         public virtual bool IsDeleted { get; set; }
+
+        public virtual int Year { get; set; }
 
         [InverseProperty("Lot")]
         public virtual ICollection<HbPurchases> Purchases { get; set; }

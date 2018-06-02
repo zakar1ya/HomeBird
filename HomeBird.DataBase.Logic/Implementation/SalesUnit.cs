@@ -13,13 +13,15 @@ namespace HomeBird.DataBase.Logic
 {
     internal class SalesUnit : ISalesUnit
     {
-        private HomeBirdContext _dc;
-        private IMapper _mapper;
+        private readonly HomeBirdContext _dc;
+        private readonly IMapper _mapper;
+        private readonly ILotsUnit _lotsUnit;
 
-        public SalesUnit(HomeBirdContext dc, IMapper mapper)
+        public SalesUnit(HomeBirdContext dc, IMapper mapper, ILotsUnit lotsUnit)
         {
             _dc = dc;
             _mapper = mapper;
+            _lotsUnit = lotsUnit;
         }
 
         public async Task<int> Count(PagedSalesForm form)
@@ -42,6 +44,15 @@ namespace HomeBird.DataBase.Logic
             if (!lotExist)
                 return new HbResult<HbSale>(ErrorCodes.LotNotFound);
 
+            if(form.Type != SalesTypes.Egg)
+            {
+                var soldChickens = await _dc.Sales.Where(u => u.LotId == form.LotId && u.Type != SalesTypes.Egg && !u.IsDeleted).SumAsync(u => u.Count);
+                var broodCount = await _dc.Broods.Where(u => u.LotId == form.LotId && !u.IsDeleted).SumAsync(u => u.Count);
+
+                if (form.Count > broodCount - soldChickens)
+                    return new HbResult<HbSale>(ErrorCodes.SalesCountMoreThanBroodCount);
+            }
+
             var sale = _dc.Sales.Add(new HbSales
             {
                 Amount = form.Amount,
@@ -54,6 +65,8 @@ namespace HomeBird.DataBase.Logic
             });
 
             await _dc.SaveChangesAsync();
+
+            await _lotsUnit.RecalculateLot(form.LotId);
 
             return new HbResult<HbSale>(_mapper.Map<HbSale>(sale.Entity));
         }
@@ -68,6 +81,15 @@ namespace HomeBird.DataBase.Logic
             if (sale == null)
                 return new HbResult<HbSale>(ErrorCodes.SaleNotFound);
 
+            if (form.Type != SalesTypes.Egg)
+            {
+                var soldChickens = await _dc.Sales.Where(u => u.LotId == form.LotId && u.Id != form.Id && u.Type != SalesTypes.Egg && !u.IsDeleted).SumAsync(u => u.Count);
+                var broodCount = await _dc.Broods.Where(u => u.LotId == form.LotId && !u.IsDeleted).SumAsync(u => u.Count);
+
+                if (form.Count > broodCount - soldChickens)
+                    return new HbResult<HbSale>(ErrorCodes.SalesCountMoreThanBroodCount);
+            }
+
             sale.SaleDate = form.SaleDate;
             sale.Comment = form.Comment;
             sale.Count = form.Count;
@@ -77,6 +99,8 @@ namespace HomeBird.DataBase.Logic
             sale.LotId = form.LotId;
 
             await _dc.SaveChangesAsync();
+
+            await _lotsUnit.RecalculateLot(form.LotId);
 
             return new HbResult<HbSale>(_mapper.Map<HbSale>(sale));
         }
@@ -120,6 +144,8 @@ namespace HomeBird.DataBase.Logic
             sale.IsDeleted = true;
 
             await _dc.SaveChangesAsync();
+
+            await _lotsUnit.RecalculateLot(sale.LotId);
         }
     }
 }

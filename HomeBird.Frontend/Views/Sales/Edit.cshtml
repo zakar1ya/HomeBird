@@ -6,6 +6,20 @@
 }
 
 <article class="content">
+    <div class="title-search-block">
+        <div class="title-block">
+            <div class="row">
+                <div class="col-md-6">
+                    <h3 class="title">
+                        Изменение продажи
+                    </h3>
+                    <p class="title-description text-danger">
+                        @ViewData[ViewDataKeys.ErrorMessage]
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
     <form asp-action="Edit" asp-controller="Sales" method="post" class="col-md-3">
         <input type="hidden" asp-for="Id" />
         <div class="form-group">

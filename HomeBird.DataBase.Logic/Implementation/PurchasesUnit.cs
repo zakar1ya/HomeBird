@@ -13,13 +13,15 @@ namespace HomeBird.DataBase.Logic
 {
     internal class PurchasesUnit : IPurchasesUnit
     {
-        private HomeBirdContext _dc;
-        private IMapper _mapper;
+        private readonly HomeBirdContext _dc;
+        private readonly IMapper _mapper;
+        private readonly ILotsUnit _lotsUnit;
 
-        public PurchasesUnit(HomeBirdContext dc, IMapper mapper)
+        public PurchasesUnit(HomeBirdContext dc, IMapper mapper, ILotsUnit lotsUnit)
         {
             _dc = dc;
             _mapper = mapper;
+            _lotsUnit = lotsUnit;
         }
 
         public async Task<int> Count(PagedPurchasesForm form)
@@ -52,6 +54,8 @@ namespace HomeBird.DataBase.Logic
 
             await _dc.SaveChangesAsync();
 
+            await _lotsUnit.RecalculateLot(form.LotId);
+
             return new HbResult<HbPurchase>(_mapper.Map<HbPurchase>(purchase.Entity));
         }
 
@@ -73,6 +77,8 @@ namespace HomeBird.DataBase.Logic
 
             await _dc.SaveChangesAsync();
 
+            await _lotsUnit.RecalculateLot(purchase.LotId);
+
             return new HbResult<HbPurchase>(_mapper.Map<HbPurchase>(purchase));
         }
 
@@ -85,6 +91,8 @@ namespace HomeBird.DataBase.Logic
             purchase.IsDeleted = true;
 
             await _dc.SaveChangesAsync();
+
+            await _lotsUnit.RecalculateLot(purchase.LotId);
         }
 
         public async Task<HbResult<HbPurchase>> GetById(int purchaseId)

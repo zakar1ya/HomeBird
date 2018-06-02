@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 using HomeBird.DataBase.EfCore.Models;
+using System;
 
 namespace HomeBird.DataBase.Logic
 {
@@ -15,17 +16,19 @@ namespace HomeBird.DataBase.Logic
     {
         private readonly HomeBirdContext _dc;
         private readonly IMapper _mapper;
+        private readonly ILotsUnit _lots;
 
-        public LayingsUnit(HomeBirdContext dc, IMapper mapper)
+        public LayingsUnit(HomeBirdContext dc, IMapper mapper, ILotsUnit lots)
         {
             _dc = dc;
             _mapper = mapper;
+            _lots = lots;
         }
 
         public async Task<int> Count(PagedLayingsForm form)
         {
             var query = _dc.Layings.Where(u => !u.IsDeleted)
-                       .Where(u => u.CreationTime > form.Start && u.CreationTime < form.End)
+                       .Where(u => u.LayingDate > form.Start && u.LayingDate < form.End)
                        .AsQueryable();
 
             if (form.LotId.HasValue)
@@ -46,37 +49,18 @@ namespace HomeBird.DataBase.Logic
             if (!incubatorExist)
                 return new HbResult<HbLaying>(ErrorCodes.IncubatorNotFound);
 
-            var overheads = await _dc.Overheads
-                                     .Where(u => !u.IsDeleted && u.LotId == form.LotId)
-                                     .Select(u => u.Amount)
-                                     .DefaultIfEmpty(0)
-                                     .SumAsync();
-
-            var purchases = await _dc.Purchases
-                                     .Where(u => !u.IsDeleted && u.LotId == form.LotId)
-                                     .Select(u => u.Amount)
-                                     .DefaultIfEmpty(0)
-                                     .SumAsync();
-
-            var layings = await _dc.Layings.Where(u => !u.IsDeleted)
-                                           .Where(u => u.LotId == form.LotId)
-                                           .ToArrayAsync();
-
-            var eggPrice = (overheads + purchases) / (form.Count + layings.Sum(u => u.Count));
-
             var laying = _dc.Layings.Add(new HbLayings
             {
                 Count = form.Count,
-                CreationTime = form.LayingDate,
+                LayingDate = form.LayingDate,
                 LotId = form.LotId,
                 IncubatorId = form.IncubatorId,
-                EggPrice = eggPrice
+                CreationDate = DateTimeOffset.UtcNow
             });
 
-            foreach (var item in layings)
-                item.EggPrice = eggPrice;
-
             await _dc.SaveChangesAsync();
+
+            await _lots.RecalculateLot(form.LotId);
 
             return new HbResult<HbLaying>(_mapper.Map<HbLaying>(laying.Entity));
         }
@@ -90,6 +74,8 @@ namespace HomeBird.DataBase.Logic
             laying.IsDeleted = true;
 
             await _dc.SaveChangesAsync();
+
+            await _lots.RecalculateLot(laying.LotId);
         }
 
         public async Task<HbResult<HbLaying>> GetById(int id)
@@ -111,7 +97,7 @@ namespace HomeBird.DataBase.Logic
             var query = _dc.Layings.Include(u => u.Lot)
                                    .Include(u => u.Incubator)
                                    .Where(u => !u.IsDeleted)
-                                   .Where(u => u.CreationTime > form.Start && u.CreationTime < form.End)
+                                   .Where(u => u.LayingDate > form.Start && u.LayingDate < form.End)
                                    .AsQueryable();
 
             if (form.LotId.HasValue)
@@ -140,35 +126,15 @@ namespace HomeBird.DataBase.Logic
             var incubatorExist = await _dc.Incubators.AnyAsync(u => !u.IsDeleted && u.Id == form.IncubatorId);
             if (!incubatorExist)
                 return new HbResult<HbLaying>(ErrorCodes.IncubatorNotFound);
-
-            var overheads = await _dc.Overheads
-                                     .Where(u => !u.IsDeleted && u.LotId == form.LotId)
-                                     .Select(u => u.Amount)
-                                     .DefaultIfEmpty(0)
-                                     .SumAsync();
-
-            var purchases = await _dc.Purchases
-                                     .Where(u => !u.IsDeleted && u.LotId == form.LotId)
-                                     .Select(u => u.Amount)
-                                     .DefaultIfEmpty(0)
-                                     .SumAsync();
-
-            var layings = await _dc.Layings.Where(u => !u.IsDeleted)
-                                           .Where(u => u.LotId == form.LotId && u.Id != laying.Id)
-                                           .ToArrayAsync();
-
-            var eggPrice = (overheads + purchases) / (form.Count + layings.Sum(u => u.Count));
-
+            
             laying.Count = form.Count;
-            laying.EggPrice = eggPrice;
             laying.IncubatorId = form.IncubatorId;
             laying.LotId = form.LotId;
-            laying.CreationTime = form.LayingDate;
-
-            foreach (var item in layings)
-                item.EggPrice = eggPrice;
+            laying.LayingDate = form.LayingDate;           
 
             await _dc.SaveChangesAsync();
+
+            await _lots.RecalculateLot(laying.LotId);
 
             return new HbResult<HbLaying>(_mapper.Map<HbLaying>(laying));
         }

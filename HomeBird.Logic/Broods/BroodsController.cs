@@ -79,7 +79,7 @@ namespace HomeBird.Logic.Broods
             if (res.IsCorrect)
                 return RedirectToAction(nameof(List));
 
-            ViewData[ViewDataKeys.ErrorMessage] = res.Result;
+            ViewData[ViewDataKeys.ErrorMessage] = res.ErrorMessage;
             await InitLotsList(form);
             return View(form);
         }

@@ -3,7 +3,6 @@ using HomeBird.Common.Extensions;
 using HomeBird.DataBase.EfCore.Models;
 using HomeBird.DataClasses;
 using HomeBird.DataClasses.Forms;
-using System.Linq;
 
 namespace HomeBird.DataBase.Logic.Mapping
 {
@@ -19,12 +18,15 @@ namespace HomeBird.DataBase.Logic.Mapping
                 .ForMember(u => u.AvgDailyPrice, opt => opt.MapFrom(u => u.AvgDailyPrice))
                 .ForMember(u => u.CreationDate, opt => opt.MapFrom(u => u.CreationDate))
                 .ForMember(u => u.Loses, opt => opt.MapFrom(u => u.Loses))
+                .ForMember(u => u.EggPrice, opt => opt.MapFrom(u => u.EggPrice))
                 .ForMember(u => u.Profit, opt => opt.MapFrom(u => u.Profit))
+                .ForMember(u => u.Year, opt => opt.MapFrom(u => u.Year))
                 .ForMember(u => u.SoldCount, opt => opt.MapFrom(u => u.SoldCount));
 
             CreateMap<HbLot, UpdateLotForm>()
                 .IgnoreOther()
                 .ForMember(u => u.Id, opt => opt.MapFrom(u => u.Id))
+                .ForMember(u => u.Year, opt => opt.MapFrom(u => u.Year))
                 .ForMember(u => u.IdentifierNumber, opt => opt.MapFrom(u => u.IdentifierNumber));
 
             CreateMap<HbIncubators, HbIncubator>()
@@ -97,8 +99,7 @@ namespace HomeBird.DataBase.Logic.Mapping
                 .IgnoreOther()
                 .ForMember(u => u.Id, opt => opt.MapFrom(u => u.Id))
                 .ForMember(u => u.Count, opt => opt.MapFrom(u => u.Count))
-                .ForMember(u => u.CreationDate, opt => opt.MapFrom(u => u.CreationTime))
-                .ForMember(u => u.EggPrice, opt => opt.MapFrom(u => u.EggPrice))
+                .ForMember(u => u.CreationDate, opt => opt.MapFrom(u => u.LayingDate))
                 .ForMember(u => u.Incubator, opt => opt.MapFrom(u => u.Incubator))
                 .ForMember(u => u.Lot, opt => opt.MapFrom(u => u.Lot));
 

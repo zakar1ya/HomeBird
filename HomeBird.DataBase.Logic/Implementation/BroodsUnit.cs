@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 using HomeBird.DataBase.EfCore.Models;
+using System;
 
 namespace HomeBird.DataBase.Logic
 {
@@ -15,11 +16,13 @@ namespace HomeBird.DataBase.Logic
     {
         private readonly HomeBirdContext _dc;
         private readonly IMapper _mapper;
+        private readonly ILotsUnit _lotsUnit;
 
-        public BroodsUnit(HomeBirdContext dc, IMapper mapper)
+        public BroodsUnit(HomeBirdContext dc, IMapper mapper, ILotsUnit lotsUnit)
         {
             _dc = dc;
             _mapper = mapper;
+            _lotsUnit = lotsUnit;
         }
 
         public async Task<int> Count(PagedBroodsForm form)
@@ -45,23 +48,32 @@ namespace HomeBird.DataBase.Logic
             if (lot == null)
                 return new HbResult<HbBrood>(ErrorCodes.LotNotFound);
 
+            var existBroodsSum = await _dc.Broods.Where(u => u.LotId == form.LotId && !u.IsDeleted)
+                                                 .SumAsync(u => u.Count);
+
             var layingSum = lot.Layings.Where(u => !u.IsDeleted).Sum(u => u.Count);
+            if (layingSum < existBroodsSum + form.Count)
+                return new HbResult<HbBrood>(ErrorCodes.BroodAmountMoreThanLayingsSum);
+
             var broodPrice = lot.Overheads.Where(u => !u.IsDeleted).Sum(u => u.Amount) + lot.Purchases.Where(u => !u.IsDeleted).Sum(u => u.Amount);
 
             var brood = _dc.Broods.Add(new HbBroods
             {
+                CreationDate = DateTimeOffset.UtcNow,
                 BroodDate = form.BroodDate,
                 Count = form.Count,
                 DeadCount = form.DeadCount,
                 EmptyCount = form.EmptyCount,
                 LotId = form.LotId,
-                DeadPercent = 100 * form.DeadCount / layingSum,
-                EmptyPercent = 100 * form.EmptyCount / layingSum,
-                Percent = 100 * form.Count / layingSum,
-                PlacePrice = broodPrice / form.Count
+                DeadPercent = Math.Round(100m * form.DeadCount / layingSum, 2),
+                EmptyPercent = Math.Round(100m * form.EmptyCount / layingSum, 2),
+                Percent = Math.Round(100m * form.Count / layingSum, 2),
+                PlacePrice = Math.Round(broodPrice / form.Count, 2)
             });
 
             await _dc.SaveChangesAsync();
+
+            await _lotsUnit.RecalculateLot(form.LotId);
 
             return new HbResult<HbBrood>(_mapper.Map<HbBrood>(brood.Entity));
         }
@@ -80,7 +92,13 @@ namespace HomeBird.DataBase.Logic
             if (lot == null)
                 return new HbResult<HbBrood>(ErrorCodes.LotNotFound);
 
+            var existBroodsSum = await _dc.Broods.Where(u => u.LotId == form.LotId && u.Id != form.Id && !u.IsDeleted)
+                                                 .SumAsync(u => u.Count);
+
             var layingSum = lot.Layings.Where(u => !u.IsDeleted).Sum(u => u.Count);
+            if (layingSum < existBroodsSum + form.Count)
+                return new HbResult<HbBrood>(ErrorCodes.BroodAmountMoreThanLayingsSum);
+
             var broodPrice = lot.Overheads.Where(u => !u.IsDeleted).Sum(u => u.Amount) + lot.Purchases.Where(u => !u.IsDeleted).Sum(u => u.Amount);
 
             brood.BroodDate = form.BroodDate;
@@ -88,12 +106,14 @@ namespace HomeBird.DataBase.Logic
             brood.DeadCount = form.DeadCount;
             brood.EmptyCount = form.EmptyCount;
             brood.LotId = form.LotId;
-            brood.DeadPercent = 100 * form.DeadCount / layingSum;
-            brood.EmptyPercent = 100 * form.EmptyCount / layingSum;
-            brood.Percent = 100 * form.Count / layingSum;
-            brood.PlacePrice = broodPrice / form.Count;
+            brood.DeadPercent = Math.Round(100m * form.DeadCount / layingSum, 2);
+            brood.EmptyPercent = Math.Round(100m * form.EmptyCount / layingSum, 2);
+            brood.Percent = Math.Round(100m * form.Count / layingSum, 2);
+            brood.PlacePrice = Math.Round(broodPrice / form.Count, 2);
 
             await _dc.SaveChangesAsync();
+
+            await _lotsUnit.RecalculateLot(brood.LotId);
 
             return new HbResult<HbBrood>(_mapper.Map<HbBrood>(brood));
         }
@@ -107,6 +127,8 @@ namespace HomeBird.DataBase.Logic
             brood.IsDeleted = true;
 
             await _dc.SaveChangesAsync();
+
+            await _lotsUnit.RecalculateLot(brood.LotId);
         }
 
         public async Task<HbResult<HbBrood>> GetById(int id)
