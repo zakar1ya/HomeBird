@@ -13,10 +13,10 @@
             <span asp-validation-for="Count" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="CreationDate"></label>
-            <input class="form-control js-datetimepicker" />
-            <input asp-for="CreationDate" type="hidden" />
-            <span asp-validation-for="CreationDate" class="text-danger"></span>
+            <label asp-for="LayingDate"></label>
+            <input class="form-control js-datetimepicker" value="@Model.LayingDate.ToIsoString()"/>
+            <input asp-for="LayingDate" type="hidden" />
+            <span asp-validation-for="LayingDate" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="IncubatorId"></label>

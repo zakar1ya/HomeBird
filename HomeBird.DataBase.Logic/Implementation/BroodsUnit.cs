@@ -111,7 +111,8 @@ namespace HomeBird.DataBase.Logic
 
         public async Task<HbResult<HbBrood>> GetById(int id)
         {
-            var brood = await _dc.Broods.FirstOrDefaultAsync(u => !u.IsDeleted && u.Id == id);
+            var brood = await _dc.Broods.Include(u => u.Lot)
+                                        .FirstOrDefaultAsync(u => !u.IsDeleted && u.Id == id);
             if (brood == null)
                 return new HbResult<HbBrood>(ErrorCodes.BroodNotFound);
 

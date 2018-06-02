@@ -89,7 +89,8 @@ namespace HomeBird.DataBase.Logic
 
         public async Task<HbResult<HbPurchase>> GetById(int purchaseId)
         {
-            var purchase = await _dc.Purchases.FirstOrDefaultAsync(u => u.Id == purchaseId && !u.IsDeleted);
+            var purchase = await _dc.Purchases.Include(u => u.Lot)
+                                              .FirstOrDefaultAsync(u => u.Id == purchaseId && !u.IsDeleted);
             if (purchase == null)
                 return new HbResult<HbPurchase>(ErrorCodes.PurchaseNotFound);
 

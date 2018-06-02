@@ -25,8 +25,8 @@
                         <tr>
                             <td>@item.Comment</td>
                             <td>@item.Amount</td>
-                            <td>@item.OverheadDate.ToString("dd MMM yyyy")</td>
-                            <td>lot number</td>
+                            <td class="js-utc-html">@item.OverheadDate.ToIsoString()</td>
+                            <td>@item.Lot.IdentifierNumber</td>
                             <td>
                                 <a class="btn btn-info" asp-action="Edit" asp-controller="Overheads" asp-route-id="@item.Id">Изменить </a>
                                 <a href="#" class="btn btn-danger js-delete" data-url="@Url.Action("Delete", "Overheads", new { id = item.Id })">Удалить</a>

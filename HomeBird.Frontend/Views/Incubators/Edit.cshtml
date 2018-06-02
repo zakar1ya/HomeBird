@@ -6,14 +6,14 @@
 }
 
 <article class="content">
-    <form asp-action="Edit" asp-controller="Incubators" method="post">
+    <form asp-action="Edit" asp-controller="Incubators" method="post" class="col-md-3">
         <input type="hidden" asp-for="Id" />
         <div class="form-group">
             <label asp-for="Title"></label>
-            <input asp-for="Title" type="text" />
-            <span asp-validation-for="Title"></span>
+            <input asp-for="Title" type="text" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
         </div>
         <input class="btn btn-success" type="submit" value="Сохранить" />
-        <a class="btn btn-default" asp-action="List" asp-controller="Incubators">Отмена</a>
+        <a class="btn btn-danger" asp-action="List" asp-controller="Incubators">Отмена</a>
     </form>
 </article>

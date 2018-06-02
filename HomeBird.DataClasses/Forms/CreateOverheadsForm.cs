@@ -1,9 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace HomeBird.DataClasses.Forms
 {
@@ -20,6 +17,7 @@ namespace HomeBird.DataClasses.Forms
 
         [Required(ErrorMessage = "Укажите сумму")]
         [Display(Name = "Сумма")]
+        [Range(1, int.MaxValue, ErrorMessage = "Сумма должна быть больше 0")]
         public decimal Amount { get; set; }
 
         [StringLength(255, ErrorMessage = "Коммендарий не должен быть длиннее 255 символов")]

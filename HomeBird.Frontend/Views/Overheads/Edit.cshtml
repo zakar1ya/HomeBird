@@ -6,33 +6,34 @@
 }
 
 <article class="content">
-    <form asp-action="Edit" asp-controller="Overheads" method="post">
+    <form asp-action="Edit" asp-controller="Overheads" method="post" class="col-md-3">
         <div class="form-group">
             <label asp-for="Comment"></label>
-            <input asp-for="Comment" type="text" />
-            <span asp-validation-for="Comment"></span>
+            <input asp-for="Comment" type="text" class="form-control" />
+            <span asp-validation-for="Comment" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Amount"></label>
-            <input asp-for="Amount" type="text" />
-            <span asp-validation-for="Amount"></span>
+            <input asp-for="Amount" type="text" class="form-control" />
+            <span asp-validation-for="Amount" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="OverheadDate"></label>
-            <input asp-for="OverheadDate" type="text" />
-            <span asp-validation-for="OverheadDate"></span>
+            <input type="text" class="form-control js-datetimepicker" value="@Model.OverheadDate.ToIsoString()" />
+            <input asp-for="OverheadDate" type="hidden" />
+            <span asp-validation-for="OverheadDate" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="LotId"></label>
-            <select asp-for="LotId">
+            <select asp-for="LotId" class="form-control">
                 @foreach (var item in Model.Lots)
                 {
                     <option value="@item.Id">@item.IdentifierNumber (@item.CreationDate.Year)</option>
                 }
             </select>
-            <span asp-validation-for="LotId"></span>
+            <span asp-validation-for="LotId" class="text-danger"></span>
         </div>
         <input class="btn btn-success" type="submit" value="Сохранить" />
-        <a class="btn btn-default" asp-action="List" asp-controller="Overheads">Отмена</a>
+        <a class="btn btn-danger" asp-action="List" asp-controller="Overheads">Отмена</a>
     </form>
 </article>

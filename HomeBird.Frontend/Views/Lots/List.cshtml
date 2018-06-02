@@ -27,7 +27,7 @@
                     {
                         <tr>
                             <td>@($"{lot.IdentifierNumber} ({lot.CreationDate.Year}г.)")</td>
-                            <td>@lot.CreationDate.ToString("dd.MM.yyyy")</td>
+                            <td class="js-utc-html">@lot.CreationDate.ToIsoString()</td>
                             <td>@(lot.SoldCount.HasValue ? lot.SoldCount.ToString() : "-")</td>
                             <td>@(lot.AvgDailyPrice.HasValue ? lot.SoldCount.ToString() : "-")</td>
                             <td>@(lot.AvgAdultPrice.HasValue ? lot.SoldCount.ToString() : "-")</td>

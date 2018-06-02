@@ -8,12 +8,12 @@ namespace HomeBird.DataClasses.Forms
     {
         public CreateLayingForm()
         {
-            CreationDate = DateTime.UtcNow;
+            LayingDate = DateTime.UtcNow;
         }
 
         [Required(ErrorMessage = "Укажиет дату закладки")]
         [Display(Name = "Дата закладки")]
-        public DateTime CreationDate { get; set; }
+        public DateTime LayingDate { get; set; }
 
         [Required(ErrorMessage = "Укажите количество")]
         [Display(Name = "Количество")]

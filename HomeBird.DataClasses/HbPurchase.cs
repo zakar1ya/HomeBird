@@ -1,8 +1,5 @@
 ﻿using HomeBird.DataClasses.Forms;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace HomeBird.DataClasses
 {
@@ -18,7 +15,7 @@ namespace HomeBird.DataClasses
 
         public string Address { get; set; }
 
-        public int LotId { get; set; }
+        public HbLot Lot { get; set; }
     }
 
     public class PagedPurchasesForm : PagingForm

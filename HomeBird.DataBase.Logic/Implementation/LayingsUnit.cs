@@ -67,7 +67,7 @@ namespace HomeBird.DataBase.Logic
             var laying = _dc.Layings.Add(new HbLayings
             {
                 Count = form.Count,
-                CreationTime = form.CreationDate,
+                CreationTime = form.LayingDate,
                 LotId = form.LotId,
                 IncubatorId = form.IncubatorId,
                 EggPrice = eggPrice
@@ -163,7 +163,7 @@ namespace HomeBird.DataBase.Logic
             laying.EggPrice = eggPrice;
             laying.IncubatorId = form.IncubatorId;
             laying.LotId = form.LotId;
-            laying.CreationTime = form.CreationDate;
+            laying.CreationTime = form.LayingDate;
 
             foreach (var item in layings)
                 item.EggPrice = eggPrice;

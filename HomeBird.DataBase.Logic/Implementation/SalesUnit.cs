@@ -83,7 +83,8 @@ namespace HomeBird.DataBase.Logic
 
         public async Task<HbResult<HbSale>> GetById(int id)
         {
-            var sale = await _dc.Sales.FirstOrDefaultAsync(u => !u.IsDeleted && u.Id == id);
+            var sale = await _dc.Sales.Include(u => u.Lot)
+                                      .FirstOrDefaultAsync(u => !u.IsDeleted && u.Id == id);
             if (sale == null)
                 return new HbResult<HbSale>(ErrorCodes.SaleNotFound);
 

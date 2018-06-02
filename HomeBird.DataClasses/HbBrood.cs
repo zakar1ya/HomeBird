@@ -11,6 +11,8 @@ namespace HomeBird.DataClasses
 
         public DateTimeOffset BroodDate { get; set; }
 
+        public HbLot Lot { get; set; }
+
         public int Count { get; set; }
 
         public decimal Percent { get; set; }

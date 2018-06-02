@@ -105,7 +105,8 @@ namespace HomeBird.DataBase.Logic
 
         public async Task<HbResult<HbOverhead>> GetById(int id)
         {
-            var overhead = await _dc.Overheads.FirstOrDefaultAsync(u => u.Id == id && !u.IsDeleted);
+            var overhead = await _dc.Overheads.Include(u => u.Lot)
+                                              .FirstOrDefaultAsync(u => u.Id == id && !u.IsDeleted);
             if (overhead == null)
                 return new HbResult<HbOverhead>(ErrorCodes.OverheadsNotFound);
 

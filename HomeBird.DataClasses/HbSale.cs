@@ -20,7 +20,7 @@ namespace HomeBird.DataClasses
 
         public string Comment { get; set; }
 
-        public int LotId { get; set; }
+        public HbLot Lot { get; set; }
     }
 
     public class PagedSalesForm : PagingForm

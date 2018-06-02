@@ -26,7 +26,7 @@
                         <tr>
                             <td>@item.Count</td>
                             <td>@item.EggPrice</td>
-                            <td>@item.CreationDate.ToString("dd MMM yyyy")</td>
+                            <td class="js-utc-html">@item.CreationDate.ToIsoString()</td>
                             <td>@item.Incubator.Title</td>
                             <td>@item.Lot.IdentifierNumber</td>
                             <td>

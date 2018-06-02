@@ -16,6 +16,7 @@
                         <th>Количество</th>
                         <th>Сумма</th>
                         <th>Дата закупки</th>
+                        <th>Партия</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -26,7 +27,8 @@
                             <td>@item.Address</td>
                             <td>@item.Count</td>
                             <td>@item.Amount</td>
-                            <td>@item.PurchaseDate.ToString("dd MMM yyyy")</td>
+                            <td class="js-utc-html">@item.PurchaseDate.ToIsoString()</td>
+                            <td>@item.Lot.IdentifierNumber</td>
                             <td>
                                 <a class="btn btn-info" asp-action="Edit" asp-controller="Purchases" asp-route-id="@item.Id">Изменить </a>
                                 <a href="#" class="btn btn-danger js-delete" data-url="@Url.Action("Delete", "Purchases", new { id = item.Id })">Удалить</a>

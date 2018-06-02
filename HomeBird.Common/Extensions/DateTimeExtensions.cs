@@ -31,7 +31,7 @@ namespace HomeBird.Common.Extensions
         /// <returns></returns>
         public static string ToIsoString(this DateTime val)
         {
-            return val.ToString("yyyy-MM-ddTHH:mm:ssZ");
+            return val.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ");
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace HomeBird.Common.Extensions
         /// <returns></returns>
         public static string ToIsoString(this DateTimeOffset val)
         {
-            return val.ToString("yyyy-MM-ddTHH:mm:ssZ");
+            return val.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ");
         }
     }
 }
