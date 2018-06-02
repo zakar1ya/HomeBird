@@ -15,7 +15,8 @@ namespace HomeBird.Common
         BroodNotFound = 8,
         LotAlreadyExist = 9,
         BroodAmountMoreThanLayingsSum = 10,
-        SalesCountMoreThanBroodCount = 11
+        SalesCountMoreThanBroodCount = 11,
+        LayingCountMoreThanPurchasesCount = 12
     }
 
     public static class ErrorCodesExtensions
@@ -48,6 +49,8 @@ namespace HomeBird.Common
                     return "Объем вывода не должен превышать объем закладки.";
                 case ErrorCodes.SalesCountMoreThanBroodCount:
                     return "Объем продаж не должен превышать объем вывода.";
+                case ErrorCodes.LayingCountMoreThanPurchasesCount:
+                    return "Объем закладки не должен превышать объем закупок.";
                 default:
                     return "";
             }

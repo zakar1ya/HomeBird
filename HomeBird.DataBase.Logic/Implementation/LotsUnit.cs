@@ -120,7 +120,7 @@ namespace HomeBird.DataBase.Logic
                                     .Include(u => u.Overheads)
                                     .Include(u => u.Purchases)
                                     .Include(u => u.Sales)
-                                    .FirstOrDefaultAsync(u => u.Id == id && !u.IsDeleted);            
+                                    .FirstOrDefaultAsync(u => u.Id == id && !u.IsDeleted);
 
             var overheads = lot.Overheads.Where(u => !u.IsDeleted);
             var salesAdults = lot.Sales.Where(u => u.Type == SalesTypes.AdultChicken && !u.IsDeleted);
@@ -144,7 +144,8 @@ namespace HomeBird.DataBase.Logic
 
             lot.SoldCount = salesDaily.Select(u => u.Count).DefaultIfEmpty(0).Sum() + salesAdults.Select(u => u.Count).DefaultIfEmpty(0).Sum();
 
-            lot.EggPrice = Math.Round(purchases.Sum(u => u.Amount) / layings.Sum(u => u.Count), 2);
+            if (purchases.Any() && layings.Any())
+                lot.EggPrice = Math.Round(purchases.Sum(u => u.Amount) / layings.Sum(u => u.Count), 2);
 
             await _dc.SaveChangesAsync();
         }

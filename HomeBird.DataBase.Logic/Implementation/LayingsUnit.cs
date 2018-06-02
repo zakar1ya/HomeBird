@@ -1,14 +1,14 @@
 ﻿using AutoMapper;
 using HomeBird.Common;
 using HomeBird.DataBase.EfCore.Context;
+using HomeBird.DataBase.EfCore.Models;
 using HomeBird.DataClasses;
 using HomeBird.DataClasses.Forms;
-using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using HomeBird.DataBase.EfCore.Models;
-using System;
 
 namespace HomeBird.DataBase.Logic
 {
@@ -48,6 +48,12 @@ namespace HomeBird.DataBase.Logic
             var incubatorExist = await _dc.Incubators.AnyAsync(u => !u.IsDeleted && u.Id == form.IncubatorId);
             if (!incubatorExist)
                 return new HbResult<HbLaying>(ErrorCodes.IncubatorNotFound);
+
+            var purchasesEggs = await _dc.Purchases.Where(u => u.LotId == form.LotId && !u.IsDeleted).SumAsync(u => u.Count);
+            var existLayings = await _dc.Layings.Where(u => u.LotId == form.LotId && !u.IsDeleted).SumAsync(u => u.Count);
+
+            if (purchasesEggs - existLayings < form.Count)
+                return new HbResult<HbLaying>(ErrorCodes.LayingCountMoreThanPurchasesCount);
 
             var laying = _dc.Layings.Add(new HbLayings
             {
@@ -126,7 +132,14 @@ namespace HomeBird.DataBase.Logic
             var incubatorExist = await _dc.Incubators.AnyAsync(u => !u.IsDeleted && u.Id == form.IncubatorId);
             if (!incubatorExist)
                 return new HbResult<HbLaying>(ErrorCodes.IncubatorNotFound);
-            
+
+            var purchasesEggs = await _dc.Purchases.Where(u => u.LotId == form.LotId && !u.IsDeleted).SumAsync(u => u.Count);
+            var existLayings = await _dc.Layings.Where(u => u.LotId == form.LotId && u.Id != form.Id && !u.IsDeleted).SumAsync(u => u.Count);
+
+            if (purchasesEggs - existLayings < form.Count)
+                return new HbResult<HbLaying>(ErrorCodes.LayingCountMoreThanPurchasesCount);
+
+
             laying.Count = form.Count;
             laying.IncubatorId = form.IncubatorId;
             laying.LotId = form.LotId;

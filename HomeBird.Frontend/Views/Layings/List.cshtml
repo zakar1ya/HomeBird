@@ -13,7 +13,6 @@
                 <thead class="thead-inverse">
                     <tr>
                         <th>Количество</th>
-                        <th>Цена яйца</th>
                         <th>Дата</th>
                         <th>Инкубатор</th>
                         <th>Партия</th>
@@ -25,7 +24,6 @@
                     <tbody>
                         <tr>
                             <td>@item.Count</td>
-                            <td>@item.EggPrice</td>
                             <td class="js-utc-html">@item.CreationDate.ToIsoString()</td>
                             <td>@item.Incubator.Title</td>
                             <td>@item.Lot.IdentifierNumber</td>
