@@ -58,6 +58,11 @@
                                     <i class="fa fa-home"></i> Партии
                                 </a>
                             </li>
+                            <li class="@Html.IsActive("List", "Purchases")">
+                                <a asp-controller="Purchases" asp-action="List">
+                                    <i class="fa fa-home"></i> Закупки
+                                </a>
+                            </li>
                             <li class="@Html.IsActive("List", "Layings")">
                                 <a asp-controller="Layings" asp-action="List">
                                     <i class="fa fa-home"></i> Закладки
@@ -71,11 +76,6 @@
                             <li class="@Html.IsActive("List", "Sales")">
                                 <a asp-controller="Sales" asp-action="List">
                                     <i class="fa fa-home"></i> Продажи
-                                </a>
-                            </li>
-                            <li class="@Html.IsActive("List", "Purchases")">
-                                <a asp-controller="Purchases" asp-action="List">
-                                    <i class="fa fa-home"></i> Закупки
                                 </a>
                             </li>
                             <li class="@Html.IsActive("List", "Overheads")">

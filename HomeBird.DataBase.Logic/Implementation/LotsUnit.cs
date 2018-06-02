@@ -94,7 +94,7 @@ namespace HomeBird.DataBase.Logic
         public async Task<IEnumerable<HbLot>> GetList(PagedLotsForm form)
         {
             var lots = await _dc.Lots
-                                .Where(u => u.CreationDate > form.Start && u.CreationDate < form.End)
+                                .Where(u => u.Year == form.Year)
                                 .Where(u => !u.IsDeleted)
                                 .OrderByDescending(u => u.Id)
                                 .Skip(form.Offset)

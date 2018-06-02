@@ -31,7 +31,6 @@ namespace HomeBird.DataClasses
 
     public class PagedLotsForm : PagingForm
     {
-
         public DateTime Start
         {
             get

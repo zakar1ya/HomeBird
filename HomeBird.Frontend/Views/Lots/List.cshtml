@@ -17,6 +17,7 @@
                         <th>Продано шт.</th>
                         <th>Средняя цена суточный</th>
                         <th>Средняя цена подрост</th>
+                        <th>Цена яйца</th>
                         <th>Потери шт.</th>
                         <th>Выгода</th>
                         <th></th>
@@ -29,10 +30,11 @@
                             <td>@($"{lot.IdentifierNumber} ({lot.CreationDate.Year}г.)")</td>
                             <td class="js-utc-html">@lot.CreationDate.ToIsoString()</td>
                             <td>@(lot.SoldCount.HasValue ? lot.SoldCount.ToString() : "-")</td>
-                            <td>@(lot.AvgDailyPrice.HasValue ? lot.SoldCount.ToString() : "-")</td>
-                            <td>@(lot.AvgAdultPrice.HasValue ? lot.SoldCount.ToString() : "-")</td>
-                            <td>@(lot.Loses.HasValue ? lot.SoldCount.ToString() : "-")</td>
-                            <td>@(lot.Profit.HasValue ? lot.SoldCount.ToString() : "-")</td>
+                            <td>@(lot.AvgDailyPrice.HasValue ? lot.AvgDailyPrice.ToString() : "-")</td>
+                            <td>@(lot.AvgAdultPrice.HasValue ? lot.AvgAdultPrice.ToString() : "-")</td>
+                            <td>@(lot.EggPrice.HasValue ? lot.EggPrice.ToString() : "-")</td>
+                            <td>@(lot.Loses.HasValue ? lot.Loses.ToString() : "-")</td>
+                            <td>@(lot.Profit.HasValue ? lot.Profit.ToString() : "-")</td>
                             <td align="center">
                                 <a href="#" class="btn btn-primary btn-sm">
                                     <i class="fa fa-edit"></i>

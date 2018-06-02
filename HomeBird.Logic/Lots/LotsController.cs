@@ -37,7 +37,6 @@ namespace HomeBird.Logic.Lots
             if (!ModelState.IsValid)
                 return View(form);
 
-            form.Year = CurrenYear;
             var res = await _lots.Create(form);
             if (res.IsCorrect)
                 return RedirectToAction(nameof(List));
