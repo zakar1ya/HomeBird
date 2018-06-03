@@ -131,10 +131,10 @@ namespace HomeBird.DataBase.Logic
             var purchases = lot.Purchases.Where(u => !u.IsDeleted);
 
             if (salesDaily.Any())
-                lot.AvgDailyPrice = Math.Round(salesDaily.Average(u => u.Count / u.Amount), 2);
+                lot.AvgDailyPrice = Math.Round(salesDaily.Average(u => u.Amount / u.Count), 2);
 
             if (salesAdults.Any())
-                lot.AvgAdultPrice = Math.Round(salesAdults.Average(u => u.Count / u.Amount), 2);
+                lot.AvgAdultPrice = Math.Round(salesAdults.Average(u => u.Amount / u.Count), 2);
 
             if (layings.Any() && broods.Any())
                 lot.Loses = layings.Sum(u => u.Count) - broods.Sum(u => u.Count);
