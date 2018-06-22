@@ -7,7 +7,16 @@
 
 <article class="content">
     <div class="col-md-9 margin-table">
-        <h2>Расходы</h2>
+        <div class="title-block">
+            <div class="row">
+                <div class="col-md-6">
+                    <h3 class="title">
+                        Расходы
+                        <a class="btn btn-primary btn-sm rounded-s" asp-action="Add" asp-controller="Overheads">Создать</a>
+                    </h3>
+                </div>
+            </div>
+        </div>
         <div class="table table-responsive">
             <table id="datatable" class="table table-hover table-striped table-bordered table-condensed">
                 <thead class="thead-inverse">
@@ -20,31 +29,28 @@
                     </tr>
                 </thead>
                 @foreach (var item in Model.List)
-                {
-                    <tbody>
-                        <tr>
-                            <td>@item.Comment</td>
-                            <td>@item.Amount</td>
-                            <td class="js-utc-html">@item.OverheadDate.ToIsoString()</td>
-                            <td>@item.Lot.IdentifierNumber</td>
-                            <td>
-                                <a class="btn btn-info" asp-action="Edit" asp-controller="Overheads" asp-route-id="@item.Id">Изменить </a>
-                                <a href="#" class="btn btn-danger js-delete" data-url="@Url.Action("Delete", "Overheads", new { id = item.Id })">Удалить</a>
-                            </td>
-                        </tr>
-                    </tbody>
-                }
+            {
+                <tbody>
+                    <tr>
+                        <td>@item.Comment</td>
+                        <td>@item.Amount</td>
+                        <td class="js-utc-html">@item.OverheadDate.ToIsoString()</td>
+                        <td>@item.Lot.IdentifierNumber</td>
+                        <td>
+                            <a class="btn btn-info" asp-action="Edit" asp-controller="Overheads" asp-route-id="@item.Id">Изменить </a>
+                            <a href="#" class="btn btn-danger js-delete" data-url="@Url.Action("Delete", "Overheads", new { id = item.Id })">Удалить</a>
+                        </td>
+                    </tr>
+                </tbody>
+        }
             </table>
         </div>
         <div class="conteiner">
             <div class="row">
-                <div class="col-md-6 margin position">
-                    <a class="btn btn-success" asp-action="Add" asp-controller="Overheads">Создать</a>
-                </div>
                 @if (Model.Form.Total > Model.Form.Count)
-                {
-                    @Html.Paging(Model.Form, u => Url.Action("List", "Lots", new PagedLotsForm { Offset = (u - 1) * Model.Form.Count }))
-                }
+            {
+                @Html.Paging(Model.Form, u => Url.Action("List", "Lots", new PagedLotsForm { Offset = (u - 1) * Model.Form.Count }))
+        }
             </div>
         </div>
     </div>

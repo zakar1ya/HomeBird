@@ -7,7 +7,16 @@
 
 <article class="content">
     <div class="col-md-11 margin-table">
-        <h2>Партии</h2>
+        <div class="title-block">
+            <div class="row">
+                <div class="col-md-6">
+                    <h3 class="title">
+                        Партии
+                        <a asp-action="Add" asp-controller="Lots" class="btn btn-primary btn-sm rounded-s">Создать</a>
+                    </h3>
+                </div>
+            </div>
+        </div>
         <div class="table table-responsive">
             <table class="table table-hover table-striped table-bordered table-condensed">
                 <thead class="thead-inverse">
@@ -50,9 +59,6 @@
         </div>
         <div class="conteiner">
             <div class="row">
-                <div class="col-md-6 margin position">
-                    <a asp-action="Add" asp-controller="Lots" class="btn btn-success">Добавить партию</a>
-                </div>
                 @if (Model.Form.Total > Model.Form.Count)
                 {
                     @Html.Paging(Model.Form, u => Url.Action("List", "Lots", new PagedLotsForm { Offset = (u - 1) * Model.Form.Count }))
